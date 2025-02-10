@@ -1,1 +1,1 @@
-import createShip from './ships';
+import ship from './ships';

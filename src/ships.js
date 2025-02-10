@@ -16,7 +16,7 @@ function createSectionsHitArr(x, y, orientation, length) {
   return sectionsHitArr;
 }
 
-export default function createShip(x, y, orientation, type) {
+export default function ship(x, y, orientation, type, player) {
   const length = shipTypes[type];
   const sectionsHit = createSectionsHitArr(x, y, orientation, length);
   let hits = 0;
@@ -45,7 +45,11 @@ export default function createShip(x, y, orientation, type) {
     return hits;
   }
 
+  function getPlayer() {
+    return player;
+  }
+
   return {
-    getShipLength, isSectionHit, isShipSunk, hitShip, getHits,
+    getShipLength, isSectionHit, isShipSunk, hitShip, getHits, getPlayer,
   };
 }
