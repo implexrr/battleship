@@ -1,4 +1,4 @@
-import createShip from "../ships";
+import ship from "../ships";
 
 // TODO: Skeleton, change later
 // describe('sums correctly', () => {

@@ -49,7 +49,11 @@ export default function ship(x, y, orientation, type, player) {
     return player;
   }
 
+  function getShipCoord() {
+    return sectionsHit;
+  }
+
   return {
-    getShipLength, isSectionHit, isShipSunk, hitShip, getHits, getPlayer,
+    getShipLength, isSectionHit, isShipSunk, hitShip, getHits, getPlayer, getShipCoord,
   };
 }
