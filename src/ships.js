@@ -16,7 +16,7 @@ function createSectionsHitArr(x, y, orientation, length) {
   return sectionsHitArr;
 }
 
-function ship(x, y, orientation, type) {
+function makeShip(x, y, orientation, type) {
   const length = shipLengths[type];
   const sectionsHit = createSectionsHitArr(x, y, orientation, length);
   let hits = 0;
@@ -54,4 +54,4 @@ function ship(x, y, orientation, type) {
   };
 }
 
-export { ship, shipLengths };
+export { makeShip, shipLengths };

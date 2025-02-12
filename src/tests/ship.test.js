@@ -1,11 +1,11 @@
-import { ship, shipLengths } from '../ships';
+import { makeShip, shipLengths } from '../ships';
 
 // Utility to dynamically create and test ships
 const testShipCreation = (orientation) => {
   const ships = {};
   describe(`creates all ${orientation} ship types correctly`, () => {
     Object.keys(shipLengths).forEach((shipType) => {
-      ships[`${shipType}`] = ship(0, 0, orientation, shipType);
+      ships[`${shipType}`] = makeShip(0, 0, orientation, shipType);
     });
 
     test.each(Object.keys(shipLengths))(

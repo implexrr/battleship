@@ -1,4 +1,4 @@
-import { shipLengths } from './ships';
+import { ship, shipLengths } from './ships';
 const GAMEBOARD_LENGTH = 10;
 
 // Gameboard Initialization
@@ -32,6 +32,10 @@ export default function initializeGameboard(player) {
         gameboard[j][x] = shipType;
       }
     }
+  }
+
+  function addToFleet(x, y, orientation, shipType) {
+    
   }
 
   function getGameboard() {
