@@ -1,23 +1,12 @@
 import './main.css';
+import ship from './ships';
+import initializeGameboard from './gameBoard';
 
-console.log(123);
-const elvenShieldRecipe = {
-  leatherStrips: 2,
-  ironIngot: 1,
-  refinedMoonstone: 4,
-};
-
-// document.addEventListener('onload', () => console.log(elvenShieldRecipe));
-const elvenGauntletsRecipe = {
-  ...elvenShieldRecipe,
-  leather: 1,
-  refinedMoonstone: 1,
-};
-console.log(elvenGauntletsRecipe);
-console.log(696969);
-
-let arr = [5,4,2,3,1];
-arr.toSorted();
-console.log(arr);
-
-
+const gameboardP1 = initializeGameboard('p1');
+console.log(gameboardP1);
+console.log(gameboardP1.getGameboard());
+console.log(gameboardP1.getPlayer());
+console.log(gameboardP1.placeShip(-1,0,'horizontal','destroyer'));
+console.log(gameboardP1.placeShip(0,-1,'horizontal','destroyer'));
+console.log(gameboardP1.placeShip(0,-1,'horizontal','destroyer'));
+console.log(gameboardP1.placeShip(0,-1,'horizontal','destroyer'));

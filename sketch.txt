@@ -1,0 +1,5 @@
+gmaeboard tile -> hit, miss, default
+  - visual = hit, miss, water
+  - actual = hit, miss, water, specificShip
+    - guessing specificShip or water tile changes tile to hit/miss, then increments specificShip data, sinking upon reaching X number of hits
+    - placing ship alters matrix (water->specificShip) and creates associated shipObj
