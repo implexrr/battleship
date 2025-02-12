@@ -1,15 +1,12 @@
 import './main.css';
 import ship from './ships';
+import initializeGameboard from './gameBoard';
 
-const shipLengths = {
-  carrier: 5, battleship: 4, cruiser: 3, submarine: 2, destroyer: 1,
-};
-
-const shipsP1 = {};
-Object.keys(shipLengths).forEach((shipType) => {
-  shipsP1[`${shipType}`] = ship(0, 0, 'vertical', shipType, 'p1');
-});
-
-console.log(shipsP1);
-console.log(shipsP1.carrier.getShipLength());
-console.log(shipsP1.carrier.getPlayer());
+const gameboardP1 = initializeGameboard('p1');
+console.log(gameboardP1);
+console.log(gameboardP1.getGameboard());
+console.log(gameboardP1.getPlayer());
+console.log(gameboardP1.placeShip(-1,0,'horizontal','destroyer'));
+console.log(gameboardP1.placeShip(0,-1,'horizontal','destroyer'));
+console.log(gameboardP1.placeShip(0,-1,'horizontal','destroyer'));
+console.log(gameboardP1.placeShip(0,-1,'horizontal','destroyer'));

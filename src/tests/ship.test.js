@@ -1,9 +1,4 @@
-import ship from '../ships';
-
-// Ship lengths for all ship types
-const shipLengths = {
-  carrier: 5, battleship: 4, cruiser: 3, submarine: 2, destroyer: 1,
-};
+import { ship, shipLengths } from '../ships';
 
 // Utility to dynamically create and test ships
 const testShipCreation = (orientation, player) => {

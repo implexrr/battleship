@@ -1,4 +1,4 @@
-const shipTypes = {
+const shipLengths = {
   carrier: 5, battleship: 4, cruiser: 3, submarine: 2, destroyer: 1,
 };
 
@@ -16,8 +16,8 @@ function createSectionsHitArr(x, y, orientation, length) {
   return sectionsHitArr;
 }
 
-export default function ship(x, y, orientation, type, player) {
-  const length = shipTypes[type];
+function ship(x, y, orientation, type, player) {
+  const length = shipLengths[type];
   const sectionsHit = createSectionsHitArr(x, y, orientation, length);
   let hits = 0;
 
@@ -57,3 +57,5 @@ export default function ship(x, y, orientation, type, player) {
     getShipLength, isSectionHit, isShipSunk, hitShip, getHits, getPlayer, getShipCoord,
   };
 }
+
+export { ship, shipLengths };
