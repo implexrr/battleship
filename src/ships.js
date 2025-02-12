@@ -16,7 +16,7 @@ function createSectionsHitArr(x, y, orientation, length) {
   return sectionsHitArr;
 }
 
-function ship(x, y, orientation, type, player) {
+function ship(x, y, orientation, type) {
   const length = shipLengths[type];
   const sectionsHit = createSectionsHitArr(x, y, orientation, length);
   let hits = 0;
@@ -45,16 +45,12 @@ function ship(x, y, orientation, type, player) {
     return hits;
   }
 
-  function getPlayer() {
-    return player;
-  }
-
   function getShipCoord() {
     return sectionsHit;
   }
 
   return {
-    getShipLength, isSectionHit, isShipSunk, hitShip, getHits, getPlayer, getShipCoord,
+    getShipLength, isSectionHit, isShipSunk, hitShip, getHits, getShipCoord,
   };
 }
 
