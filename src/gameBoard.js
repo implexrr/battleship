@@ -1,4 +1,5 @@
-import { shipLengths } from './ships';
+import { makeShip, shipLengths } from './ships';
+
 const GAMEBOARD_LENGTH = 10;
 
 // Gameboard Initialization
@@ -11,7 +12,10 @@ export default function initializeGameboard(player) {
     }
   }
 
-  const ships = {};
+  const fleet = {};
+  function addToFleet(x, y, orientation, shipType) {
+    fleet[shipType] = makeShip(x, y, orientation, shipType);
+  }
 
   function placeShip(x, y, orientation, shipType) {
     if (x > GAMEBOARD_LENGTH
@@ -32,6 +36,28 @@ export default function initializeGameboard(player) {
         gameboard[j][x] = shipType;
       }
     }
+    addToFleet(x, y, orientation, shipType);
+  }
+
+  function getFleetStatus() {
+    const fleetStatus = {};
+    Object.keys(fleet).forEach((ship) => {
+      const health = fleet[ship].getShipLength();
+      const hits = fleet[ship].getHits();
+      const isSunk = fleet[ship].isShipSunk();
+      fleetStatus[ship] = { health, hits, isSunk };
+    });
+    return fleetStatus;
+  }
+
+  function registerHit(x, y) {
+    if (gameboard[x][y] === 'water') {
+      gameboard[x][y] = 'miss';
+    } else if (gameboard[x][y] in shipLengths) {
+      const ship = gameboard[x][y];
+      gameboard[x][y] = 'hit';
+      fleet[ship].hitShip(x, y);
+    }
   }
 
   function getGameboard() {
@@ -42,10 +68,7 @@ export default function initializeGameboard(player) {
     return player;
   }
 
-  return { getPlayer, getGameboard, placeShip };
-}
-
-// Add Hit/Miss
-function shoot(x, y, shooter, defender) {
-
+  return {
+    getPlayer, getGameboard, placeShip, getFleetStatus, registerHit,
+  };
 }

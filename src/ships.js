@@ -2,6 +2,7 @@ const shipLengths = {
   carrier: 5, battleship: 4, cruiser: 3, submarine: 2, destroyer: 1,
 };
 
+// Create array of ship sections for a given ship/orientation
 function createSectionsHitArr(x, y, orientation, length) {
   const sectionsHitArr = {};
   for (let i = 0; i < length; i += 1) {
@@ -16,7 +17,8 @@ function createSectionsHitArr(x, y, orientation, length) {
   return sectionsHitArr;
 }
 
-function ship(x, y, orientation, type, player) {
+// Create a ship object
+function makeShip(x, y, orientation, type) {
   const length = shipLengths[type];
   const sectionsHit = createSectionsHitArr(x, y, orientation, length);
   let hits = 0;
@@ -33,11 +35,11 @@ function ship(x, y, orientation, type, player) {
     return length === hits;
   }
 
+  // Changes a setion in the ship from <shipname> to 'sunk', then increases # of hits on ship
   function hitShip(a, b) {
     if (sectionsHit[`${a}, ${b}`] === false) {
       sectionsHit[`${a}, ${b}`] = true;
       hits += 1;
-      console.log('hit!');
     }
   }
 
@@ -45,8 +47,8 @@ function ship(x, y, orientation, type, player) {
     return hits;
   }
 
-  function getPlayer() {
-    return player;
+  function getShipHealth() {
+    return length - hits;
   }
 
   function getShipCoord() {
@@ -54,8 +56,8 @@ function ship(x, y, orientation, type, player) {
   }
 
   return {
-    getShipLength, isSectionHit, isShipSunk, hitShip, getHits, getPlayer, getShipCoord,
+    getShipLength, isSectionHit, isShipSunk, hitShip, getHits, getShipCoord, getShipHealth,
   };
 }
 
-export { ship, shipLengths };
+export { makeShip, shipLengths };
