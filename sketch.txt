@@ -3,3 +3,16 @@ gmaeboard tile -> hit, miss, default
   - actual = hit, miss, water, specificShip
     - guessing specificShip or water tile changes tile to hit/miss, then increments specificShip data, sinking upon reaching X number of hits
     - placing ship alters matrix (water->specificShip) and creates associated shipObj
+
+3 placing ships on same spots
+4 firing shots out of grid
+4 duplicate hits?
+3 anything happen to gameboard when water gets hit?
+3 change to sunk on gamebaord if all hit?
+
+3 fleetHealth (return game over)
+3 sunnk status change
+5 refactor gamboard stuff
+5 rewrite tests
+2 new branch
+1 finalize ship skele

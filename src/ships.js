@@ -37,7 +37,6 @@ function makeShip(x, y, orientation, type) {
     if (sectionsHit[`${a}, ${b}`] === false) {
       sectionsHit[`${a}, ${b}`] = true;
       hits += 1;
-      console.log('hit!');
     }
   }
 
