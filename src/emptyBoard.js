@@ -6,4 +6,5 @@ export default function createEmptyBoard(length) {
       board[i][j] = 'water';
     }
   }
+  return board;
 }

@@ -22,8 +22,8 @@ function isInsideGameboard(boardLength, x, y, orientation, shipType) {
     || y < 0
     || ((orientation === 'horizontal') && (x + shipLengths[shipType] > boardLength))
     || ((orientation === 'vertical') && (y + shipLengths[shipType] > boardLength))
-  ) { return true; }
-  return false;
+  ) { return false; }
+  return true;
 }
 
 // Check if ship is placeable

@@ -7,12 +7,12 @@ const GAMEBOARD_LENGTH = 10;
 
 // Gameboard Initialization
 export default function initializeGameboard(player) {
-  const gameboard = createEmptyBoard();
+  const gameboard = createEmptyBoard(GAMEBOARD_LENGTH);
   const fleet = initializeFleet();
   let gameOver = false;
 
   // Place ship and add it to player fleet
-  function placeShip(board, boardLength, x, y, orientation, shipType) {
+  function placeShip(x, y, orientation, shipType) {
     if (!(isShipPlaceable(gameboard, GAMEBOARD_LENGTH, x, y, orientation, shipType))) {
       throw new Error('Can\'t place ship there');
     }
@@ -44,7 +44,7 @@ export default function initializeGameboard(player) {
     } else if (gameboard[x][y] in shipLengths) {
       const ship = gameboard[x][y];
       gameboard[x][y] = 'hit';
-      fleet[ship].hitShip(x, y);
+      fleet.ships[ship].hitShip(x, y);
       fleet.health -= 1;
     }
     if (fleet.isFleetSunk()) {

@@ -33,6 +33,6 @@ export default function initializeFleet() {
   }
 
   return {
-    addToFleet, isFleetSunk, getFleetStatus, getFleetHealth,
+    ships, addToFleet, isFleetSunk, getFleetStatus, getFleetHealth,
   };
 }
