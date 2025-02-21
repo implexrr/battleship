@@ -17,6 +17,19 @@ export default function initializeGameboard(player) {
     fleet[shipType] = makeShip(x, y, orientation, shipType);
   }
 
+  function isOccupied(x, y, orientation, shipType) {
+    if (orientation === 'horizontal') {
+      for (let i = x; i < x + shipLengths[shipType]; i += 1) {
+        if (gameboard[y][i] !== 'water') { return true; }
+      }
+    } else {
+      for (let j = y; j < y + shipLengths[shipType]; j += 1) {
+        if (gameboard[j][x] !== 'water') { return true; }
+      }
+    }
+    return false;
+  }
+
   function placeShip(x, y, orientation, shipType) {
     if (x > GAMEBOARD_LENGTH
       || y > GAMEBOARD_LENGTH
@@ -24,6 +37,7 @@ export default function initializeGameboard(player) {
       || y < 0
       || ((orientation === 'horizontal') && (x + shipLengths[shipType] > GAMEBOARD_LENGTH))
       || ((orientation === 'vertical') && (y + shipLengths[shipType] > GAMEBOARD_LENGTH))
+      || isOccupied(x, y, orientation, shipType)
     ) {
       throw new Error('Can\'t place ship there');
     }
