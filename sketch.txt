@@ -12,8 +12,8 @@ X change to sunk on gamebaord if all hit?
 X fleetHealth (return game over)
 X sunk status change
 
-4 firing shots out of grid
-4 duplicate hits?
+U firing shots out of grid
+X duplicate hits?
 
 5 refactor gamboard stuff
 5 rewrite tests
