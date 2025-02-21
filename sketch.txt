@@ -4,7 +4,7 @@ gmaeboard tile -> hit, miss, default
     - guessing specificShip or water tile changes tile to hit/miss, then increments specificShip data, sinking upon reaching X number of hits
     - placing ship alters matrix (water->specificShip) and creates associated shipObj
 
-3 placing ships on same spots
+X placing ships on same spots
   create bool fxn called isOccupied
 3 anything happen to gameboard when water gets hit?
   built into existing fxns or new fxn?

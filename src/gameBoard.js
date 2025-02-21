@@ -17,6 +17,7 @@ export default function initializeGameboard(player) {
     fleet[shipType] = makeShip(x, y, orientation, shipType);
   }
 
+  // Check if ship is being placed in empty water
   function isOccupied(x, y, orientation, shipType) {
     if (orientation === 'horizontal') {
       for (let i = x; i < x + shipLengths[shipType]; i += 1) {
@@ -30,15 +31,30 @@ export default function initializeGameboard(player) {
     return false;
   }
 
-  function placeShip(x, y, orientation, shipType) {
+  // Check if ship is being placed inside gameboard
+  function isInsideGameboard(x, y, orientation, shipType) {
     if (x > GAMEBOARD_LENGTH
       || y > GAMEBOARD_LENGTH
       || x < 0
       || y < 0
       || ((orientation === 'horizontal') && (x + shipLengths[shipType] > GAMEBOARD_LENGTH))
       || ((orientation === 'vertical') && (y + shipLengths[shipType] > GAMEBOARD_LENGTH))
-      || isOccupied(x, y, orientation, shipType)
-    ) {
+    ) { return true; }
+    return false;
+  }
+
+  // Check if ship is placeable
+  function isShipPlaceable(x, y, orientation, shipType) {
+    if (isInsideGameboard(x, y, orientation, shipType)
+      && !(isOccupied(x, y, orientation, shipType))) {
+      return true;
+    }
+    return false;
+  }
+
+  // Place ship and add it to player fleet
+  function placeShip(x, y, orientation, shipType) {
+    if (!(isShipPlaceable(x, y, orientation, shipType))) {
       throw new Error('Can\'t place ship there');
     }
     if (orientation === 'horizontal') {
@@ -53,6 +69,7 @@ export default function initializeGameboard(player) {
     addToFleet(x, y, orientation, shipType);
   }
 
+  // Get player fleet status
   function getFleetStatus() {
     const fleetStatus = {};
     Object.keys(fleet).forEach((ship) => {
@@ -64,6 +81,7 @@ export default function initializeGameboard(player) {
     return fleetStatus;
   }
 
+  // Register a hit on a ship
   function registerHit(x, y) {
     if (gameboard[x][y] === 'water') {
       gameboard[x][y] = 'miss';
