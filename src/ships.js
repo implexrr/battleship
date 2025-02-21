@@ -31,7 +31,7 @@ function makeShip(x, y, orientation, type) {
     return sectionsHit[`${a}, ${b}`];
   }
 
-  function isShipSunk() {
+  function isSunk() {
     return length === hits;
   }
 
@@ -56,7 +56,7 @@ function makeShip(x, y, orientation, type) {
   }
 
   return {
-    getShipLength, isSectionHit, isShipSunk, hitShip, getHits, getShipCoord, getShipHealth,
+    getShipLength, isSectionHit, isSunk, hitShip, getHits, getShipCoord, getShipHealth,
   };
 }
 

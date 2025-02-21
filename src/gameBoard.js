@@ -4,28 +4,50 @@ const GAMEBOARD_LENGTH = 10;
 
 // Gameboard Initialization
 export default function initializeGameboard(player) {
-  const gameboard = [];
+  const gameboard = {
+    player,
+    board: [],
+    gameOver: false,
+    fleet: {
+      health: 0,
+    },
+  };
+
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
-    gameboard[i] = [];
+    gameboard.board[i] = [];
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-      gameboard[i][j] = 'water';
+      gameboard.board[i][j] = 'water';
     }
   }
 
-  const fleet = {};
   function addToFleet(x, y, orientation, shipType) {
-    fleet[shipType] = makeShip(x, y, orientation, shipType);
+    gameboard.fleet[shipType] = makeShip(x, y, orientation, shipType);
+    gameboard.fleet.health += shipLengths[shipType];
+  }
+
+  // Check if fleet is sunk
+  function isFleetSunk() {
+    return gameboard.fleet.health <= 0;
+  }
+
+  // Change status of all "hit" ship tiles to sunk
+  function sinkAllShips() {
+    for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
+      for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
+        if (gameboard.board[i][j] === 'hit') { gameboard.board[i][j] = 'sunk'; }
+      }
+    }
   }
 
   // Check if ship is being placed in empty water
   function isOccupied(x, y, orientation, shipType) {
     if (orientation === 'horizontal') {
       for (let i = x; i < x + shipLengths[shipType]; i += 1) {
-        if (gameboard[y][i] !== 'water') { return true; }
+        if (gameboard.board[y][i] !== 'water') { return true; }
       }
     } else {
       for (let j = y; j < y + shipLengths[shipType]; j += 1) {
-        if (gameboard[j][x] !== 'water') { return true; }
+        if (gameboard.board[j][x] !== 'water') { return true; }
       }
     }
     return false;
@@ -59,11 +81,11 @@ export default function initializeGameboard(player) {
     }
     if (orientation === 'horizontal') {
       for (let i = x; i < x + shipLengths[shipType]; i += 1) {
-        gameboard[y][i] = shipType;
+        gameboard.board[y][i] = shipType;
       }
     } else {
       for (let j = y; j < y + shipLengths[shipType]; j += 1) {
-        gameboard[j][x] = shipType;
+        gameboard.board[j][x] = shipType;
       }
     }
     addToFleet(x, y, orientation, shipType);
@@ -72,10 +94,10 @@ export default function initializeGameboard(player) {
   // Get player fleet status
   function getFleetStatus() {
     const fleetStatus = {};
-    Object.keys(fleet).forEach((ship) => {
-      const health = fleet[ship].getShipLength();
-      const hits = fleet[ship].getHits();
-      const isSunk = fleet[ship].isShipSunk();
+    Object.keys(gameboard.fleet).forEach((ship) => {
+      const health = gameboard.fleet[ship].getShipLength();
+      const hits = gameboard.fleet[ship].getHits();
+      const isSunk = gameboard.fleet[ship].isShipSunk();
       fleetStatus[ship] = { health, hits, isSunk };
     });
     return fleetStatus;
@@ -83,24 +105,33 @@ export default function initializeGameboard(player) {
 
   // Register a hit on a ship
   function registerHit(x, y) {
-    if (gameboard[x][y] === 'water') {
-      gameboard[x][y] = 'miss';
-    } else if (gameboard[x][y] in shipLengths) {
-      const ship = gameboard[x][y];
-      gameboard[x][y] = 'hit';
-      fleet[ship].hitShip(x, y);
+    if (gameboard.board[x][y] === 'water') {
+      gameboard.board[x][y] = 'miss';
+    } else if (gameboard.board[x][y] in shipLengths) {
+      const ship = gameboard.board[x][y];
+      gameboard.board[x][y] = 'hit';
+      gameboard.fleet[ship].hitShip(x, y);
+      gameboard.fleet.health -= 1;
+    }
+    if (isFleetSunk()) {
+      sinkAllShips();
+      gameboard.gameOver = true;
     }
   }
 
-  function getGameboard() {
-    return gameboard;
+  function getBoard() {
+    return gameboard.board;
   }
 
   function getPlayer() {
-    return player;
+    return gameboard.player;
+  }
+
+  function isGameOver() {
+    return gameboard.gameOver;
   }
 
   return {
-    getPlayer, getGameboard, placeShip, getFleetStatus, registerHit,
+    getPlayer, getBoard, placeShip, getFleetStatus, registerHit, isGameOver,
   };
 }

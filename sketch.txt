@@ -6,11 +6,11 @@ gmaeboard tile -> hit, miss, default
 
 X placing ships on same spots
   create bool fxn called isOccupied
-3 anything happen to gameboard when water gets hit?
+X anything happen to gameboard when water gets hit?
   built into existing fxns or new fxn?
-3 change to sunk on gamebaord if all hit?
-3 fleetHealth (return game over)
-3 sunk status change
+X change to sunk on gamebaord if all hit?
+X fleetHealth (return game over)
+X sunk status change
 
 4 firing shots out of grid
 4 duplicate hits?
