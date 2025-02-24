@@ -7,9 +7,9 @@ function createSectionsHitArr(x, y, orientation, length) {
   const sectionsHitArr = {};
   for (let i = 0; i < length; i += 1) {
     if (orientation === 'horizontal') {
-      sectionsHitArr[`${x + i}, ${y}`] = false;
-    } else if (orientation === 'vertical') {
       sectionsHitArr[`${x}, ${y + i}`] = false;
+    } else if (orientation === 'vertical') {
+      sectionsHitArr[`${x + i}, ${y}`] = false;
     } else {
       throw new Error('Not a valid orientation');
     }
@@ -35,14 +35,6 @@ function makeShip(x, y, orientation, type) {
     return length === hits;
   }
 
-  // Changes a setion in the ship from <shipname> to 'sunk', then increases # of hits on ship
-  function hitShip(a, b) {
-    if (sectionsHit[`${a}, ${b}`] === false) {
-      sectionsHit[`${a}, ${b}`] = true;
-      hits += 1;
-    }
-  }
-
   function getHits() {
     return hits;
   }
@@ -53,6 +45,15 @@ function makeShip(x, y, orientation, type) {
 
   function getShipCoord() {
     return sectionsHit;
+  }
+
+  // Changes a setion in the ship from <shipname> to 'sunk', then increases # of hits on ship
+  function hitShip(a, b) {
+    console.log(sectionsHit);
+    if (sectionsHit[`${a}, ${b}`] === false) {
+      sectionsHit[`${a}, ${b}`] = true;
+      hits += 1;
+    }
   }
 
   return {

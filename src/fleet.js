@@ -1,17 +1,21 @@
 import { makeShip, shipLengths } from './ships';
 
 export default function initializeFleet() {
-  let health = 0;
   const ships = {};
 
   function addToFleet(x, y, orientation, shipType) {
     const newShip = makeShip(x, y, orientation, shipType);
-    health += shipLengths[shipType];
     ships[shipType] = newShip;
   }
 
   function isFleetSunk() {
-    return health <= 0;
+    let health = 0;
+    Object.keys(ships).forEach((ship) => {
+      health += ships[ship].getShipHealth();
+    });
+    if (health <= 0) {
+      return true;
+    } return false;
   }
 
   function getFleetStatus() {
@@ -20,7 +24,7 @@ export default function initializeFleet() {
       const length = ships[ship].getShipLength();
       const hits = ships[ship].getHits();
       const healthLeft = length - hits;
-      const isSunk = ships[ship].isShipSunk();
+      const isSunk = ships[ship].isSunk();
       fleetStatus[ship] = {
         length, hits, healthLeft, isSunk,
       };
@@ -29,6 +33,10 @@ export default function initializeFleet() {
   }
 
   function getFleetHealth() {
+    let health = 0;
+    Object.keys(ships).forEach((ship) => {
+      health += ships[ship].getShipHealth();
+    });
     return health;
   }
 

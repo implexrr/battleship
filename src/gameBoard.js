@@ -45,7 +45,6 @@ export default function initializeGameboard(player) {
       const ship = gameboard[x][y];
       gameboard[x][y] = 'hit';
       fleet.ships[ship].hitShip(x, y);
-      fleet.health -= 1;
     }
     if (fleet.isFleetSunk()) {
       sinkAllShips();
@@ -66,6 +65,6 @@ export default function initializeGameboard(player) {
   }
 
   return {
-    getPlayer, getBoard, placeShip, registerHit, isGameOver,
+    fleet, getPlayer, getBoard, placeShip, registerHit, isGameOver,
   };
 }
