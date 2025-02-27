@@ -4,16 +4,4 @@ gmaeboard tile -> hit, miss, default
     - guessing specificShip or water tile changes tile to hit/miss, then increments specificShip data, sinking upon reaching X number of hits
     - placing ship alters matrix (water->specificShip) and creates associated shipObj
 
-X placing ships on same spots
-  create bool fxn called isOccupied
-X anything happen to gameboard when water gets hit?
-  built into existing fxns or new fxn?
-X change to sunk on gamebaord if all hit?
-X fleetHealth (return game over)
-X sunk status change
-
-U firing shots out of grid
-X duplicate hits?
-
-5 refactor gamboard stuff
-5 rewrite tests
+1 rewrite tests
