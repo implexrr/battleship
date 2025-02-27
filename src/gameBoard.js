@@ -1,30 +1,19 @@
-import { makeShip, shipLengths } from './ships';
+import { shipLengths } from './ships';
+import initializeFleet from './fleet';
+import createEmptyBoard from './emptyBoard';
+import isShipPlaceable from './validatePlacement';
 
 const GAMEBOARD_LENGTH = 10;
 
 // Gameboard Initialization
 export default function initializeGameboard(player) {
-  const gameboard = [];
-  for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
-    gameboard[i] = [];
-    for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-      gameboard[i][j] = 'water';
-    }
-  }
+  const gameboard = createEmptyBoard(GAMEBOARD_LENGTH);
+  const fleet = initializeFleet();
+  let gameOver = false;
 
-  const fleet = {};
-  function addToFleet(x, y, orientation, shipType) {
-    fleet[shipType] = makeShip(x, y, orientation, shipType);
-  }
-
+  // Place ship and add it to player fleet
   function placeShip(x, y, orientation, shipType) {
-    if (x > GAMEBOARD_LENGTH
-      || y > GAMEBOARD_LENGTH
-      || x < 0
-      || y < 0
-      || ((orientation === 'horizontal') && (x + shipLengths[shipType] > GAMEBOARD_LENGTH))
-      || ((orientation === 'vertical') && (y + shipLengths[shipType] > GAMEBOARD_LENGTH))
-    ) {
+    if (!(isShipPlaceable(gameboard, GAMEBOARD_LENGTH, x, y, orientation, shipType))) {
       throw new Error('Can\'t place ship there');
     }
     if (orientation === 'horizontal') {
@@ -36,31 +25,34 @@ export default function initializeGameboard(player) {
         gameboard[j][x] = shipType;
       }
     }
-    addToFleet(x, y, orientation, shipType);
+    fleet.addToFleet(x, y, orientation, shipType);
   }
 
-  function getFleetStatus() {
-    const fleetStatus = {};
-    Object.keys(fleet).forEach((ship) => {
-      const health = fleet[ship].getShipLength();
-      const hits = fleet[ship].getHits();
-      const isSunk = fleet[ship].isShipSunk();
-      fleetStatus[ship] = { health, hits, isSunk };
-    });
-    return fleetStatus;
+  // Change status of all "hit" ship tiles to sunk
+  function sinkAllShips() {
+    for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
+      for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
+        if (gameboard[i][j] === 'hit') { gameboard[i][j] = 'sunk'; }
+      }
+    }
   }
 
+  // Register a hit on a ship
   function registerHit(x, y) {
     if (gameboard[x][y] === 'water') {
       gameboard[x][y] = 'miss';
     } else if (gameboard[x][y] in shipLengths) {
       const ship = gameboard[x][y];
       gameboard[x][y] = 'hit';
-      fleet[ship].hitShip(x, y);
+      fleet.ships[ship].hitShip(x, y);
+    }
+    if (fleet.isFleetSunk()) {
+      sinkAllShips();
+      gameOver = true;
     }
   }
 
-  function getGameboard() {
+  function getBoard() {
     return gameboard;
   }
 
@@ -68,7 +60,11 @@ export default function initializeGameboard(player) {
     return player;
   }
 
+  function isGameOver() {
+    return gameOver;
+  }
+
   return {
-    getPlayer, getGameboard, placeShip, getFleetStatus, registerHit,
+    fleet, getPlayer, getBoard, placeShip, registerHit, isGameOver,
   };
 }
