@@ -47,9 +47,8 @@ function makeShip(x, y, orientation, type) {
     return sectionsHit;
   }
 
-  // Changes a setion in the ship from <shipname> to 'sunk', then increases # of hits on ship
+  // Change a setion in the ship from <shipname> to 'sunk', then increase # of hits on ship
   function hitShip(a, b) {
-    console.log(sectionsHit);
     if (sectionsHit[`${a}, ${b}`] === false) {
       sectionsHit[`${a}, ${b}`] = true;
       hits += 1;

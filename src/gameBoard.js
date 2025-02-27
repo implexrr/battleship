@@ -1,4 +1,4 @@
-import { makeShip, shipLengths } from './ships';
+import { shipLengths } from './ships';
 import initializeFleet from './fleet';
 import createEmptyBoard from './emptyBoard';
 import isShipPlaceable from './validatePlacement';

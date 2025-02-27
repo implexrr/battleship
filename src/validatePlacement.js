@@ -16,9 +16,7 @@ function isOccupied(board, x, y, orientation, shipType) {
 
 // Check if ship is being placed inside gameboard
 function isInsideGameboard(boardLength, x, y, orientation, shipType) {
-  if (x > boardLength
-    || y > boardLength
-    || x < 0
+  if (x < 0
     || y < 0
     || ((orientation === 'horizontal') && (x + shipLengths[shipType] > boardLength))
     || ((orientation === 'vertical') && (y + shipLengths[shipType] > boardLength))
