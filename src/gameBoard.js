@@ -68,3 +68,5 @@ export default function initializeGameboard(player) {
     fleet, getPlayer, getBoard, placeShip, registerHit, isGameOver,
   };
 }
+
+// Play 100 games of battleship given random coord and choice

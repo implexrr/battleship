@@ -61,3 +61,6 @@ function makeShip(x, y, orientation, type) {
 }
 
 export { makeShip, shipLengths };
+
+// TDL Check that all ships, given random (but tracked) starting coordinates, return correct
+// sectionHits, getHits, isSunk, etc. values when hit with all possible combinations

@@ -48,3 +48,6 @@ export default function initializeFleet() {
     ships, addToFleet, isFleetSunk, getFleetStatus, getFleetHealth,
   };
 }
+
+// Place 5 ships randomly, hit all of their sections, then check fleet status and sunkness each time
+// Repeat the above 10 times, tracking all results
