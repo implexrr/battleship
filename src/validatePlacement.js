@@ -32,9 +32,3 @@ export default function isShipPlaceable(board, boardLength, x, y, orientation, s
   }
   return false;
 }
-
-// TDL: Write tests for isShipPlacable for all possible out of bounds variants
-// TDL: Write tests for isShipPlacable for 20 randomly chosen overlapping ship placement attempts
-// And 20 valid ones for the same preexisting ship config
-// TDL Write tests for isShipPlacable for all possible in bounds variants
-// TDL: Write tests that check if duplicate ships (e.g. 2 battleships) are placable
