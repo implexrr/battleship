@@ -3,13 +3,13 @@ const shipLengths = {
 };
 
 // Create array of ship sections for a given ship/orientation
-function createSectionsHitArr(x, y, orientation, length) {
+function createSectionsHitArr(row, col, orientation, length) {
   const sectionsHitArr = {};
   for (let i = 0; i < length; i += 1) {
     if (orientation === 'horizontal') {
-      sectionsHitArr[`${x}, ${y + i}`] = false;
+      sectionsHitArr[`${row}, ${col + i}`] = false;
     } else if (orientation === 'vertical') {
-      sectionsHitArr[`${x + i}, ${y}`] = false;
+      sectionsHitArr[`${row + i}, ${col}`] = false;
     } else {
       throw new Error('Not a valid orientation');
     }
@@ -18,9 +18,9 @@ function createSectionsHitArr(x, y, orientation, length) {
 }
 
 // Create a ship object
-function makeShip(x, y, orientation, type) {
+function makeShip(row, col, orientation, type) {
   const length = shipLengths[type];
-  const sectionsHit = createSectionsHitArr(x, y, orientation, length);
+  const sectionsHit = createSectionsHitArr(row, col, orientation, length);
   let hits = 0;
 
   function getShipLength() {
