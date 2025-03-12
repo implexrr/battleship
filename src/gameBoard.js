@@ -41,11 +41,11 @@ export default function initializeGameboard(player) {
     fleet.addToFleet(row, col, orientation, shipType);
   }
 
-  // Change status of all "hit" ship tiles to sunk
+  // Change status of all "hit" ship tiles to 'wreckage'
   function sinkAllShips() {
     for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
       for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-        if (gameboard[i][j] === 'hit') { gameboard[i][j] = 'sunk'; }
+        if (gameboard[i][j] === 'hit') { gameboard[i][j] = 'wreckage'; }
       }
     }
   }
@@ -98,6 +98,10 @@ export default function initializeGameboard(player) {
       }
     }
     return true;
+  }
+
+  function placeWreckage(x, y) {
+    gameboard(x, y) = 'wreckage';
   }
 
   return {
