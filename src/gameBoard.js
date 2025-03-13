@@ -101,11 +101,19 @@ export default function initializeGameboard(player) {
   }
 
   function placeWreckage(x, y) {
-    gameboard(x, y) = 'wreckage';
+    gameboard[x][y] = 'wreckage';
   }
 
   return {
-    fleet, getPlayer, getBoard, placeShip, registerHit, isGameOver, isShipFullyHere, resetGameboard,
+    fleet,
+    getPlayer,
+    getBoard,
+    placeShip,
+    registerHit,
+    isGameOver,
+    isShipFullyHere,
+    resetGameboard,
+    placeWreckage,
   };
 }
 
