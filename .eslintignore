@@ -7,3 +7,4 @@ webpack.dev.js
 webpack.prod.js
 babel.config.js
 postcss.config.js
+error.log
