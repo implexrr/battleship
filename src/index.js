@@ -1,6 +1,6 @@
 import './main.css';
-import initializeGameboard from './game/gameBoard';
-import { shipLengths } from './game/ships';
+import initializeGameboard from './app/gameMechanics/gameBoard';
+import { shipLengths } from './app/gameMechanics/ships';
 
 // 4 states this webpage will take
 // 1. initialPage, only has a playGame button and some filler html elements with basic css
@@ -13,7 +13,6 @@ import { shipLengths } from './game/ships';
 // 4. game over/play again screen
   // generate gameOverPage component, with playAgain button that generates initialPage component
 
-
 function changeGameState(newGameState) {
   if (newGameState === 'initial') { renderInitial(); }
   else if (newGameState === 'placement') { renderPlacement(); }
@@ -23,25 +22,29 @@ function changeGameState(newGameState) {
 
 const goToInitialButton = () => {
   const el = document.createElement('button');
-  el.addEventListener('click', renderInitial);
+  el.textContent = 'initial';
+  el.addEventListener('click', () => { changeGameState('initial'); });
   return el;
 };
 
 const goToPlacementButton = () => {
   const el = document.createElement('button');
-  el.addEventListener('click', renderPlacement);
+  el.textContent = 'placement';
+  el.addEventListener('click', () => { changeGameState('placement'); });
   return el;
 };
 
 const goToShootingButton = () => {
   const el = document.createElement('button');
-  el.addEventListener('click', renderShooting);
+  el.textContent = 'shooting';
+  el.addEventListener('click', () => { changeGameState('shooting'); });
   return el;
 };
 
 const goToGameOverButton = () => {
   const el = document.createElement('button');
-  el.addEventListener('click', renderGameOver);
+  el.textContent = 'gameOver';
+  el.addEventListener('click', () => { changeGameState('gameOver'); });
   return el;
 };
 
@@ -74,7 +77,7 @@ function renderGameOver() {
   // create gotoInitial button
   const bodyEl = document.querySelector('body');
   bodyEl.textContent = 'Game over page';
-  bodyEl.append(goToInitialButton);
+  bodyEl.append(goToInitialButton());
 }
 
 renderInitial();

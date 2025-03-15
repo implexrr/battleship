@@ -1,4 +1,4 @@
-import { makeShip, shipLengths } from '../game/ships';
+import { makeShip, shipLengths } from '../app/gameMechanics/ships';
 
 // Utility to dynamically create and test ships
 const testShipCreation = (orientation) => {
