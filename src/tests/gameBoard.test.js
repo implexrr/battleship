@@ -1,6 +1,6 @@
 import fs from 'fs';
-import initializeGameboard from '../gameBoard';
-import { shipLengths } from '../ships';
+import initializeGameboard from '../game/gameBoard';
+import { shipLengths } from '../game/ships';
 
 // Create a writable stream to 'error.log', using 'w' flag to overwrite the file
 const errorLogStream = fs.createWriteStream('error.log', { flags: 'w' });
