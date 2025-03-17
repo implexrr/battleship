@@ -1,6 +1,8 @@
 import './main.css';
 import initializeGameboard from './app/gameMechanics/gameBoard';
 import { shipLengths } from './app/gameMechanics/ships';
+// import changeGameState from './app/gameState';
+// import gameStateManager from './app/gameStateManager';
 
 // 4 states this webpage will take
 // 1. initialPage, only has a playGame button and some filler html elements with basic css
@@ -13,71 +15,13 @@ import { shipLengths } from './app/gameMechanics/ships';
 // 4. game over/play again screen
   // generate gameOverPage component, with playAgain button that generates initialPage component
 
-function changeGameState(newGameState) {
-  if (newGameState === 'initial') { renderInitial(); }
-  else if (newGameState === 'placement') { renderPlacement(); }
-  else if (newGameState === 'shooting') { renderShooting(); }
-  else if (newGameState === 'gameOver') { renderGameOver(); }
-}
+// index.js
+import './app/pages/initial';
+import './app/pages/placement';
+import './app/pages/shooting';
+import './app/pages/gameOver';
 
-const goToInitialButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'initial';
-  el.addEventListener('click', () => { changeGameState('initial'); });
-  return el;
-};
+import gameStateManager from './app/gameStateManager';
 
-const goToPlacementButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'placement';
-  el.addEventListener('click', () => { changeGameState('placement'); });
-  return el;
-};
-
-const goToShootingButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'shooting';
-  el.addEventListener('click', () => { changeGameState('shooting'); });
-  return el;
-};
-
-const goToGameOverButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'gameOver';
-  el.addEventListener('click', () => { changeGameState('gameOver'); });
-  return el;
-};
-
-function renderInitial() {
-  // create gotoPlacement button
-  const bodyEl = document.querySelector('body');
-  bodyEl.textContent = 'Initial page';
-  bodyEl.append(goToPlacementButton());
-}
-
-function renderPlacement() {
-  // create gotoShooting button
-  // create gotoInitial button
-  const bodyEl = document.querySelector('body');
-  bodyEl.textContent = 'Placement page';
-  bodyEl.append(goToShootingButton());
-  bodyEl.append(goToInitialButton());
-}
-
-function renderShooting() {
-  // create gotoGameOver button
-  // create gotoInitial button
-  const bodyEl = document.querySelector('body');
-  bodyEl.textContent = 'Shooting page';
-  bodyEl.append(goToGameOverButton());
-  bodyEl.append(goToInitialButton());
-}
-
-function renderGameOver() {
-  // create gotoInitial button
-  const bodyEl = document.querySelector('body');
-  bodyEl.textContent = 'Game over page';
-  bodyEl.append(goToInitialButton());
-}
-
-renderInitial();
+// Start by rendering the first page
+gameStateManager.setState('initial');
