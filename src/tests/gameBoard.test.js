@@ -1,6 +1,6 @@
 import fs from 'fs';
 import initializeGameboard from '../app/gameMechanics/gameBoard';
-import { shipLengths } from '../app/gameMechanics/ships';
+import { SHIP_LENGTHS } from '../app/gameMechanics/ships';
 
 // Create a writable stream to 'error.log', using 'w' flag to overwrite the file
 const errorLogStream = fs.createWriteStream('error.log', { flags: 'w' });
@@ -11,6 +11,7 @@ console.error = (...args) => {
 };
 const GAMEBOARD_LENGTH = 10;
 
+// Check if ships are placed properly for every possible orientation and coordinate pair
 const testPlacement = (orientation) => {
   const gameboard = initializeGameboard('player1');
   beforeEach(() => {
@@ -19,10 +20,10 @@ const testPlacement = (orientation) => {
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
       describe(`places ${orientation} ships correctly`, () => {
-        test.each(Object.keys(shipLengths))(`Correctly places ${orientation} %s at ${i}, ${j}`, (shipType) => {
+        test.each(Object.keys(SHIP_LENGTHS))(`Correctly places ${orientation} %s at ${i}, ${j}`, (shipType) => {
           try { gameboard.placeShip(i, j, orientation, shipType); } catch (error) { console.error('Error:', error.message); }
-          if (((orientation === 'horizontal') && (j + shipLengths[shipType] > GAMEBOARD_LENGTH))
-            || ((orientation === 'vertical') && (i + shipLengths[shipType] > GAMEBOARD_LENGTH))) {
+          if (((orientation === 'horizontal') && (j + SHIP_LENGTHS[shipType] > GAMEBOARD_LENGTH))
+            || ((orientation === 'vertical') && (i + SHIP_LENGTHS[shipType] > GAMEBOARD_LENGTH))) {
             expect(gameboard.isShipFullyHere(i, j, orientation, shipType)).toBe(false);
           } else { expect(gameboard.isShipFullyHere(i, j, orientation, shipType)).toBe(true); }
         });
@@ -31,6 +32,7 @@ const testPlacement = (orientation) => {
   }
 };
 
+// Check if ships are placed properly given arbitrary wreckage lines
 const testPlacementWithWreckage = (orientation, hLine1, hLine2, vLine1, vLine2) => {
   const gameboard = initializeGameboard('player1');
   beforeEach(() => {
@@ -45,19 +47,19 @@ const testPlacementWithWreckage = (orientation, hLine1, hLine2, vLine1, vLine2) 
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
       describe(`places ${orientation} ships correctly with wreckage lines v: (${vLine1}, ${vLine2}), h: (${hLine1}, ${hLine2})`, () => {
-        test.each(Object.keys(shipLengths))(`Correctly places ${orientation} %s at ${i}, ${j} with wreckage lines v: (${vLine1}, ${vLine2}), h: (${hLine1}, ${hLine2})`, (shipType) => {
+        test.each(Object.keys(SHIP_LENGTHS))(`Correctly places ${orientation} %s at ${i}, ${j} with wreckage lines v: (${vLine1}, ${vLine2}), h: (${hLine1}, ${hLine2})`, (shipType) => {
           try { gameboard.placeShip(i, j, orientation, shipType); } catch (error) { console.error('Error:', error.message); }
           if (
             (i === hLine1) // starts on hLine1
             || (i === hLine2) // starts on hLine2
             || (j === vLine1) // starts on vLine1
             || (j === vLine2) // starts on vLine2
-            || ((orientation === 'horizontal') && (j + shipLengths[shipType] > vLine1 && vLine1 > j)) // crosses vLine1
-            || ((orientation === 'horizontal') && (j + shipLengths[shipType] > vLine2 && vLine2 > j)) // crosses vLine2
-            || ((orientation === 'horizontal') && (j + shipLengths[shipType] > GAMEBOARD_LENGTH)) // exceeds gameboard horizontally
-            || ((orientation === 'vertical') && (i + shipLengths[shipType] > hLine1 && hLine1 > i)) // crosses hLine1
-            || ((orientation === 'vertical') && (i + shipLengths[shipType] > hLine2 && hLine2 > i)) // crosses hLine2
-            || ((orientation === 'vertical') && (i + shipLengths[shipType] > GAMEBOARD_LENGTH)) // exceeds gameboard vertically
+            || ((orientation === 'horizontal') && (j + SHIP_LENGTHS[shipType] > vLine1 && vLine1 > j)) // crosses vLine1
+            || ((orientation === 'horizontal') && (j + SHIP_LENGTHS[shipType] > vLine2 && vLine2 > j)) // crosses vLine2
+            || ((orientation === 'horizontal') && (j + SHIP_LENGTHS[shipType] > GAMEBOARD_LENGTH)) // exceeds gameboard horizontally
+            || ((orientation === 'vertical') && (i + SHIP_LENGTHS[shipType] > hLine1 && hLine1 > i)) // crosses hLine1
+            || ((orientation === 'vertical') && (i + SHIP_LENGTHS[shipType] > hLine2 && hLine2 > i)) // crosses hLine2
+            || ((orientation === 'vertical') && (i + SHIP_LENGTHS[shipType] > GAMEBOARD_LENGTH)) // exceeds gameboard vertically
           ) {
             expect(gameboard.isShipFullyHere(i, j, orientation, shipType)).toBe(false);
           } else { expect(gameboard.isShipFullyHere(i, j, orientation, shipType)).toBe(true); }

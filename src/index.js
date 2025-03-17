@@ -1,8 +1,14 @@
 import './main.css';
 import initializeGameboard from './app/gameMechanics/gameBoard';
-import { shipLengths } from './app/gameMechanics/ships';
+import { SHIP_LENGTHS } from './app/gameMechanics/ships';
 // import changeGameState from './app/gameState';
 // import gameStateManager from './app/gameStateManager';
+
+const gameboard = initializeGameboard('p1');
+gameboard.placeShip(0, 0, 'horizontal', 'carrier');
+const fleetStatus = gameboard.fleet.getFleetStatus();
+// console.log(fleetStatus.carrier.healthLeft);
+console.log(gameboard.isShipFullyHere(0, 0, 'horizontal', 'carrier'));
 
 // 4 states this webpage will take
 // 1. initialPage, only has a playGame button and some filler html elements with basic css

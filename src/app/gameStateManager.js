@@ -1,6 +1,9 @@
+// Globally accessed IIFE that renders, registers and sets the state of the game
 const gameStateManager = (() => {
   const states = {}; // key=state, val=stateContentGenerator
   let curState = null;
+
+  // Render content related to state, according to whatever the current state is
   function renderStateContent() {
     const stateContent = states[curState];
     const bodyEl = document.querySelector('body');
@@ -8,10 +11,12 @@ const gameStateManager = (() => {
     bodyEl.append(stateContent());
   }
 
+  // Register a state and its associated content generation fxn as key-val pairs
   function registerState(state, stateContent) {
     states[state] = stateContent;
   }
 
+  // Set the current state to newState, render associated content via the states object
   function setState(newState) {
     curState = newState;
     renderStateContent();
