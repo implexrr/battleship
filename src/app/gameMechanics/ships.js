@@ -1,4 +1,4 @@
-const shipLengths = {
+const SHIP_LENGTHS = {
   carrier: 5, battleship: 4, cruiser: 3, submarine: 2, destroyer: 1,
 };
 
@@ -19,7 +19,7 @@ function createSectionsHitArr(row, col, orientation, length) {
 
 // Create a ship object
 function makeShip(row, col, orientation, type) {
-  const length = shipLengths[type];
+  const length = SHIP_LENGTHS[type];
   const sectionsHit = createSectionsHitArr(row, col, orientation, length);
   let hits = 0;
 
@@ -60,4 +60,4 @@ function makeShip(row, col, orientation, type) {
   };
 }
 
-export { makeShip, shipLengths };
+export { makeShip, SHIP_LENGTHS };

@@ -1,3 +1,4 @@
+// Create "empty" matrix full of water to represent an empty board in the gameboard object
 export default function createEmptyBoard(length) {
   const board = [];
   for (let i = 0; i < length; i += 1) {

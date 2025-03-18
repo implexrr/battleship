@@ -1,11 +1,11 @@
-import { shipLengths } from './ships';
+import { SHIP_LENGTHS } from './ships';
 import initializeFleet from './fleet';
 import createEmptyBoard from './emptyBoard';
 import isShipPlaceable from './validatePlacement';
 
 const GAMEBOARD_LENGTH = 10;
 
-// Gameboard Initialization
+// Initialize gameboard
 export default function initializeGameboard(player) {
   let gameboard = createEmptyBoard(GAMEBOARD_LENGTH);
   let fleet = initializeFleet();
@@ -20,7 +20,7 @@ export default function initializeGameboard(player) {
 
   // Place ship and add it to player fleet
   function placeShip(row, col, orientation, shipType) {
-    if (!(shipType in shipLengths)) {
+    if (!(shipType in SHIP_LENGTHS)) {
       throw new Error('Not a ship type');
     }
     if (orientation !== 'horizontal' && orientation !== 'vertical') {
@@ -30,11 +30,11 @@ export default function initializeGameboard(player) {
       throw new Error('Can\'t place ship there');
     }
     if (orientation === 'horizontal') {
-      for (let i = col; i < col + shipLengths[shipType]; i += 1) {
+      for (let i = col; i < col + SHIP_LENGTHS[shipType]; i += 1) {
         gameboard[row][i] = shipType;
       }
     } else {
-      for (let j = row; j < row + shipLengths[shipType]; j += 1) {
+      for (let j = row; j < row + SHIP_LENGTHS[shipType]; j += 1) {
         gameboard[j][col] = shipType;
       }
     }
@@ -54,7 +54,7 @@ export default function initializeGameboard(player) {
   function registerHit(x, y) {
     if (gameboard[x][y] === 'water') {
       gameboard[x][y] = 'miss';
-    } else if (gameboard[x][y] in shipLengths) {
+    } else if (gameboard[x][y] in SHIP_LENGTHS) {
       const ship = gameboard[x][y];
       gameboard[x][y] = 'hit';
       fleet.ships[ship].hitShip(x, y);
@@ -77,26 +77,34 @@ export default function initializeGameboard(player) {
     return gameOver;
   }
 
+  // Check to see if a ship is properly placed in a given location
   function isShipFullyHere(row, col, orientation, shipType) {
-    if (!(shipType in shipLengths)) {
+    // Check parameters for validity
+    if (!(shipType in SHIP_LENGTHS)) {
       throw new Error('Not a ship type');
     }
     if (orientation !== 'horizontal' && orientation !== 'vertical') {
       throw new Error('Not a valid orientation');
     }
+
+    // Check if matrix cell value matches ship name
     if (orientation === 'horizontal') {
-      for (let i = col; i < col + shipLengths[shipType]; i += 1) {
+      for (let i = col; i < col + SHIP_LENGTHS[shipType]; i += 1) {
         if (gameboard[row][i] !== shipType) {
           return false;
         }
       }
     } else {
-      for (let i = row; i < row + shipLengths[shipType]; i += 1) {
-        if (gameboard[i][col] !== shipType) {
+      for (let i = row; i < row + SHIP_LENGTHS[shipType]; i += 1) {
+        if ((gameboard[i][col] !== shipType)) {
           return false;
         }
       }
     }
+
+    // Check if ship has full HP
+    const fleetStatus = fleet.getFleetStatus();
+    if (SHIP_LENGTHS[shipType] !== fleetStatus[shipType].healthLeft) { return false; }
     return true;
   }
 
