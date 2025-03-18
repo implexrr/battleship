@@ -5,10 +5,14 @@ const gameStateManager = (() => {
 
   // Render content related to state, according to whatever the current state is
   function renderStateContent() {
-    const stateContent = states[curState];
+    const contentArr = (states[curState])();
     const bodyEl = document.querySelector('body');
     bodyEl.textContent = '';
-    bodyEl.append(stateContent());
+
+    for (let i = 0; i < contentArr.length; i += 1) {
+      bodyEl.append(contentArr[i]);
+    }
+    // bodyEl.append(stateContent());
   }
 
   // Register a state and its associated content generation fxn as key-val pairs
