@@ -1,5 +1,11 @@
 import gameStateManager from '../gameStateManager';
 
+const genTitleEl = () => {
+  const el = document.createElement('h2');
+  el.textContent = 'Placement Phase';
+  return el;
+};
+
 const genGoToInitialButton = () => {
   const el = document.createElement('button');
   el.textContent = 'Go to initial';
@@ -14,12 +20,9 @@ const genGoToShootingButton = () => {
   return el;
 };
 
-const genPlacementPageEl = () => {
-  const el = document.createElement('div');
-  el.textContent = 'Placement page';
-  el.append(genGoToInitialButton());
-  el.append(genGoToShootingButton());
-  return el;
+const placementPageEls = () => {
+  const els = [genTitleEl(), genGoToInitialButton(), genGoToShootingButton()];
+  return els;
 };
 
-gameStateManager.registerState('placement', genPlacementPageEl);
+gameStateManager.registerState('placement', placementPageEls);

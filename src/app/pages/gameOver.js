@@ -1,5 +1,11 @@
 import gameStateManager from '../gameStateManager';
 
+const genTitleEl = () => {
+  const el = document.createElement('h2');
+  el.textContent = 'Game over';
+  return el;
+};
+
 const genGoToInitialButton = () => {
   const el = document.createElement('button');
   el.textContent = 'Go to initial';
@@ -7,11 +13,9 @@ const genGoToInitialButton = () => {
   return el;
 };
 
-const genGameOverPageEl = () => {
-  const el = document.createElement('div');
-  el.textContent = 'Game over page';
-  el.append(genGoToInitialButton());
-  return el;
+const gameOverPageEls = () => {
+  const els = [genTitleEl(), genGoToInitialButton()];
+  return els;
 };
 
-gameStateManager.registerState('gameOver', genGameOverPageEl);
+gameStateManager.registerState('gameOver', gameOverPageEls);
