@@ -1,5 +1,5 @@
 import fs from 'fs';
-import initializeGameboard from '../app/gameMechanics/gameBoard';
+import { initializeGameboard, GAMEBOARD_LENGTH } from '../app/gameMechanics/gameBoard';
 import { SHIP_LENGTHS } from '../app/gameMechanics/ships';
 
 // Create a writable stream to 'error.log', using 'w' flag to overwrite the file
@@ -9,7 +9,6 @@ const errorLogStream = fs.createWriteStream('error.log', { flags: 'w' });
 console.error = (...args) => {
   errorLogStream.write(`${args.map((arg) => (typeof arg === 'string' ? arg : JSON.stringify(arg))).join(' ')}\n`);
 };
-const GAMEBOARD_LENGTH = 10;
 
 // Check if ships are placed properly for every possible orientation and coordinate pair
 const testPlacement = (orientation) => {

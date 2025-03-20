@@ -1,0 +1,20 @@
+
+* {
+  box-sizing: border-box;
+}
+
+.board-container {
+  width: 300px;
+  height: 300px;
+  display: grid;
+  border: 2px solid black;
+  grid-template-columns: repeat(10, 1fr); /* 10 equal columns */
+  grid-template-rows: repeat(10, 1fr);    /* 10 equal rows */
+}
+
+.cell {
+  /* background-color: red; */
+  border: 1px solid gray;
+  width: 100%;  /* Makes sure it fills the grid cell */
+  height: 100%; /* Makes sure it fills the grid cell */
+}

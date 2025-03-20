@@ -1,6 +1,7 @@
-import './main.css';
-import initializeGameboard from './app/gameMechanics/gameBoard';
+import { initializeGameboard } from './app/gameMechanics/gameBoard';
 import { SHIP_LENGTHS } from './app/gameMechanics/ships';
+import './app/assets/styling/main.css';
+
 // import changeGameState from './app/gameState';
 // import gameStateManager from './app/gameStateManager';
 
@@ -30,4 +31,4 @@ import './app/pages/gameOver';
 import gameStateManager from './app/gameStateManager';
 
 // Start by rendering the first page
-gameStateManager.setState('initial');
+gameStateManager.setState('placement');

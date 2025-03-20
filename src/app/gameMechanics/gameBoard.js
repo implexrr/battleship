@@ -6,7 +6,7 @@ import isShipPlaceable from './validatePlacement';
 const GAMEBOARD_LENGTH = 10;
 
 // Initialize gameboard
-export default function initializeGameboard(player) {
+function initializeGameboard(player) {
   let gameboard = createEmptyBoard(GAMEBOARD_LENGTH);
   let fleet = initializeFleet();
   let gameOver = false;
@@ -125,4 +125,4 @@ export default function initializeGameboard(player) {
   };
 }
 
-// Play 100 games of battleship given random coord and choice
+export { GAMEBOARD_LENGTH, initializeGameboard };

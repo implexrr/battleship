@@ -1,10 +1,31 @@
 import gameStateManager from '../gameStateManager';
+import { initializeGameboard, GAMEBOARD_LENGTH } from '../gameMechanics/gameBoard';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
   el.textContent = 'Placement Phase';
   return el;
 };
+
+const genBoardEl = (player) => {
+  const el = document.createElement('div');
+  el.setAttribute('class', `board-container ${player}`);
+  for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
+    for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
+      const cell = document.createElement('div');
+      cell.setAttribute('data-row', i);
+      cell.setAttribute('data-col', j);
+      cell.setAttribute('class', `cell ${player}`);
+      el.append(cell);
+    }
+  }
+  return el;
+};
+
+// const genPlayerBoardEl = () => {
+//   const gameBoard = initializeGameboard();
+//   const
+// };
 
 const genGoToInitialButton = () => {
   const el = document.createElement('button');
@@ -21,7 +42,7 @@ const genGoToShootingButton = () => {
 };
 
 const placementPageEls = () => {
-  const els = [genTitleEl(), genGoToInitialButton(), genGoToShootingButton()];
+  const els = [genTitleEl(), genBoardEl('player1'), genGoToInitialButton(), genGoToShootingButton()];
   return els;
 };
 
