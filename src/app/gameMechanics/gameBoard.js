@@ -10,6 +10,7 @@ function initializeGameboard(player) {
   let gameboard = createEmptyBoard(GAMEBOARD_LENGTH);
   let fleet = initializeFleet();
   let gameOver = false;
+  let placementMode = 'horizontal';
 
   // Reset all major gameboard related variables
   function resetGameboard() {
@@ -18,13 +19,21 @@ function initializeGameboard(player) {
     gameOver = false;
   }
 
+  function changePlacementMode(newPlacementMode) {
+    placementMode = newPlacementMode;
+  }
+
+  function getPlacementMode() {
+    return placementMode;
+  }
+
   // Place ship and add it to player fleet
   function placeShip(row, col, orientation, shipType) {
     if (!(shipType in SHIP_LENGTHS)) {
       throw new Error('Not a ship type');
     }
     if (orientation !== 'horizontal' && orientation !== 'vertical') {
-      throw new Error('Not a valid orientation');
+      throw new Error(`Not a valid orientation; orientation given was ${orientation}`);
     }
     if (!(isShipPlaceable(gameboard, GAMEBOARD_LENGTH, row, col, orientation, shipType))) {
       throw new Error('Can\'t place ship there');
@@ -116,12 +125,14 @@ function initializeGameboard(player) {
     fleet,
     getPlayer,
     getBoard,
+    getPlacementMode,
     placeShip,
     registerHit,
     isGameOver,
     isShipFullyHere,
     resetGameboard,
     placeWreckage,
+    changePlacementMode,
   };
 }
 

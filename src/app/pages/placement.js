@@ -8,6 +8,7 @@ const genTitleEl = () => {
 };
 
 const genBoardEl = (player) => {
+  const gameboard = initializeGameboard(player);
   const el = document.createElement('div');
   el.setAttribute('class', `board-container ${player}`);
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
@@ -16,16 +17,66 @@ const genBoardEl = (player) => {
       cell.setAttribute('data-row', i);
       cell.setAttribute('data-col', j);
       cell.setAttribute('class', `cell ${player}`);
+      cell.addEventListener('click', () => {
+        const orientation = document.querySelector('input[name="orientation"]:checked').value;
+        try {
+          gameboard.placeShip(Number(cell.dataset.row), Number(cell.dataset.col), orientation, 'cruiser');
+        } catch (err) {
+          console.error(`Error: ${err}`);
+        } finally {
+          console.log(gameboard.getBoard());
+          gameboard.changePlacementMode(orientation);
+        }
+      });
       el.append(cell);
     }
   }
   return el;
 };
 
-// const genPlayerBoardEl = () => {
-//   const gameBoard = initializeGameboard();
-//   const
-// };
+const genHorizontalOptionEl = () => {
+  const el = document.createElement('input');
+  el.setAttribute('id', 'horizontalOption');
+  el.setAttribute('type', 'radio');
+  el.setAttribute('name', 'orientation');
+  el.setAttribute('value', 'horizontal');
+  el.checked = true;
+  return el;
+};
+
+const genVerticalOptionEl = () => {
+  const el = document.createElement('input');
+  el.setAttribute('id', 'verticalOption');
+  el.setAttribute('type', 'radio');
+  el.setAttribute('name', 'orientation');
+  el.setAttribute('value', 'vertical');
+  return el;
+};
+
+const genHorizontalOptionLabelEl = () => {
+  const el = document.createElement('label');
+  el.setAttribute('for', 'horizontalOption');
+  el.textContent = 'Horizontal';
+  return el;
+};
+
+const genVerticalOptionLabelEl = () => {
+  const el = document.createElement('label');
+  el.setAttribute('for', 'verticalOption');
+  el.textContent = 'Vertical';
+  return el;
+};
+
+const genPlacementModeOptionsEl = () => {
+  const el = document.createElement('div');
+  el.append(
+    genHorizontalOptionEl(),
+    genHorizontalOptionLabelEl(),
+    genVerticalOptionEl(),
+    genVerticalOptionLabelEl(),
+  );
+  return el;
+};
 
 const genGoToInitialButton = () => {
   const el = document.createElement('button');
@@ -42,7 +93,7 @@ const genGoToShootingButton = () => {
 };
 
 const placementPageEls = () => {
-  const els = [genTitleEl(), genBoardEl('player1'), genGoToInitialButton(), genGoToShootingButton()];
+  const els = [genTitleEl(), genBoardEl('player1'), genPlacementModeOptionsEl(), genGoToInitialButton(), genGoToShootingButton()];
   return els;
 };
 
