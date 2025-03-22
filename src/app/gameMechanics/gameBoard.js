@@ -10,21 +10,12 @@ function initializeGameboard(player) {
   let gameboard = createEmptyBoard(GAMEBOARD_LENGTH);
   let fleet = initializeFleet();
   let gameOver = false;
-  let placementMode = 'horizontal';
 
   // Reset all major gameboard related variables
   function resetGameboard() {
     gameboard = createEmptyBoard(GAMEBOARD_LENGTH);
     fleet = initializeFleet();
     gameOver = false;
-  }
-
-  function changePlacementMode(newPlacementMode) {
-    placementMode = newPlacementMode;
-  }
-
-  function getPlacementMode() {
-    return placementMode;
   }
 
   // Place ship and add it to player fleet

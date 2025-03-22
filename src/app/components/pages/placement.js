@@ -33,7 +33,6 @@ const genBoardEl = (player) => {
           console.error(`Error: ${err}`);
         } finally {
           console.log(gameboard.getBoard());
-          gameboard.changePlacementMode(orientation);
         }
       });
       el.append(cell);
