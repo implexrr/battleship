@@ -1,6 +1,7 @@
 import gameStateManager from '../../gameStateManager';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../gameMechanics/gameBoard';
 import genPlacementModeOptionsEl from '../inputSelection/orientationOptions';
+import genShipTypeOptionsEl from '../inputSelection/shipTypeOptions';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
@@ -20,13 +21,13 @@ const genBoardEl = (player) => {
       cell.setAttribute('class', `cell ${player}`);
       cell.addEventListener('click', () => {
         const orientation = document.querySelector('input[name="orientation"]:checked').value;
-        // const shipType = document.querySelector('input[name="shipType"]:checked').value;
+        const shipType = document.querySelector('input[name="shipType"]:checked').value;
         try {
           gameboard.placeShip(
             Number(cell.dataset.row),
             Number(cell.dataset.col),
             orientation,
-            'cruiser',
+            shipType,
           );
         } catch (err) {
           console.error(`Error: ${err}`);
@@ -56,7 +57,7 @@ const genGoToShootingButton = () => {
 };
 
 const placementPageEls = () => {
-  const els = [genTitleEl(), genBoardEl('player1'), genPlacementModeOptionsEl(), genGoToInitialButton(), genGoToShootingButton()];
+  const els = [genTitleEl(), genBoardEl('player1'), genPlacementModeOptionsEl(), genShipTypeOptionsEl(), genGoToInitialButton(), genGoToShootingButton()];
   return els;
 };
 
