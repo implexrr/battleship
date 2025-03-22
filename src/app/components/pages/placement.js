@@ -20,13 +20,13 @@ const genBoardEl = (player) => {
       cell.setAttribute('class', `cell ${player}`);
       cell.addEventListener('click', () => {
         const orientation = document.querySelector('input[name="orientation"]:checked').value;
-        const shipType = document.querySelector('input[name="shipType"]:checked').value;
+        // const shipType = document.querySelector('input[name="shipType"]:checked').value;
         try {
           gameboard.placeShip(
             Number(cell.dataset.row),
             Number(cell.dataset.col),
             orientation,
-            shipType,
+            'cruiser',
           );
         } catch (err) {
           console.error(`Error: ${err}`);

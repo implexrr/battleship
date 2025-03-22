@@ -1,32 +1,34 @@
+import synthesizeElement from '../../utils/synthesizeElement';
+
 const genHorizontalOptionEl = () => {
-  const el = document.createElement('input');
-  el.setAttribute('id', 'horizontalOption');
-  el.setAttribute('type', 'radio');
-  el.setAttribute('name', 'orientation');
-  el.setAttribute('value', 'horizontal');
+  const el = synthesizeElement('input', {
+    id: 'horizontalOption',
+    type: 'radio',
+    name: 'orientation',
+    value: 'horizontal',
+  });
   el.checked = true;
   return el;
 };
 
 const genVerticalOptionEl = () => {
-  const el = document.createElement('input');
-  el.setAttribute('id', 'verticalOption');
-  el.setAttribute('type', 'radio');
-  el.setAttribute('name', 'orientation');
-  el.setAttribute('value', 'vertical');
+  const el = synthesizeElement('input', {
+    id: 'verticalOption',
+    type: 'radio',
+    name: 'orientation',
+    value: 'vertical',
+  });
   return el;
 };
 
 const genHorizontalOptionLabelEl = () => {
-  const el = document.createElement('label');
-  el.setAttribute('for', 'horizontalOption');
+  const el = synthesizeElement('label', { for: 'horizontalOption' });
   el.textContent = 'Horizontal';
   return el;
 };
 
 const genVerticalOptionLabelEl = () => {
-  const el = document.createElement('label');
-  el.setAttribute('for', 'verticalOption');
+  const el = synthesizeElement('label', { for: 'verticalOption' });
   el.textContent = 'Vertical';
   return el;
 };
