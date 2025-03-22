@@ -38,6 +38,9 @@ function initializeGameboard(player) {
     if (!(isShipPlaceable(gameboard, GAMEBOARD_LENGTH, row, col, orientation, shipType))) {
       throw new Error('Can\'t place ship there');
     }
+    if (fleet.getFleetStatus()[shipType]) {
+      throw new Error('No duplicate ships allowed');
+    }
     if (orientation === 'horizontal') {
       for (let i = col; i < col + SHIP_LENGTHS[shipType]; i += 1) {
         gameboard[row][i] = shipType;
