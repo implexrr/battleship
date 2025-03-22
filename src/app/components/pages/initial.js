@@ -1,4 +1,4 @@
-import gameStateManager from '../gameStateManager';
+import gameStateManager from '../../gameStateManager';
 
 const genTitleEl = () => {
   const el = document.createElement('h1');

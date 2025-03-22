@@ -1,5 +1,6 @@
-import gameStateManager from '../gameStateManager';
-import { initializeGameboard, GAMEBOARD_LENGTH } from '../gameMechanics/gameBoard';
+import gameStateManager from '../../gameStateManager';
+import { initializeGameboard, GAMEBOARD_LENGTH } from '../../gameMechanics/gameBoard';
+import genPlacementModeOptionsEl from '../inputSelection/orientationOptions';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
@@ -19,8 +20,14 @@ const genBoardEl = (player) => {
       cell.setAttribute('class', `cell ${player}`);
       cell.addEventListener('click', () => {
         const orientation = document.querySelector('input[name="orientation"]:checked').value;
+        const shipType = document.querySelector('input[name="shipType"]:checked').value;
         try {
-          gameboard.placeShip(Number(cell.dataset.row), Number(cell.dataset.col), orientation, 'cruiser');
+          gameboard.placeShip(
+            Number(cell.dataset.row),
+            Number(cell.dataset.col),
+            orientation,
+            shipType,
+          );
         } catch (err) {
           console.error(`Error: ${err}`);
         } finally {
@@ -31,50 +38,6 @@ const genBoardEl = (player) => {
       el.append(cell);
     }
   }
-  return el;
-};
-
-const genHorizontalOptionEl = () => {
-  const el = document.createElement('input');
-  el.setAttribute('id', 'horizontalOption');
-  el.setAttribute('type', 'radio');
-  el.setAttribute('name', 'orientation');
-  el.setAttribute('value', 'horizontal');
-  el.checked = true;
-  return el;
-};
-
-const genVerticalOptionEl = () => {
-  const el = document.createElement('input');
-  el.setAttribute('id', 'verticalOption');
-  el.setAttribute('type', 'radio');
-  el.setAttribute('name', 'orientation');
-  el.setAttribute('value', 'vertical');
-  return el;
-};
-
-const genHorizontalOptionLabelEl = () => {
-  const el = document.createElement('label');
-  el.setAttribute('for', 'horizontalOption');
-  el.textContent = 'Horizontal';
-  return el;
-};
-
-const genVerticalOptionLabelEl = () => {
-  const el = document.createElement('label');
-  el.setAttribute('for', 'verticalOption');
-  el.textContent = 'Vertical';
-  return el;
-};
-
-const genPlacementModeOptionsEl = () => {
-  const el = document.createElement('div');
-  el.append(
-    genHorizontalOptionEl(),
-    genHorizontalOptionLabelEl(),
-    genVerticalOptionEl(),
-    genVerticalOptionLabelEl(),
-  );
   return el;
 };
 
