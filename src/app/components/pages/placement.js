@@ -2,6 +2,7 @@ import gameStateManager from '../../gameStateManager';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../gameMechanics/gameBoard';
 import genPlacementModeOptionsEl from '../inputSelection/orientationOptions';
 import genShipTypeOptionsEl from '../inputSelection/shipTypeOptions';
+import synthesizeElement from '../../utils/synthesizeElement';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
@@ -9,16 +10,26 @@ const genTitleEl = () => {
   return el;
 };
 
+function colorBoard(player, boardMatrix) {
+  const cells = document.querySelectorAll(`.cell.${player}`);
+  for (let i = 0; i < cells.length; i += 1) {
+    cells[i].setAttribute('cell-type', boardMatrix[cells[i].dataset.row][cells[i].dataset.col]);
+  }
+}
+
 const genBoardEl = (player) => {
   const gameboard = initializeGameboard(player);
+  const initialBoardMatrix = gameboard.getBoard();
   const el = document.createElement('div');
-  el.setAttribute('class', `board-container ${player}`);
+  el.setAttribute('class', `board ${player}`);
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-      const cell = document.createElement('div');
-      cell.setAttribute('data-row', i);
-      cell.setAttribute('data-col', j);
-      cell.setAttribute('class', `cell ${player}`);
+      const cell = synthesizeElement('div', {
+        'data-row': i,
+        'data-col': j,
+        class: `cell ${player}`,
+        'cell-type': initialBoardMatrix[i][j],
+      });
       cell.addEventListener('click', () => {
         const orientation = document.querySelector('input[name="orientation"]:checked').value;
         const shipType = document.querySelector('input[name="shipType"]:checked').value;
@@ -29,6 +40,7 @@ const genBoardEl = (player) => {
             orientation,
             shipType,
           );
+          colorBoard(player, gameboard.getBoard());
         } catch (err) {
           console.error(`Error: ${err}`);
         } finally {

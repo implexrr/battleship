@@ -119,14 +119,12 @@ function initializeGameboard(player) {
     fleet,
     getPlayer,
     getBoard,
-    getPlacementMode,
     placeShip,
     registerHit,
     isGameOver,
     isShipFullyHere,
     resetGameboard,
     placeWreckage,
-    changePlacementMode,
   };
 }
 
