@@ -12,10 +12,23 @@ const genTitleEl = () => {
   return el;
 };
 
-function colorBoard(player, boardMatrix) {
-  const cells = document.querySelectorAll(`.cell.${player}`);
-  for (let i = 0; i < cells.length; i += 1) {
-    cells[i].setAttribute('cell-type', boardMatrix[cells[i].dataset.row][cells[i].dataset.col]);
+function colorBoard(cellMap, boardMatrix) {
+  for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
+    for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
+      cellMap[i][j].setAttribute('cell-type', boardMatrix[i][j]);
+    }
+  }
+}
+
+function colorShip(cellMap, x, y, orientation, shipType) {
+  if (orientation === 'horizontal') {
+    for (let i = y; i < y + SHIP_LENGTHS[shipType]; i += 1) {
+      cellMap[x][i].setAttribute('cell-type', shipType);
+    }
+  } else {
+    for (let i = x; i < x + SHIP_LENGTHS[shipType]; i += 1) {
+      cellMap[i][y].setAttribute('cell-type', shipType);
+    }
   }
 }
 
@@ -23,6 +36,7 @@ const genPlayerBoardEl = (player) => {
   const gameboard = initializeGameboard(player);
   const boardMatrix = gameboard.getBoard();
   const el = document.createElement('div');
+  const cellMap = {};
   el.setAttribute('class', `board ${player}`);
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
@@ -32,6 +46,8 @@ const genPlayerBoardEl = (player) => {
         class: `cell ${player}`,
         'cell-type': boardMatrix[i][j],
       });
+      if (!cellMap[i]) cellMap[i] = {};
+      cellMap[i][j] = cell;
       cell.addEventListener('click', () => {
         const orientation = document.querySelector('input[name="orientation"]:checked').value;
         const shipType = document.querySelector('input[name="shipType"]:checked').value;
@@ -42,7 +58,13 @@ const genPlayerBoardEl = (player) => {
             orientation,
             shipType,
           );
-          colorBoard(player, gameboard.getBoard());
+          colorShip(
+            cellMap,
+            Number(cell.dataset.row),
+            Number(cell.dataset.col),
+            orientation,
+            shipType,
+          );
         } catch (err) {
           console.error(`Error: ${err}`);
         }
@@ -53,12 +75,28 @@ const genPlayerBoardEl = (player) => {
   return el;
 };
 
+function populateGameboard(gameboard) {
+  const shipLengthsCopy = Object.keys({ ...SHIP_LENGTHS });
+  const orientations = ['horizontal', 'vertical'];
+  while (shipLengthsCopy.length > 0) {
+    const row = Math.floor(Math.random() * 10);
+    const col = Math.floor(Math.random() * 10);
+    const orientation = orientations[Math.floor(Math.random() * 2)];
+    try {
+      gameboard.placeShip(row, col, orientation, shipLengthsCopy[0]);
+      shipLengthsCopy.shift();
+    } catch (err) {
+      console.error(`Error: ${err}`);
+    }
+  }
+}
+
 const genAIBoardEl = () => {
   const gameboard = initializeGameboard('AI');
-  const el = document.createElement('div');
-  el.setAttribute('class', 'board AI');
+  populateGameboard(gameboard);
   const cellMap = {};
   const boardMatrix = gameboard.getBoard();
+  const el = synthesizeElement('div', { class: 'board AI' });
 
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
@@ -74,27 +112,7 @@ const genAIBoardEl = () => {
     }
   }
 
-  const shipLengthsCopy = Object.keys({ ...SHIP_LENGTHS });
-  const orientations = ['horizontal', 'vertical'];
-  while (shipLengthsCopy.length > 0) {
-    const row = Math.floor(Math.random() * 10);
-    const col = Math.floor(Math.random() * 10);
-    const orientation = orientations[Math.floor(Math.random() * 2)];
-    try {
-      gameboard.placeShip(row, col, orientation, shipLengthsCopy[0]);
-      console.log(`${shipLengthsCopy[0]} placed`);
-      const deleted = shipLengthsCopy.shift();
-      console.log(`${deleted} deleted`);
-    } catch (err) {
-      console.error(`Error: ${err}`);
-    }
-  }
-
-  for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
-    for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-      cellMap[i][j].setAttribute('cell-type', boardMatrix[i][j]);
-    }
-  }
+  colorBoard(cellMap, boardMatrix);
 
   return el;
 };
