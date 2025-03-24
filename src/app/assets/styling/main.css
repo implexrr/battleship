@@ -7,19 +7,20 @@
 }
 
 .board {
+  border: 2px solid rgba(232, 239, 239, 0.8);
   width: 300px;
   height: 300px;
   display: grid;
-  border: 2px solid black;
   grid-template-columns: repeat(10, 1fr); /* 10 equal columns */
   grid-template-rows: repeat(10, 1fr);    /* 10 equal rows */
 }
 
 .cell {
   /* background-color: red; */
-  border: 1px solid gray;
+  border: 2px solid rgba(232, 239, 239, 0.8);
   width: 100%;  /* Makes sure it fills the grid cell */
   height: 100%; /* Makes sure it fills the grid cell */
+  border-image: url("https://www.unicefusa.org/sites/default/files/answer-box.png") 50;
 }
 
 [cell-type='miss'] {

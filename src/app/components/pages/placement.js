@@ -3,6 +3,7 @@ import { initializeGameboard, GAMEBOARD_LENGTH } from '../../gameMechanics/gameB
 import genPlacementModeOptionsEl from '../inputSelection/orientationOptions';
 import genShipTypeOptionsEl from '../inputSelection/shipTypeOptions';
 import synthesizeElement from '../../utils/synthesizeElement';
+import { SHIP_LENGTHS } from '../../gameMechanics/ships';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
@@ -17,7 +18,7 @@ function colorBoard(player, boardMatrix) {
   }
 }
 
-const genBoardEl = (player) => {
+const genPlayerBoardEl = (player) => {
   const gameboard = initializeGameboard(player);
   const initialBoardMatrix = gameboard.getBoard();
   const el = document.createElement('div');
@@ -53,6 +54,52 @@ const genBoardEl = (player) => {
   return el;
 };
 
+const genAIBoardEl = () => {
+  const gameboard = initializeGameboard('AI');
+  const el = document.createElement('div');
+  el.setAttribute('class', 'board AI');
+  const cellMap = {};
+  const boardMatrix = gameboard.getBoard();
+
+  for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
+    for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
+      const cell = synthesizeElement('div', {
+        'data-row': i,
+        'data-col': j,
+        class: 'cell AI',
+        'cell-type': boardMatrix[i][j],
+      });
+      if (!cellMap[i]) cellMap[i] = {};
+      cellMap[i][j] = cell;
+      el.append(cell);
+    }
+  }
+
+  const shipLengthsCopy = Object.keys({ ...SHIP_LENGTHS });
+  const orientations = ['horizontal', 'vertical'];
+  while (shipLengthsCopy.length > 0) {
+    const row = Math.floor(Math.random() * 10);
+    const col = Math.floor(Math.random() * 10);
+    const orientation = orientations[Math.floor(Math.random() * 2)];
+    try {
+      gameboard.placeShip(row, col, orientation, shipLengthsCopy[0]);
+      console.log(`${shipLengthsCopy[0]} placed`);
+      const deleted = shipLengthsCopy.shift();
+      console.log(`${deleted} deleted`);
+    } catch (err) {
+      console.error(`Error: ${err}`);
+    }
+  }
+
+  for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
+    for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
+      cellMap[i][j].setAttribute('cell-type', boardMatrix[i][j]);
+    }
+  }
+
+  return el;
+};
+
 const genGoToInitialButton = () => {
   const el = document.createElement('button');
   el.textContent = 'Go to initial';
@@ -68,7 +115,7 @@ const genGoToShootingButton = () => {
 };
 
 const placementPageEls = () => {
-  const els = [genTitleEl(), genBoardEl('player1'), genPlacementModeOptionsEl(), genShipTypeOptionsEl(), genGoToInitialButton(), genGoToShootingButton()];
+  const els = [genTitleEl(), genPlayerBoardEl('player1'), genAIBoardEl(), genPlacementModeOptionsEl(), genShipTypeOptionsEl(), genGoToInitialButton(), genGoToShootingButton()];
   return els;
 };
 
