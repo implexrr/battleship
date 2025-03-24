@@ -1,4 +1,5 @@
 import gameStateManager from '../../gameStateManager';
+import { playNowButtonEl } from '../buttons';
 
 const genTitleEl = () => {
   const el = document.createElement('h1');
@@ -6,15 +7,8 @@ const genTitleEl = () => {
   return el;
 };
 
-const genPlayNowButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'Play Now';
-  el.addEventListener('click', () => { gameStateManager.setState('placement'); });
-  return el;
-};
-
 const initialPageEls = () => {
-  const els = [genTitleEl(), genPlayNowButton()];
+  const els = [genTitleEl(), playNowButtonEl()];
   return els;
 };
 

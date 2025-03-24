@@ -1,4 +1,5 @@
 import gameStateManager from '../../gameStateManager';
+import { initialButtonEl } from '../buttons';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
@@ -6,15 +7,8 @@ const genTitleEl = () => {
   return el;
 };
 
-const genGoToInitialButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'Go to initial';
-  el.addEventListener('click', () => { gameStateManager.setState('initial'); });
-  return el;
-};
-
 const gameOverPageEls = () => {
-  const els = [genTitleEl(), genGoToInitialButton()];
+  const els = [genTitleEl(), initialButtonEl()];
   return els;
 };
 

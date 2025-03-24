@@ -1,4 +1,5 @@
 import gameStateManager from '../../gameStateManager';
+import { gameOverButtonEl, initialButtonEl } from '../buttons';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
@@ -6,22 +7,8 @@ const genTitleEl = () => {
   return el;
 };
 
-const genGoToInitialButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'Go to initial';
-  el.addEventListener('click', () => { gameStateManager.setState('initial'); });
-  return el;
-};
-
-const genGoToGameOverButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'Go to gameOver';
-  el.addEventListener('click', () => { gameStateManager.setState('gameOver'); });
-  return el;
-};
-
 const shootingPageEls = () => {
-  const els = [genTitleEl(), genGoToInitialButton(), genGoToGameOverButton()];
+  const els = [genTitleEl(), initialButtonEl(), gameOverButtonEl()];
   return els;
 };
 

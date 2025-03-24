@@ -4,6 +4,7 @@ import genPlacementModeOptionsEl from '../inputSelection/orientationOptions';
 import genShipTypeOptionsEl from '../inputSelection/shipTypeOptions';
 import synthesizeElement from '../../utils/synthesizeElement';
 import { SHIP_LENGTHS } from '../../gameMechanics/ships';
+import { initialButtonEl, shootingButtonEl } from '../buttons';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
@@ -20,7 +21,7 @@ function colorBoard(player, boardMatrix) {
 
 const genPlayerBoardEl = (player) => {
   const gameboard = initializeGameboard(player);
-  const initialBoardMatrix = gameboard.getBoard();
+  const boardMatrix = gameboard.getBoard();
   const el = document.createElement('div');
   el.setAttribute('class', `board ${player}`);
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
@@ -29,7 +30,7 @@ const genPlayerBoardEl = (player) => {
         'data-row': i,
         'data-col': j,
         class: `cell ${player}`,
-        'cell-type': initialBoardMatrix[i][j],
+        'cell-type': boardMatrix[i][j],
       });
       cell.addEventListener('click', () => {
         const orientation = document.querySelector('input[name="orientation"]:checked').value;
@@ -44,8 +45,6 @@ const genPlayerBoardEl = (player) => {
           colorBoard(player, gameboard.getBoard());
         } catch (err) {
           console.error(`Error: ${err}`);
-        } finally {
-          console.log(gameboard.getBoard());
         }
       });
       el.append(cell);
@@ -100,22 +99,8 @@ const genAIBoardEl = () => {
   return el;
 };
 
-const genGoToInitialButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'Go to initial';
-  el.addEventListener('click', () => { gameStateManager.setState('initial'); });
-  return el;
-};
-
-const genGoToShootingButton = () => {
-  const el = document.createElement('button');
-  el.textContent = 'Go to shooting';
-  el.addEventListener('click', () => { gameStateManager.setState('shooting'); });
-  return el;
-};
-
 const placementPageEls = () => {
-  const els = [genTitleEl(), genPlayerBoardEl('player1'), genAIBoardEl(), genPlacementModeOptionsEl(), genShipTypeOptionsEl(), genGoToInitialButton(), genGoToShootingButton()];
+  const els = [genTitleEl(), genPlayerBoardEl('player1'), genAIBoardEl(), genPlacementModeOptionsEl(), genShipTypeOptionsEl(), initialButtonEl(), shootingButtonEl()];
   return els;
 };
 
