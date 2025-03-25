@@ -10,13 +10,8 @@ import { initialButtonEl, shootingButtonEl } from '../../buttons';
 import { colorBoard, colorShip } from '../../../services/color';
 import populateGameboard from '../../../services/populate';
 import getPlacementState from '../../../controllers/optionsController';
-import { pageTitleContainerEl, boardsContainerEl, placementOptionsContainerEl } from '../../../containers';
-
-const titleEl = () => {
-  const el = document.createElement('h2');
-  el.textContent = 'Placement Phase';
-  return el;
-};
+import { boardsContainerEl, placementOptionsContainerEl } from '../../../containers';
+import pageTitleEl from './title';
 
 function storeCell(cellMap, row, col, cell) {
   // eslint-disable-next-line no-param-reassign
@@ -92,14 +87,13 @@ const aiBoardEl = () => {
 
 const placementPageEls = () => {
   const els = [
-    titleEl(),
+    pageTitleEl(),
     playerBoardEl('player1'),
     aiBoardEl(),
     genPlacementModeOptionsEl(),
     genShipTypeOptionsEl(),
     initialButtonEl(),
     shootingButtonEl(),
-    pageTitleContainerEl(),
   ];
   return els;
 };
