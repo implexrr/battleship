@@ -1,5 +1,5 @@
-import gameStateManager from '../../controllers/gameStateManager';
-import { playNowButtonEl } from '../buttons';
+import gameStateManager from '../../../controllers/gameStateManager';
+import { playNowButtonEl } from '../../buttons';
 
 const genTitleEl = () => {
   const el = document.createElement('h1');
@@ -16,3 +16,5 @@ const initialPageEls = () => {
 // eliminating the need to import initial.js in the gameStateManager.js file.
 // This removes the cyclic dependency I was struggling with earlier.
 gameStateManager.registerState('initial', initialPageEls);
+
+export default initialPageEls;

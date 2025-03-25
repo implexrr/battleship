@@ -1,5 +1,5 @@
-import gameStateManager from '../../controllers/gameStateManager';
-import { initialButtonEl } from '../buttons';
+import gameStateManager from '../../../controllers/gameStateManager';
+import { initialButtonEl } from '../../buttons';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
@@ -13,3 +13,5 @@ const gameOverPageEls = () => {
 };
 
 gameStateManager.registerState('gameOver', gameOverPageEls);
+
+export default gameOverPageEls;
