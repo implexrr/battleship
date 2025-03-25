@@ -1,4 +1,4 @@
-import gameStateManager from '../../gameStateManager';
+import gameStateManager from '../../controllers/gameStateManager';
 import { playNowButtonEl } from '../buttons';
 
 const genTitleEl = () => {

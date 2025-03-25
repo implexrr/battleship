@@ -1,36 +1,18 @@
-import gameStateManager from '../../gameStateManager';
+import gameStateManager from '../../controllers/gameStateManager';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../gameMechanics/gameBoard';
 import genPlacementModeOptionsEl from '../inputSelection/orientationOptions';
 import genShipTypeOptionsEl from '../inputSelection/shipTypeOptions';
 import synthesizeElement from '../../utils/synthesizeElement';
-import { SHIP_LENGTHS } from '../../gameMechanics/ships';
 import { initialButtonEl, shootingButtonEl } from '../buttons';
+import { colorBoard, colorShip } from '../../services/color';
+import populateGameboard from '../../services/populate';
+import getPlacementState from '../../controllers/optionsController';
 
 const genTitleEl = () => {
   const el = document.createElement('h2');
   el.textContent = 'Placement Phase';
   return el;
 };
-
-function colorBoard(cellMap, boardMatrix) {
-  for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
-    for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-      cellMap[i][j].setAttribute('cell-type', boardMatrix[i][j]);
-    }
-  }
-}
-
-function colorShip(cellMap, x, y, orientation, shipType) {
-  if (orientation === 'horizontal') {
-    for (let i = y; i < y + SHIP_LENGTHS[shipType]; i += 1) {
-      cellMap[x][i].setAttribute('cell-type', shipType);
-    }
-  } else {
-    for (let i = x; i < x + SHIP_LENGTHS[shipType]; i += 1) {
-      cellMap[i][y].setAttribute('cell-type', shipType);
-    }
-  }
-}
 
 const genPlayerBoardEl = (player) => {
   const gameboard = initializeGameboard(player);
@@ -49,8 +31,7 @@ const genPlayerBoardEl = (player) => {
       if (!cellMap[i]) cellMap[i] = {};
       cellMap[i][j] = cell;
       cell.addEventListener('click', () => {
-        const orientation = document.querySelector('input[name="orientation"]:checked').value;
-        const shipType = document.querySelector('input[name="shipType"]:checked').value;
+        const { orientation, shipType } = getPlacementState();
         try {
           gameboard.placeShip(
             Number(cell.dataset.row),
@@ -74,22 +55,6 @@ const genPlayerBoardEl = (player) => {
   }
   return el;
 };
-
-function populateGameboard(gameboard) {
-  const shipLengthsCopy = Object.keys({ ...SHIP_LENGTHS });
-  const orientations = ['horizontal', 'vertical'];
-  while (shipLengthsCopy.length > 0) {
-    const row = Math.floor(Math.random() * 10);
-    const col = Math.floor(Math.random() * 10);
-    const orientation = orientations[Math.floor(Math.random() * 2)];
-    try {
-      gameboard.placeShip(row, col, orientation, shipLengthsCopy[0]);
-      shipLengthsCopy.shift();
-    } catch (err) {
-      console.error(`Error: ${err}`);
-    }
-  }
-}
 
 const genAIBoardEl = () => {
   const gameboard = initializeGameboard('AI');

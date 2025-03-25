@@ -1,4 +1,4 @@
-import gameStateManager from '../gameStateManager';
+import gameStateManager from '../controllers/gameStateManager';
 
 const playNowButtonEl = () => {
   const el = document.createElement('button');
