@@ -1,4 +1,4 @@
-import synthesizeElement from '../../../utils/synthesizeElement';
+import synthesizeElement from '../utils/synthesizeElement';
 
 const cellEl = (i, j, player, type) => {
   const el = synthesizeElement('div', {
