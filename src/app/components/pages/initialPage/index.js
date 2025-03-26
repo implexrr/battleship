@@ -1,20 +1,29 @@
 import gameStateManager from '../../../controllers/gameStateManager';
 import { playNowButtonEl } from '../../buttons';
 
+// Generates the title element for the "Play Now" screen
 const genTitleEl = () => {
   const el = document.createElement('h1');
   el.textContent = 'Battleship';
   return el;
 };
 
+// Returns an array of DOM elements to render for the "Play Now" state
 const initialPageEls = () => {
   const els = [genTitleEl(), playNowButtonEl()];
   return els;
 };
 
-// NTS: The state manager object is being imported, then altered directly in this file, thus
-// eliminating the need to import initial.js in the gameStateManager.js file.
-// This removes the cyclic dependency I was struggling with earlier.
+/*
+  Registers this set of elements with the game state manager
+
+  Note to self:
+  We're importing the state manager here and registering the state externally.
+  This avoids needing to import this file inside `gameStateManager.js`,
+  which would cause a circular dependency.
+
+  This structure keeps state registration modular and decoupled.
+*/
 gameStateManager.registerState('initial', initialPageEls);
 
 export default initialPageEls;

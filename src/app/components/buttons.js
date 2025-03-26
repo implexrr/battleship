@@ -1,5 +1,6 @@
 import gameStateManager from '../controllers/gameStateManager';
 
+// Create a "Play Now" button that sets the game state to 'placement'
 const playNowButtonEl = () => {
   const el = document.createElement('button');
   el.textContent = 'Play Now';
@@ -7,6 +8,7 @@ const playNowButtonEl = () => {
   return el;
 };
 
+// Create a "Go to initial" button that sets the game state to 'initial'
 const initialButtonEl = () => {
   const el = document.createElement('button');
   el.textContent = 'Go to initial';
@@ -14,6 +16,7 @@ const initialButtonEl = () => {
   return el;
 };
 
+// Creates a "Go to shooting" button that sets the game state to 'shooting'
 const shootingButtonEl = () => {
   const el = document.createElement('button');
   el.textContent = 'Go to shooting';
@@ -21,6 +24,7 @@ const shootingButtonEl = () => {
   return el;
 };
 
+// Creates a "Go to gameOver" button that sets the game state to 'gameOver'
 const gameOverButtonEl = () => {
   const el = document.createElement('button');
   el.textContent = 'Go to gameOver';

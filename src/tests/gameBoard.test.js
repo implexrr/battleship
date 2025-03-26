@@ -1,3 +1,11 @@
+/*
+  Comprehensive test suite for Battleship game logic:
+  - Tests all valid and invalid ship placements (with and without wreckage).
+  - Logs any placement errors to a file (error.log) by overriding console.error.
+  - Validates game rules through dynamic test generation for edge cases.
+  - playGame1() and playGame2() simulate full gameplay scenarios and test fleet health tracking.
+*/
+
 import fs from 'fs';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../app/gameMechanics/gameBoard';
 import { SHIP_LENGTHS } from '../app/gameMechanics/ships';
@@ -10,7 +18,7 @@ console.error = (...args) => {
   errorLogStream.write(`${args.map((arg) => (typeof arg === 'string' ? arg : JSON.stringify(arg))).join(' ')}\n`);
 };
 
-// Check if ships are placed properly for every possible orientation and coordinate pair
+// Tests all ship placements (by type and position) for a given orientation
 const testPlacement = (orientation) => {
   const gameboard = initializeGameboard('player1');
   beforeEach(() => {
@@ -31,7 +39,7 @@ const testPlacement = (orientation) => {
   }
 };
 
-// Check if ships are placed properly given arbitrary wreckage lines
+// Tests ship placement against simulated wreckage lines to ensure correct rejections
 const testPlacementWithWreckage = (orientation, hLine1, hLine2, vLine1, vLine2) => {
   const gameboard = initializeGameboard('player1');
   beforeEach(() => {
@@ -68,16 +76,18 @@ const testPlacementWithWreckage = (orientation, hLine1, hLine2, vLine1, vLine2) 
   }
 };
 
+// Simulates a full game where player 1 loses and player 2 survives
 const playGame1 = () => {
   const gameboardP1 = initializeGameboard('player1');
   const gameboardP2 = initializeGameboard('player2');
   describe('ships placed correctly', () => {
     beforeAll(() => {
+      // Attempt valid + invalid placements
       try { gameboardP1.placeShip(5, 5, 'vertical', 'carrier'); } catch (err) { console.error('Error caught:', err.message); }
-      try { gameboardP1.placeShip(5, 5, 'vertical', 'carrier'); } catch (err) { console.error('Error caught:', err.message); }
+      try { gameboardP1.placeShip(5, 5, 'vertical', 'carrier'); } catch (err) { console.error('Error caught:', err.message); } // overlap
       try { gameboardP2.placeShip(7, 3, 'horizontal', 'carrier'); } catch (err) { console.error('Error caught:', err.message); }
-      try { gameboardP1.placeShip(7, 3, 'diagonal', 'carrier'); } catch (err) { console.error('Error caught:', err.message); }
-      try { gameboardP1.placeShip(7, 3, 'horizontal', 'reee'); } catch (err) { console.error('Error caught:', err.message); }
+      try { gameboardP1.placeShip(7, 3, 'diagonal', 'carrier'); } catch (err) { console.error('Error caught:', err.message); } // invalid orientation
+      try { gameboardP1.placeShip(7, 3, 'horizontal', 'reee'); } catch (err) { console.error('Error caught:', err.message); } // invalid ship type
       try { gameboardP1.placeShip(0, 1, 'horizontal', 'battleship'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP2.placeShip(3, 2, 'vertical', 'battleship'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP1.placeShip(1, 2, 'vertical', 'cruiser'); } catch (err) { console.error('Error caught:', err.message); }
@@ -87,6 +97,7 @@ const playGame1 = () => {
       try { gameboardP1.placeShip(5, 6, 'horizontal', 'destroyer'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP2.placeShip(9, 9, 'vertical', 'destroyer'); } catch (err) { console.error('Error caught:', err.message); }
     });
+    // Verifies all valid placements were successful
     test('p1 carrier placed correctly', () => {
       expect(gameboardP1.isShipFullyHere(5, 5, 'vertical', 'carrier')).toBe(true);
     });
@@ -124,6 +135,7 @@ const playGame1 = () => {
   });
   describe('game played properly', () => {
     beforeAll(() => {
+      // Simulate full board sweep until final position hit
       let finalP1PositionReached = false;
       const finalXPos = 6;
       const finalYPos = 9;
@@ -155,8 +167,8 @@ const playGame1 = () => {
           if (board1[i][j] === 'hit') { hitEncountered = true; }
         }
       }
-      expect(wreckedCount).toBe(15);
-      expect(hitEncountered).toBe(false);
+      expect(wreckedCount).toBe(15); // Total ship health
+      expect(hitEncountered).toBe(false); // All hits converted to wreckage
     });
     test('p2 fleet still has HP', () => {
       expect(gameboardP2.fleet.getFleetHealth() > 0).toBe(true);
@@ -170,23 +182,27 @@ const playGame1 = () => {
   });
 };
 
+// Simulates another full game and verifies incremental ship sinking and fleet health tracking
 const playGame2 = () => {
   const gameboardP1 = initializeGameboard('player1');
   const gameboardP2 = initializeGameboard('player2');
   describe('ships placed correctly', () => {
     beforeAll(() => {
+      // Place all ships vertically for player 1
       try { gameboardP1.placeShip(0, 0, 'vertical', 'carrier'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP1.placeShip(0, 1, 'vertical', 'battleship'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP1.placeShip(0, 2, 'vertical', 'cruiser'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP1.placeShip(0, 3, 'vertical', 'submarine'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP1.placeShip(0, 4, 'vertical', 'destroyer'); } catch (err) { console.error('Error caught:', err.message); }
 
+      // Place all ships horizontally for player 2
       try { gameboardP2.placeShip(0, 0, 'horizontal', 'carrier'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP2.placeShip(1, 0, 'horizontal', 'battleship'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP2.placeShip(2, 0, 'horizontal', 'cruiser'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP2.placeShip(3, 0, 'horizontal', 'submarine'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP2.placeShip(4, 0, 'horizontal', 'destroyer'); } catch (err) { console.error('Error caught:', err.message); }
     });
+    // Confirm all ships are placed correctly on both boards
     test('p1 carrier placed correctly', () => { expect(gameboardP1.isShipFullyHere(0, 0, 'vertical', 'carrier')).toBe(true); });
     test('p1 battleship placed correctly', () => { expect(gameboardP1.isShipFullyHere(0, 1, 'vertical', 'battleship')).toBe(true); });
     test('p1 cruiser placed correctly', () => { expect(gameboardP1.isShipFullyHere(0, 2, 'vertical', 'cruiser')).toBe(true); });
@@ -201,6 +217,7 @@ const playGame2 = () => {
   });
 
   describe('game played properly', () => {
+    // Sink player 1's fleet incrementally and check health after each hit
     test('p1 carrier sunk', () => {
       gameboardP1.registerHit(0, 0);
       expect(gameboardP1.fleet.getFleetStatus().carrier.healthLeft).toBe(4);
@@ -353,7 +370,7 @@ const playGame2 = () => {
   });
 };
 
-// Dynamically run tests for all combinations
+// Run all combinations of testPlacement
 ['vertical', 'horizontal'].forEach((orientation) => {
   testPlacement(orientation);
 });
@@ -370,5 +387,6 @@ const playGame2 = () => {
   testPlacementWithWreckage(orientation, 5, 5, 5, 5);
 });
 
+// Simulate full games
 playGame1();
 playGame2();

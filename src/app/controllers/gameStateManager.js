@@ -12,7 +12,6 @@ const gameStateManager = (() => {
     for (let i = 0; i < contentArr.length; i += 1) {
       bodyEl.append(contentArr[i]);
     }
-    // bodyEl.append(stateContent());
   }
 
   // Register a state and its associated content generation fxn as key-val pairs

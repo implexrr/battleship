@@ -1,17 +1,29 @@
 import gameStateManager from '../../../controllers/gameStateManager';
 import { initialButtonEl } from '../../buttons';
 
+// Generates the title element for the "Game Over" screen
 const genTitleEl = () => {
   const el = document.createElement('h2');
   el.textContent = 'Game over';
   return el;
 };
 
+// Returns an array of DOM elements to render for the "Game Over" state
 const gameOverPageEls = () => {
   const els = [genTitleEl(), initialButtonEl()];
   return els;
 };
 
+/*
+  Registers this set of elements with the game state manager
+
+  Note to self:
+  We're importing the state manager here and registering the state externally.
+  This avoids needing to import this file inside `gameStateManager.js`,
+  which would cause a circular dependency.
+
+  This structure keeps state registration modular and decoupled.
+*/
 gameStateManager.registerState('gameOver', gameOverPageEls);
 
 export default gameOverPageEls;

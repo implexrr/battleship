@@ -1,6 +1,7 @@
 import { GAMEBOARD_LENGTH } from '../gameMechanics/gameBoard';
 import { SHIP_LENGTHS } from '../gameMechanics/ships';
 
+// Update all cells on the board based on the current board matrix state
 function colorBoard(cellMap, boardMatrix) {
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
@@ -9,6 +10,7 @@ function colorBoard(cellMap, boardMatrix) {
   }
 }
 
+// Visually marks cells corresponding to a placed ship
 function colorShip(cellMap, x, y, orientation, shipType) {
   if (orientation === 'horizontal') {
     for (let i = y; i < y + SHIP_LENGTHS[shipType]; i += 1) {

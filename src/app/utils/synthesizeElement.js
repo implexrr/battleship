@@ -1,4 +1,4 @@
-// Map attributes object to some pre-existing DOM element
+// Maps attributes object to some pre-existing DOM element
 function setAttributes(element, attributes) {
   const keys = Object.keys(attributes);
   for (let keyDex = 0; keyDex < keys.length; keyDex += 1) {

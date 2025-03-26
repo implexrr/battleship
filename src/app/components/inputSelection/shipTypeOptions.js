@@ -1,10 +1,12 @@
 import synthesizeElement from '../../utils/synthesizeElement';
 import { SHIP_LENGTHS } from '../../gameMechanics/ships';
 
+// Initializes objects to hold radio input elements and their corresponding labels
 const options = {};
 const labels = {};
-const ships = Object.keys(SHIP_LENGTHS);
+const ships = Object.keys(SHIP_LENGTHS); // Gets ship names from the SHIP_LENGTHS constant
 
+// Dynamically generates a radio button and label for each ship type
 for (let i = 0; i < ships.length; i += 1) {
   options[ships[i]] = synthesizeElement('input', {
     id: `${ships[i]}-option`,
@@ -13,9 +15,12 @@ for (let i = 0; i < ships.length; i += 1) {
     value: `${ships[i]}`,
   });
   labels[ships[i]] = synthesizeElement('label', { for: `${ships[i]}-option` });
+
+  // Capitalizes first letter of the ship name for label text
   labels[ships[i]].textContent = ships[i].charAt(0).toUpperCase() + ships[i].slice(1);
 }
 
+// Creates and returns a container <div> holding all ship selection inputs and labels
 const shipTypeOptionsEl = () => {
   const el = document.createElement('div');
   for (let i = 0; i < ships.length; i += 1) {
