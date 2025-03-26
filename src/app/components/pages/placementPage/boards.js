@@ -4,23 +4,22 @@ import { boardsContainerEl } from '../../../containers';
 import * as services from '../../../services';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
-import getPlacementState from '../../../controllers/optionsController';
 
-function attachPlacementHandler(cell, gameboard, cellMap) {
-  cell.addEventListener('click', () => {
-    const { orientation, shipType } = getPlacementState();
-    const row = Number(cell.dataset.row);
-    const col = Number(cell.dataset.col);
+// function attachPlacementHandler(cell, gameboard, cellMap) {
+//   cell.addEventListener('click', () => {
+//     const { orientation, shipType } = getPlacementState();
+//     const row = Number(cell.dataset.row);
+//     const col = Number(cell.dataset.col);
 
-    try {
-      gameboard.placeShip(row, col, orientation, shipType);
-      services.colorShip(cellMap, row, col, orientation, shipType);
-    } catch (err) {
-      console.error(`Error: ${err}`);
-      console.log(gameboard.getBoard());
-    }
-  });
-}
+//     try {
+//       gameboard.placeShip(row, col, orientation, shipType);
+//       services.colorShip(cellMap, row, col, orientation, shipType);
+//     } catch (err) {
+//       console.error(`Error: ${err}`);
+//       console.log(gameboard.getBoard());
+//     }
+//   });
+// }
 
 const aiBoardEl = () => {
   const gameboard = initializeGameboard('ai');
@@ -55,7 +54,7 @@ const playerBoardEl = () => {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
       const cell = cellEl(i, j, 'player', boardMatrix[i][j]);
       services.updateCellMap(cellMap, i, j, cell);
-      attachPlacementHandler(cell, gameboard, cellMap);
+      services.attachPlacementHandler(cell, gameboard, cellMap);
       el.append(cell);
     }
   }
