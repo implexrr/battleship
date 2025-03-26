@@ -1,101 +1,27 @@
 import synthesizeElement from '../../utils/synthesizeElement';
+import { SHIP_LENGTHS } from '../../gameMechanics/ships';
 
-const genCarrierOptionEl = () => {
-  const el = synthesizeElement('input', {
-    id: 'carrierOption',
+const options = {};
+const labels = {};
+const ships = Object.keys(SHIP_LENGTHS);
+
+for (let i = 0; i < ships.length; i += 1) {
+  options[ships[i]] = synthesizeElement('input', {
+    id: `${ships[i]}-option`,
     type: 'radio',
-    name: 'shipType',
-    value: 'carrier',
+    name: 'ship-type',
+    value: `${ships[i]}`,
   });
-  el.checked = true;
-  return el;
-};
+  labels[ships[i]] = synthesizeElement('label', { for: `${ships[i]}-option` });
+  labels[ships[i]].textContent = ships[i].charAt(0).toUpperCase() + ships[i].slice(1);
+}
 
-const genCarrierOptionLabelEl = () => {
-  const el = synthesizeElement('label', { for: 'carrierOption' });
-  el.textContent = 'Carrier';
-  return el;
-};
-
-const genBattleshipOptionEl = () => {
-  const el = synthesizeElement('input', {
-    id: 'battleshipOption',
-    type: 'radio',
-    name: 'shipType',
-    value: 'battleship',
-  });
-  return el;
-};
-
-const genBattleshipOptionLabelEl = () => {
-  const el = synthesizeElement('label', { for: 'battleshipOption' });
-  el.textContent = 'Battleship';
-  return el;
-};
-
-const genCruiserOptionEl = () => {
-  const el = synthesizeElement('input', {
-    id: 'cruiserOption',
-    type: 'radio',
-    name: 'shipType',
-    value: 'cruiser',
-  });
-  return el;
-};
-
-const genCruiserOptionLabelEl = () => {
-  const el = synthesizeElement('label', { for: 'cruiserOption' });
-  el.textContent = 'Cruiser';
-  return el;
-};
-
-const genSubmarineOptionEl = () => {
-  const el = synthesizeElement('input', {
-    id: 'submarineOption',
-    type: 'radio',
-    name: 'shipType',
-    value: 'submarine',
-  });
-  return el;
-};
-
-const genSubmarineOptionLabelEl = () => {
-  const el = synthesizeElement('label', { for: 'submarineOption' });
-  el.textContent = 'Submarine';
-  return el;
-};
-
-const genDestroyerOptionEl = () => {
-  const el = synthesizeElement('input', {
-    id: 'destroyerOption',
-    type: 'radio',
-    name: 'shipType',
-    value: 'destroyer',
-  });
-  return el;
-};
-
-const genDestroyerOptionLabelEl = () => {
-  const el = synthesizeElement('label', { for: 'destroyerOption' });
-  el.textContent = 'Destroyer';
-  return el;
-};
-
-const genShipTypeOptionsEl = () => {
+const shipTypeOptionsEl = () => {
   const el = document.createElement('div');
-  el.append(
-    genCarrierOptionEl(),
-    genCarrierOptionLabelEl(),
-    genBattleshipOptionEl(),
-    genBattleshipOptionLabelEl(),
-    genCruiserOptionEl(),
-    genCruiserOptionLabelEl(),
-    genSubmarineOptionEl(),
-    genSubmarineOptionLabelEl(),
-    genDestroyerOptionEl(),
-    genDestroyerOptionLabelEl(),
-  );
+  for (let i = 0; i < ships.length; i += 1) {
+    el.append(options[ships[i]], labels[ships[i]]);
+  }
   return el;
 };
 
-export default genShipTypeOptionsEl;
+export default shipTypeOptionsEl;

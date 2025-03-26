@@ -1,13 +1,9 @@
 import { placementOptionsContainerEl } from '../../../containers';
-
-// TDL: Refactor these imports
-import genPlacementModeOptionsEl from '../../inputSelection/orientationOptions';
-import genShipTypeOptionsEl from '../../inputSelection/shipTypeOptions';
-// TDL: Refactor these imports
+import { orientationOptionsEl, shipTypeOptionsEl } from '../../inputSelection';
 
 const placementOptionsEl = () => {
   const el = placementOptionsContainerEl();
-  el.append(genPlacementModeOptionsEl(), genShipTypeOptionsEl());
+  el.append(orientationOptionsEl(), shipTypeOptionsEl());
   return el;
 };
 

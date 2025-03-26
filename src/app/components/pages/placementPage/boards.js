@@ -1,25 +1,8 @@
-// TDL: Refactor imports
 import synthesizeElement from '../../../utils/synthesizeElement';
 import { boardsContainerEl } from '../../../containers';
 import * as services from '../../../services';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
-
-// function attachPlacementHandler(cell, gameboard, cellMap) {
-//   cell.addEventListener('click', () => {
-//     const { orientation, shipType } = getPlacementState();
-//     const row = Number(cell.dataset.row);
-//     const col = Number(cell.dataset.col);
-
-//     try {
-//       gameboard.placeShip(row, col, orientation, shipType);
-//       services.colorShip(cellMap, row, col, orientation, shipType);
-//     } catch (err) {
-//       console.error(`Error: ${err}`);
-//       console.log(gameboard.getBoard());
-//     }
-//   });
-// }
 
 const aiBoardEl = () => {
   const gameboard = initializeGameboard('ai');

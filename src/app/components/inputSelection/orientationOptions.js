@@ -1,6 +1,6 @@
 import synthesizeElement from '../../utils/synthesizeElement';
 
-const genHorizontalOptionEl = () => {
+const horizontalOptionEl = () => {
   const el = synthesizeElement('input', {
     id: 'horizontalOption',
     type: 'radio',
@@ -11,7 +11,7 @@ const genHorizontalOptionEl = () => {
   return el;
 };
 
-const genVerticalOptionEl = () => {
+const verticalOptionEl = () => {
   const el = synthesizeElement('input', {
     id: 'verticalOption',
     type: 'radio',
@@ -21,27 +21,27 @@ const genVerticalOptionEl = () => {
   return el;
 };
 
-const genHorizontalOptionLabelEl = () => {
+const horizontalOptionLabelEl = () => {
   const el = synthesizeElement('label', { for: 'horizontalOption' });
   el.textContent = 'Horizontal';
   return el;
 };
 
-const genVerticalOptionLabelEl = () => {
+const verticalOptionLabelEl = () => {
   const el = synthesizeElement('label', { for: 'verticalOption' });
   el.textContent = 'Vertical';
   return el;
 };
 
-const genPlacementModeOptionsEl = () => {
+const orientationOptionsEl = () => {
   const el = document.createElement('div');
   el.append(
-    genHorizontalOptionEl(),
-    genHorizontalOptionLabelEl(),
-    genVerticalOptionEl(),
-    genVerticalOptionLabelEl(),
+    horizontalOptionEl(),
+    horizontalOptionLabelEl(),
+    verticalOptionEl(),
+    verticalOptionLabelEl(),
   );
   return el;
 };
 
-export default genPlacementModeOptionsEl;
+export default orientationOptionsEl;
