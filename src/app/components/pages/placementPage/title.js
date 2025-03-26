@@ -1,12 +1,15 @@
 import { pageTitleContainerEl } from '../../../containers';
 
-const pageTitleEl = () => {
+const titleEl = () => {
   const el = document.createElement('h2');
   el.textContent = 'Placement Phase';
   return el;
 };
 
-const pageTitle = pageTitleContainerEl();
-pageTitle.append(pageTitleEl);
+const pageTitleEl = () => {
+  const el = pageTitleContainerEl();
+  el.append(titleEl());
+  return el;
+};
 
 export default pageTitleEl;
