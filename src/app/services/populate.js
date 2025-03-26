@@ -1,6 +1,6 @@
 import { SHIP_LENGTHS } from '../gameMechanics/ships';
 
-export default function populateGameboard(gameboard) {
+export default function populateGameboardMatrix(gameboard) {
   const shipLengthsCopy = Object.keys({ ...SHIP_LENGTHS });
   const orientations = ['horizontal', 'vertical'];
   while (shipLengthsCopy.length > 0) {

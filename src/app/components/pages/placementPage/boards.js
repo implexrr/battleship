@@ -10,7 +10,7 @@ const aiBoardEl = () => {
   const cellMap = {};
   const el = synthesizeElement('div', { class: 'board ai' });
 
-  services.populateGameboard(gameboard);
+  services.populateGameboardMatrix(gameboard);
 
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
