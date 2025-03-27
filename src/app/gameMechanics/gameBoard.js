@@ -5,29 +5,32 @@ import isShipPlaceable from './validatePlacement';
 
 const GAMEBOARD_LENGTH = 10;
 
-// Initialize gameboard
-export default function initializeGameboard(player) {
+// Initializes gameboard
+function initializeGameboard(player) {
   let gameboard = createEmptyBoard(GAMEBOARD_LENGTH);
   let fleet = initializeFleet();
   let gameOver = false;
 
-  // Reset all major gameboard related variables
+  // Resets all major gameboard related variables
   function resetGameboard() {
     gameboard = createEmptyBoard(GAMEBOARD_LENGTH);
     fleet = initializeFleet();
     gameOver = false;
   }
 
-  // Place ship and add it to player fleet
+  // Places ship and adds it to player fleet
   function placeShip(row, col, orientation, shipType) {
     if (!(shipType in SHIP_LENGTHS)) {
       throw new Error('Not a ship type');
     }
     if (orientation !== 'horizontal' && orientation !== 'vertical') {
-      throw new Error('Not a valid orientation');
+      throw new Error(`Not a valid orientation; orientation given was ${orientation}`);
     }
     if (!(isShipPlaceable(gameboard, GAMEBOARD_LENGTH, row, col, orientation, shipType))) {
       throw new Error('Can\'t place ship there');
+    }
+    if (fleet.getFleetStatus()[shipType]) {
+      throw new Error('No duplicate ships allowed');
     }
     if (orientation === 'horizontal') {
       for (let i = col; i < col + SHIP_LENGTHS[shipType]; i += 1) {
@@ -41,7 +44,7 @@ export default function initializeGameboard(player) {
     fleet.addToFleet(row, col, orientation, shipType);
   }
 
-  // Change status of all "hit" ship tiles to 'wreckage'
+  // Changes status of all "hit" ship tiles to 'wreckage'
   function sinkAllShips() {
     for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
       for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
@@ -50,7 +53,7 @@ export default function initializeGameboard(player) {
     }
   }
 
-  // Register a hit on a ship
+  // Registers a hit on a ship
   function registerHit(x, y) {
     if (gameboard[x][y] === 'water') {
       gameboard[x][y] = 'miss';
@@ -77,7 +80,7 @@ export default function initializeGameboard(player) {
     return gameOver;
   }
 
-  // Check to see if a ship is properly placed in a given location
+  // Checks to see if a ship is properly placed in a given location
   function isShipFullyHere(row, col, orientation, shipType) {
     // Check parameters for validity
     if (!(shipType in SHIP_LENGTHS)) {
@@ -87,7 +90,7 @@ export default function initializeGameboard(player) {
       throw new Error('Not a valid orientation');
     }
 
-    // Check if matrix cell value matches ship name
+    // Checks if matrix cell value matches ship name
     if (orientation === 'horizontal') {
       for (let i = col; i < col + SHIP_LENGTHS[shipType]; i += 1) {
         if (gameboard[row][i] !== shipType) {
@@ -102,7 +105,7 @@ export default function initializeGameboard(player) {
       }
     }
 
-    // Check if ship has full HP
+    // Checks if ship has full HP
     const fleetStatus = fleet.getFleetStatus();
     if (SHIP_LENGTHS[shipType] !== fleetStatus[shipType].healthLeft) { return false; }
     return true;
@@ -125,4 +128,4 @@ export default function initializeGameboard(player) {
   };
 }
 
-// Play 100 games of battleship given random coord and choice
+export { GAMEBOARD_LENGTH, initializeGameboard };
