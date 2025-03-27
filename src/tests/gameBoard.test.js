@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable object-curly-newline */
 /*
   Comprehensive test suite for Battleship game logic:
   - Tests all valid and invalid ship placements (with and without wreckage).
@@ -97,42 +99,28 @@ const playGame1 = () => {
       try { gameboardP1.placeShip(5, 6, 'horizontal', 'destroyer'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP2.placeShip(9, 9, 'vertical', 'destroyer'); } catch (err) { console.error('Error caught:', err.message); }
     });
+
     // Verifies all valid placements were successful
-    test('p1 carrier placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(5, 5, 'vertical', 'carrier')).toBe(true);
-    });
-    test('p2 carrier placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(7, 3, 'horizontal', 'carrier')).toBe(true);
-    });
+    const shipPlacementTests = [
+      { player: 'p1', board: gameboardP1, x: 5, y: 5, dir: 'vertical', type: 'carrier' },
+      { player: 'p2', board: gameboardP2, x: 7, y: 3, dir: 'horizontal', type: 'carrier' },
+      { player: 'p1', board: gameboardP1, x: 0, y: 1, dir: 'horizontal', type: 'battleship' },
+      { player: 'p2', board: gameboardP2, x: 3, y: 2, dir: 'vertical', type: 'battleship' },
+      { player: 'p1', board: gameboardP1, x: 1, y: 2, dir: 'vertical', type: 'cruiser' },
+      { player: 'p2', board: gameboardP2, x: 2, y: 1, dir: 'horizontal', type: 'cruiser' },
+      { player: 'p1', board: gameboardP1, x: 3, y: 4, dir: 'vertical', type: 'submarine' },
+      { player: 'p2', board: gameboardP2, x: 1, y: 0, dir: 'horizontal', type: 'submarine' },
+      { player: 'p1', board: gameboardP1, x: 5, y: 6, dir: 'horizontal', type: 'destroyer' },
+      { player: 'p2', board: gameboardP2, x: 9, y: 9, dir: 'vertical', type: 'destroyer' },
+    ];
 
-    test('p1 battleship placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(0, 1, 'horizontal', 'battleship')).toBe(true);
-    });
-    test('p2 battleship placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(3, 2, 'vertical', 'battleship')).toBe(true);
-    });
-
-    test('p1 cruiser placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(1, 2, 'vertical', 'cruiser')).toBe(true);
-    });
-    test('p2 cruiser placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(2, 1, 'horizontal', 'cruiser')).toBe(true);
-    });
-
-    test('p1 submarine placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(3, 4, 'vertical', 'submarine')).toBe(true);
-    });
-    test('p2 submarine placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(1, 0, 'horizontal', 'submarine')).toBe(true);
-    });
-
-    test('p1 destroyer placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(5, 6, 'horizontal', 'destroyer')).toBe(true);
-    });
-    test('p2 destroyer placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(9, 9, 'vertical', 'destroyer')).toBe(true);
+    shipPlacementTests.forEach(({ player, board, x, y, dir, type }) => {
+      test(`${player} ${type} placed correctly`, () => {
+        expect(board.isShipFullyHere(x, y, dir, type)).toBe(true);
+      });
     });
   });
+
   describe('game played properly', () => {
     beforeAll(() => {
       // Simulate full board sweep until final position hit
@@ -152,10 +140,10 @@ const playGame1 = () => {
       }
     });
     test('p1 fleet fully sunk', () => {
-      expect(gameboardP1.fleet.isFleetSunk()).toBe(true);
+      expect(gameboardP1.isFleetSunk()).toBe(true);
     });
     test('p2 fleet still alive', () => {
-      expect(gameboardP2.fleet.isFleetSunk()).toBe(false);
+      expect(gameboardP2.isFleetSunk()).toBe(false);
     });
     test('p1gameboard turned into wreckage', () => {
       const board1 = gameboardP1.getBoard();
@@ -171,7 +159,7 @@ const playGame1 = () => {
       expect(hitEncountered).toBe(false); // All hits converted to wreckage
     });
     test('p2 fleet still has HP', () => {
-      expect(gameboardP2.fleet.getFleetHealth() > 0).toBe(true);
+      expect(gameboardP2.getFleetHealth() > 0).toBe(true);
     });
     test('p1 has lost game', () => {
       expect(gameboardP1.isGameOver()).toBe(true);
@@ -220,153 +208,153 @@ const playGame2 = () => {
     // Sink player 1's fleet incrementally and check health after each hit
     test('p1 carrier sunk', () => {
       gameboardP1.registerHit(0, 0);
-      expect(gameboardP1.fleet.getFleetStatus().carrier.healthLeft).toBe(4);
+      expect(gameboardP1.getFleetStatus().carrier.healthLeft).toBe(4);
       gameboardP1.registerHit(1, 0);
-      expect(gameboardP1.fleet.getFleetStatus().carrier.healthLeft).toBe(3);
+      expect(gameboardP1.getFleetStatus().carrier.healthLeft).toBe(3);
       gameboardP1.registerHit(2, 0);
-      expect(gameboardP1.fleet.getFleetStatus().carrier.healthLeft).toBe(2);
+      expect(gameboardP1.getFleetStatus().carrier.healthLeft).toBe(2);
       gameboardP1.registerHit(3, 0);
-      expect(gameboardP1.fleet.getFleetStatus().carrier.healthLeft).toBe(1);
+      expect(gameboardP1.getFleetStatus().carrier.healthLeft).toBe(1);
       gameboardP1.registerHit(4, 0);
-      expect(gameboardP1.fleet.getFleetStatus().carrier.healthLeft).toBe(0);
+      expect(gameboardP1.getFleetStatus().carrier.healthLeft).toBe(0);
     });
     test('carrier health subtracted from fleet health', () => {
-      expect(gameboardP1.fleet.getFleetHealth()).toBe(10);
+      expect(gameboardP1.getFleetHealth()).toBe(10);
     });
     test('p1 fleet still alive', () => {
-      expect(gameboardP1.fleet.isFleetSunk()).toBe(false);
+      expect(gameboardP1.isFleetSunk()).toBe(false);
     });
 
     test('p1 battleship sunk', () => {
       gameboardP1.registerHit(0, 1);
-      expect(gameboardP1.fleet.getFleetStatus().battleship.healthLeft).toBe(3);
+      expect(gameboardP1.getFleetStatus().battleship.healthLeft).toBe(3);
       gameboardP1.registerHit(1, 1);
-      expect(gameboardP1.fleet.getFleetStatus().battleship.healthLeft).toBe(2);
+      expect(gameboardP1.getFleetStatus().battleship.healthLeft).toBe(2);
       gameboardP1.registerHit(2, 1);
-      expect(gameboardP1.fleet.getFleetStatus().battleship.healthLeft).toBe(1);
+      expect(gameboardP1.getFleetStatus().battleship.healthLeft).toBe(1);
       gameboardP1.registerHit(3, 1);
-      expect(gameboardP1.fleet.getFleetStatus().battleship.healthLeft).toBe(0);
+      expect(gameboardP1.getFleetStatus().battleship.healthLeft).toBe(0);
     });
     test('battleship health subtracted from fleet health', () => {
-      expect(gameboardP1.fleet.getFleetHealth()).toBe(6);
+      expect(gameboardP1.getFleetHealth()).toBe(6);
     });
     test('p1 fleet still alive', () => {
-      expect(gameboardP1.fleet.isFleetSunk()).toBe(false);
+      expect(gameboardP1.isFleetSunk()).toBe(false);
     });
 
     test('p1 cruiser sunk', () => {
       gameboardP1.registerHit(0, 2);
-      expect(gameboardP1.fleet.getFleetStatus().cruiser.healthLeft).toBe(2);
+      expect(gameboardP1.getFleetStatus().cruiser.healthLeft).toBe(2);
       gameboardP1.registerHit(1, 2);
-      expect(gameboardP1.fleet.getFleetStatus().cruiser.healthLeft).toBe(1);
+      expect(gameboardP1.getFleetStatus().cruiser.healthLeft).toBe(1);
       gameboardP1.registerHit(2, 2);
-      expect(gameboardP1.fleet.getFleetStatus().cruiser.healthLeft).toBe(0);
+      expect(gameboardP1.getFleetStatus().cruiser.healthLeft).toBe(0);
     });
     test('cruiser health subtracted from fleet health', () => {
-      expect(gameboardP1.fleet.getFleetHealth()).toBe(3);
+      expect(gameboardP1.getFleetHealth()).toBe(3);
     });
     test('p1 fleet still alive', () => {
-      expect(gameboardP1.fleet.isFleetSunk()).toBe(false);
+      expect(gameboardP1.isFleetSunk()).toBe(false);
     });
 
     test('p1 submarine sunk', () => {
       gameboardP1.registerHit(0, 3);
-      expect(gameboardP1.fleet.getFleetStatus().submarine.healthLeft).toBe(1);
+      expect(gameboardP1.getFleetStatus().submarine.healthLeft).toBe(1);
       gameboardP1.registerHit(1, 3);
-      expect(gameboardP1.fleet.getFleetStatus().submarine.healthLeft).toBe(0);
+      expect(gameboardP1.getFleetStatus().submarine.healthLeft).toBe(0);
     });
     test('submarine health subtracted from fleet health', () => {
-      expect(gameboardP1.fleet.getFleetHealth()).toBe(1);
+      expect(gameboardP1.getFleetHealth()).toBe(1);
     });
     test('p1 fleet still alive', () => {
-      expect(gameboardP1.fleet.isFleetSunk()).toBe(false);
+      expect(gameboardP1.isFleetSunk()).toBe(false);
     });
 
     test('p1 destroyer sunk', () => {
       gameboardP1.registerHit(0, 4);
-      expect(gameboardP1.fleet.getFleetStatus().destroyer.healthLeft).toBe(0);
+      expect(gameboardP1.getFleetStatus().destroyer.healthLeft).toBe(0);
     });
     test('destroyer health subtracted from fleet health', () => {
-      expect(gameboardP1.fleet.getFleetHealth()).toBe(0);
+      expect(gameboardP1.getFleetHealth()).toBe(0);
     });
     test('p1 fleet has been sunk', () => {
-      expect(gameboardP1.fleet.isFleetSunk()).toBe(true);
+      expect(gameboardP1.isFleetSunk()).toBe(true);
     });
   });
 
   test('p2 carrier sunk', () => {
     gameboardP2.registerHit(0, 0);
-    expect(gameboardP2.fleet.getFleetStatus().carrier.healthLeft).toBe(4);
+    expect(gameboardP2.getFleetStatus().carrier.healthLeft).toBe(4);
     gameboardP2.registerHit(0, 1);
-    expect(gameboardP2.fleet.getFleetStatus().carrier.healthLeft).toBe(3);
+    expect(gameboardP2.getFleetStatus().carrier.healthLeft).toBe(3);
     gameboardP2.registerHit(0, 2);
-    expect(gameboardP2.fleet.getFleetStatus().carrier.healthLeft).toBe(2);
+    expect(gameboardP2.getFleetStatus().carrier.healthLeft).toBe(2);
     gameboardP2.registerHit(0, 3);
-    expect(gameboardP2.fleet.getFleetStatus().carrier.healthLeft).toBe(1);
+    expect(gameboardP2.getFleetStatus().carrier.healthLeft).toBe(1);
     gameboardP2.registerHit(0, 4);
-    expect(gameboardP2.fleet.getFleetStatus().carrier.healthLeft).toBe(0);
+    expect(gameboardP2.getFleetStatus().carrier.healthLeft).toBe(0);
   });
   test('carrier health subtracted from fleet health', () => {
-    expect(gameboardP2.fleet.getFleetHealth()).toBe(10);
+    expect(gameboardP2.getFleetHealth()).toBe(10);
   });
   test('p2 fleet still alive', () => {
-    expect(gameboardP2.fleet.isFleetSunk()).toBe(false);
+    expect(gameboardP2.isFleetSunk()).toBe(false);
   });
 
   test('p2 battleship sunk', () => {
     gameboardP2.registerHit(1, 0);
-    expect(gameboardP2.fleet.getFleetStatus().battleship.healthLeft).toBe(3);
+    expect(gameboardP2.getFleetStatus().battleship.healthLeft).toBe(3);
     gameboardP2.registerHit(1, 1);
-    expect(gameboardP2.fleet.getFleetStatus().battleship.healthLeft).toBe(2);
+    expect(gameboardP2.getFleetStatus().battleship.healthLeft).toBe(2);
     gameboardP2.registerHit(1, 2);
-    expect(gameboardP2.fleet.getFleetStatus().battleship.healthLeft).toBe(1);
+    expect(gameboardP2.getFleetStatus().battleship.healthLeft).toBe(1);
     gameboardP2.registerHit(1, 3);
-    expect(gameboardP2.fleet.getFleetStatus().battleship.healthLeft).toBe(0);
+    expect(gameboardP2.getFleetStatus().battleship.healthLeft).toBe(0);
   });
   test('battleship health subtracted from fleet health', () => {
-    expect(gameboardP2.fleet.getFleetHealth()).toBe(6);
+    expect(gameboardP2.getFleetHealth()).toBe(6);
   });
   test('p2 fleet still alive', () => {
-    expect(gameboardP2.fleet.isFleetSunk()).toBe(false);
+    expect(gameboardP2.isFleetSunk()).toBe(false);
   });
 
   test('p2 cruiser sunk', () => {
     gameboardP2.registerHit(2, 0);
-    expect(gameboardP2.fleet.getFleetStatus().cruiser.healthLeft).toBe(2);
+    expect(gameboardP2.getFleetStatus().cruiser.healthLeft).toBe(2);
     gameboardP2.registerHit(2, 1);
-    expect(gameboardP2.fleet.getFleetStatus().cruiser.healthLeft).toBe(1);
+    expect(gameboardP2.getFleetStatus().cruiser.healthLeft).toBe(1);
     gameboardP2.registerHit(2, 2);
-    expect(gameboardP2.fleet.getFleetStatus().cruiser.healthLeft).toBe(0);
+    expect(gameboardP2.getFleetStatus().cruiser.healthLeft).toBe(0);
   });
   test('cruiser health subtracted from fleet health', () => {
-    expect(gameboardP2.fleet.getFleetHealth()).toBe(3);
+    expect(gameboardP2.getFleetHealth()).toBe(3);
   });
   test('p2 fleet still alive', () => {
-    expect(gameboardP2.fleet.isFleetSunk()).toBe(false);
+    expect(gameboardP2.isFleetSunk()).toBe(false);
   });
 
   test('p2 submarine sunk', () => {
     gameboardP2.registerHit(3, 0);
-    expect(gameboardP2.fleet.getFleetStatus().submarine.healthLeft).toBe(1);
+    expect(gameboardP2.getFleetStatus().submarine.healthLeft).toBe(1);
     gameboardP2.registerHit(3, 1);
-    expect(gameboardP2.fleet.getFleetStatus().submarine.healthLeft).toBe(0);
+    expect(gameboardP2.getFleetStatus().submarine.healthLeft).toBe(0);
   });
   test('submarine health subtracted from fleet health', () => {
-    expect(gameboardP2.fleet.getFleetHealth()).toBe(1);
+    expect(gameboardP2.getFleetHealth()).toBe(1);
   });
   test('p2 fleet still alive', () => {
-    expect(gameboardP2.fleet.isFleetSunk()).toBe(false);
+    expect(gameboardP2.isFleetSunk()).toBe(false);
   });
 
   test('p2 destroyer sunk', () => {
     gameboardP2.registerHit(4, 0);
-    expect(gameboardP2.fleet.getFleetStatus().submarine.healthLeft).toBe(0);
+    expect(gameboardP2.getFleetStatus().submarine.healthLeft).toBe(0);
   });
   test('destroyer health subtracted from fleet health', () => {
-    expect(gameboardP2.fleet.getFleetHealth()).toBe(0);
+    expect(gameboardP2.getFleetHealth()).toBe(0);
   });
   test('p2 fleet has been sunk', () => {
-    expect(gameboardP2.fleet.isFleetSunk()).toBe(true);
+    expect(gameboardP2.isFleetSunk()).toBe(true);
   });
 };
 
