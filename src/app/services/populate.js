@@ -17,7 +17,7 @@ export default function populateGameboardMatrix(gameboard) {
       shipLengthsCopy.shift();
     } catch (err) {
       // Placement failed (e.g., overlap or out-of-bounds) — try again
-      console.error(`Error: ${err}`);
+      console.error(`${err}`);
     }
   }
 }

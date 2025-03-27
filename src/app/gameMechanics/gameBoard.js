@@ -20,17 +20,9 @@ function initializeGameboard(player) {
 
   // Places ship and adds it to player fleet
   function placeShip(row, col, orientation, shipType) {
-    if (!(shipType in SHIP_LENGTHS)) {
-      throw new Error('Not a ship type');
-    }
-    if (orientation !== 'horizontal' && orientation !== 'vertical') {
-      throw new Error(`Not a valid orientation; orientation given was ${orientation}`);
-    }
-    if (!(isShipPlaceable(gameboard, GAMEBOARD_LENGTH, row, col, orientation, shipType))) {
-      throw new Error('Can\'t place ship there');
-    }
-    if (fleet.getFleetStatus()[shipType]) {
-      throw new Error('No duplicate ships allowed');
+    const shipPlaceability = isShipPlaceable(fleet, gameboard, GAMEBOARD_LENGTH, row, col, orientation, shipType);
+    if (shipPlaceability !== true) {
+      throw new Error(`${shipPlaceability}`);
     }
     if (orientation === 'horizontal') {
       for (let i = col; i < col + SHIP_LENGTHS[shipType]; i += 1) {

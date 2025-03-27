@@ -6,11 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Listen for changes to orientation radio buttons
   document.querySelectorAll('input[name="orientation"]').forEach((input) => input.addEventListener('change', (e) => {
     currentOrientation = e.target.value;
+    console.log(currentOrientation);
   }));
 
   // Listen for changes to ship type radio buttons
-  document.querySelectorAll('input[name="shipType"]').forEach((input) => input.addEventListener('change', (e) => {
+  document.querySelectorAll('input[name="ship-type"]').forEach((input) => input.addEventListener('change', (e) => {
     currentShipType = e.target.value;
+    console.log(currentShipType);
   }));
 });
 
