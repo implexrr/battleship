@@ -18,6 +18,10 @@ for (let i = 0; i < ships.length; i += 1) {
 
   // Capitalizes first letter of the ship name for label text
   labels[ships[i]].textContent = ships[i].charAt(0).toUpperCase() + ships[i].slice(1);
+
+  if (ships[i] === 'carrier') {
+    options[ships[i]].checked = true;
+  }
 }
 
 // Creates and returns a container <div> holding all ship selection inputs and labels

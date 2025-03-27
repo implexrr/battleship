@@ -24,11 +24,33 @@ function isInsideGameboard(boardLength, row, col, orientation, shipType) {
   return true;
 }
 
+function isValidOrientation(orientation) {
+  return (orientation === 'horizontal' || orientation === 'vertical');
+}
+function isValidShipType(shipType) {
+  return (shipType in SHIP_LENGTHS);
+}
+
+function isDuplicate(shipType, fleet) {
+  return fleet.getFleetStatus()[shipType];
+}
+
 // Checks if ship is placeable
-export default function isShipPlaceable(board, boardLength, row, col, orientation, shipType) {
-  if (isInsideGameboard(boardLength, row, col, orientation, shipType)
-    && !(isOccupied(board, row, col, orientation, shipType))) {
-    return true;
+export default function isShipPlaceable(fleet, board, boardLength, row, col, orientation, shipType) {
+  if (!(isInsideGameboard(boardLength, row, col, orientation, shipType))) {
+    return 'bounds';
   }
-  return false;
+  if (!(isValidOrientation(orientation))) {
+    return 'orientation';
+  }
+  if (isOccupied(board, row, col, orientation, shipType)) {
+    return 'overlap';
+  }
+  if (!isValidShipType(shipType)) {
+    return 'invalid ship';
+  }
+  if (isDuplicate(shipType, fleet)) {
+    return 'duplicate';
+  }
+  return true;
 }
