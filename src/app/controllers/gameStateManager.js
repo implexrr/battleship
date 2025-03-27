@@ -3,7 +3,7 @@ const gameStateManager = (() => {
   const states = {}; // key=state, val=stateContentGenerator
   let curState = null;
 
-  // Render content related to state, according to whatever the current state is
+  // Renders content related to state, according to whatever the current state is
   function renderStateContent() {
     const contentArr = (states[curState])();
     const bodyEl = document.querySelector('body');
@@ -14,12 +14,12 @@ const gameStateManager = (() => {
     }
   }
 
-  // Register a state and its associated content generation fxn as key-val pairs
+  // Registers a state and its associated content generation fxn as key-val pairs
   function registerState(state, stateContent) {
     states[state] = stateContent;
   }
 
-  // Set the current state to newState, render associated content via the states object
+  // Sets the current state to newState, renders associated content via the states object
   function setState(newState) {
     curState = newState;
     renderStateContent();

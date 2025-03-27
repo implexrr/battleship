@@ -3,10 +3,14 @@ import { initialButtonEl, shootingButtonEl } from '../../buttons';
 import pageTitleEl from './title';
 import boardsEl from './boards';
 import placementOptionsEl from './placementOptions';
+import { duplicatePlacementWarningEl, overlapWarningEl, outOfBoundsWarningEl } from '../../popUps';
 
 // Returns an array of DOM elements to render for the "Placement" state
 const placementPageEls = () => {
   const els = [
+    duplicatePlacementWarningEl(),
+    overlapWarningEl(),
+    outOfBoundsWarningEl(),
     pageTitleEl(),
     boardsEl(),
     placementOptionsEl(),
