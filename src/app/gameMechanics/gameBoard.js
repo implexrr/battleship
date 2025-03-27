@@ -120,7 +120,6 @@ function initializeGameboard(player) {
   }
 
   return {
-    // fleet,
     getFleetHealth,
     getFleetStatus,
     isFleetSunk,

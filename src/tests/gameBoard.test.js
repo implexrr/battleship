@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable object-curly-newline */
 /*
   Comprehensive test suite for Battleship game logic:
   - Tests all valid and invalid ship placements (with and without wreckage).
@@ -97,42 +99,28 @@ const playGame1 = () => {
       try { gameboardP1.placeShip(5, 6, 'horizontal', 'destroyer'); } catch (err) { console.error('Error caught:', err.message); }
       try { gameboardP2.placeShip(9, 9, 'vertical', 'destroyer'); } catch (err) { console.error('Error caught:', err.message); }
     });
+
     // Verifies all valid placements were successful
-    test('p1 carrier placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(5, 5, 'vertical', 'carrier')).toBe(true);
-    });
-    test('p2 carrier placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(7, 3, 'horizontal', 'carrier')).toBe(true);
-    });
+    const shipPlacementTests = [
+      { player: 'p1', board: gameboardP1, x: 5, y: 5, dir: 'vertical', type: 'carrier' },
+      { player: 'p2', board: gameboardP2, x: 7, y: 3, dir: 'horizontal', type: 'carrier' },
+      { player: 'p1', board: gameboardP1, x: 0, y: 1, dir: 'horizontal', type: 'battleship' },
+      { player: 'p2', board: gameboardP2, x: 3, y: 2, dir: 'vertical', type: 'battleship' },
+      { player: 'p1', board: gameboardP1, x: 1, y: 2, dir: 'vertical', type: 'cruiser' },
+      { player: 'p2', board: gameboardP2, x: 2, y: 1, dir: 'horizontal', type: 'cruiser' },
+      { player: 'p1', board: gameboardP1, x: 3, y: 4, dir: 'vertical', type: 'submarine' },
+      { player: 'p2', board: gameboardP2, x: 1, y: 0, dir: 'horizontal', type: 'submarine' },
+      { player: 'p1', board: gameboardP1, x: 5, y: 6, dir: 'horizontal', type: 'destroyer' },
+      { player: 'p2', board: gameboardP2, x: 9, y: 9, dir: 'vertical', type: 'destroyer' },
+    ];
 
-    test('p1 battleship placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(0, 1, 'horizontal', 'battleship')).toBe(true);
-    });
-    test('p2 battleship placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(3, 2, 'vertical', 'battleship')).toBe(true);
-    });
-
-    test('p1 cruiser placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(1, 2, 'vertical', 'cruiser')).toBe(true);
-    });
-    test('p2 cruiser placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(2, 1, 'horizontal', 'cruiser')).toBe(true);
-    });
-
-    test('p1 submarine placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(3, 4, 'vertical', 'submarine')).toBe(true);
-    });
-    test('p2 submarine placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(1, 0, 'horizontal', 'submarine')).toBe(true);
-    });
-
-    test('p1 destroyer placed correctly', () => {
-      expect(gameboardP1.isShipFullyHere(5, 6, 'horizontal', 'destroyer')).toBe(true);
-    });
-    test('p2 destroyer placed correctly', () => {
-      expect(gameboardP2.isShipFullyHere(9, 9, 'vertical', 'destroyer')).toBe(true);
+    shipPlacementTests.forEach(({ player, board, x, y, dir, type }) => {
+      test(`${player} ${type} placed correctly`, () => {
+        expect(board.isShipFullyHere(x, y, dir, type)).toBe(true);
+      });
     });
   });
+
   describe('game played properly', () => {
     beforeAll(() => {
       // Simulate full board sweep until final position hit
