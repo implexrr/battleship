@@ -46,7 +46,11 @@ export default function initializeFleet() {
     return health;
   }
 
+  function hitShip(a, b, ship) {
+    ships[ship].hitShip(a, b);
+  }
+
   return {
-    ships, addToFleet, isFleetSunk, getFleetStatus, getFleetHealth,
+    hitShip, addToFleet, isFleetSunk, getFleetStatus, getFleetHealth,
   };
 }

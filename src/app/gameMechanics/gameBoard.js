@@ -52,7 +52,7 @@ function initializeGameboard(player) {
     } else if (gameboard[x][y] in SHIP_LENGTHS) {
       const ship = gameboard[x][y];
       gameboard[x][y] = 'hit';
-      fleet.ships[ship].hitShip(x, y);
+      fleet.hitShip(x, y, ship);
     }
     if (fleet.isFleetSunk()) {
       sinkAllShips();
@@ -107,8 +107,23 @@ function initializeGameboard(player) {
     gameboard[x][y] = 'wreckage';
   }
 
+  function getFleetHealth() {
+    return fleet.getFleetHealth();
+  }
+
+  function getFleetStatus() {
+    return fleet.getFleetStatus();
+  }
+
+  function isFleetSunk() {
+    return fleet.isFleetSunk();
+  }
+
   return {
-    fleet,
+    // fleet,
+    getFleetHealth,
+    getFleetStatus,
+    isFleetSunk,
     getPlayer,
     getBoard,
     placeShip,
