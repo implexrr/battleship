@@ -1,0 +1,6 @@
+TDL:
+
+- Change Go to initial buttons
+- Basic CSS
+- Add cursor over board placement
+- Add hover over board placement
