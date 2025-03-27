@@ -19,7 +19,8 @@ export default function initializeFleet() {
     });
     if (health <= 0) {
       return true;
-    } return false;
+    }
+    return false;
   }
 
   // Gives status report on each ship in the fleet
@@ -31,7 +32,10 @@ export default function initializeFleet() {
       const healthLeft = length - hits;
       const isSunk = ships[ship].isSunk();
       fleetStatus[ship] = {
-        length, hits, healthLeft, isSunk,
+        length,
+        hits,
+        healthLeft,
+        isSunk,
       };
     });
     return fleetStatus;
@@ -51,6 +55,10 @@ export default function initializeFleet() {
   }
 
   return {
-    hitShip, addToFleet, isFleetSunk, getFleetStatus, getFleetHealth,
+    hitShip,
+    addToFleet,
+    isFleetSunk,
+    getFleetStatus,
+    getFleetHealth,
   };
 }

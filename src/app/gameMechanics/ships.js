@@ -1,5 +1,9 @@
 const SHIP_LENGTHS = {
-  carrier: 5, battleship: 4, cruiser: 3, submarine: 2, destroyer: 1,
+  carrier: 5,
+  battleship: 4,
+  cruiser: 3,
+  submarine: 2,
+  destroyer: 1,
 };
 
 // Creates array of ship sections for a given ship/orientation
@@ -56,7 +60,13 @@ function makeShip(row, col, orientation, type) {
   }
 
   return {
-    getShipLength, isSectionHit, isSunk, hitShip, getHits, getShipCoord, getShipHealth,
+    getShipLength,
+    isSectionHit,
+    isSunk,
+    hitShip,
+    getHits,
+    getShipCoord,
+    getShipHealth,
   };
 }
 
