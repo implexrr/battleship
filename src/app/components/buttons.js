@@ -16,14 +16,6 @@ const initialButtonEl = () => {
   return el;
 };
 
-// Creates a "Go to shooting" button that sets the game state to 'shooting'
-const shootingButtonEl = () => {
-  const el = document.createElement('button');
-  el.textContent = 'Go to shooting';
-  el.addEventListener('click', () => { gameStateManager.setState('shooting'); });
-  return el;
-};
-
 // Creates a "Go to gameOver" button that sets the game state to 'gameOver'
 const gameOverButtonEl = () => {
   const el = document.createElement('button');
@@ -35,6 +27,5 @@ const gameOverButtonEl = () => {
 export {
   playNowButtonEl,
   initialButtonEl,
-  shootingButtonEl,
   gameOverButtonEl,
 };

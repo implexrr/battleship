@@ -1,5 +1,5 @@
 import { SHIP_LENGTHS } from './ships';
-import initializeFleet from './fleet';
+import { initializeFleet, MAX_FLEET_HEALTH } from './fleet';
 import createEmptyBoard from './emptyBoard';
 import isShipPlaceable from './validatePlacement';
 
@@ -70,16 +70,8 @@ function initializeGameboard(player) {
     }
   }
 
-  function getBoard() {
-    return gameboard;
-  }
-
-  function getPlayer() {
-    return player;
-  }
-
-  function isGameOver() {
-    return gameOver;
+  function placeWreckage(x, y) {
+    gameboard[x][y] = 'wreckage';
   }
 
   // Checks to see if a ship is properly placed in a given location
@@ -115,10 +107,6 @@ function initializeGameboard(player) {
     return true;
   }
 
-  function placeWreckage(x, y) {
-    gameboard[x][y] = 'wreckage';
-  }
-
   function getFleetHealth() {
     return fleet.getFleetHealth();
   }
@@ -127,22 +115,40 @@ function initializeGameboard(player) {
     return fleet.getFleetStatus();
   }
 
+  function getBoard() {
+    return gameboard;
+  }
+
+  function getPlayer() {
+    return player;
+  }
+
+  function isPlacementFinished() {
+    return fleet.getFleetHealth() === MAX_FLEET_HEALTH;
+  }
+
   function isFleetSunk() {
     return fleet.isFleetSunk();
   }
 
+  function isGameOver() {
+    return gameOver;
+  }
+
   return {
-    getFleetHealth,
-    getFleetStatus,
-    isFleetSunk,
-    getPlayer,
-    getBoard,
     placeShip,
     registerHit,
-    isGameOver,
-    isShipFullyHere,
     resetGameboard,
     placeWreckage,
+    isShipFullyHere,
+    getFleetHealth,
+    getFleetStatus,
+    getBoard,
+    getPlayer,
+    isPlacementFinished,
+    isFleetSunk,
+    isGameOver,
+
   };
 }
 

@@ -1,5 +1,7 @@
 import { makeShip } from './ships';
 
+const MAX_FLEET_HEALTH = 15;
+
 // Initializes a fleet object with the ability to add/get status of ships
 export default function initializeFleet() {
   // Sets up empty object to store ships and their associated values
@@ -62,3 +64,5 @@ export default function initializeFleet() {
     getFleetHealth,
   };
 }
+
+export { MAX_FLEET_HEALTH, initializeFleet };
