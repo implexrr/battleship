@@ -29,7 +29,7 @@ export default function attachPlacementHandler(cell, gameboard, cellMap) {
       // TDL: Auto-transition to shooting phase if all ships placed
     } catch (err) {
       // Logs error and prints current gameboard state for debugging
-      console.error(`${err}`);
+      console.error(`${err.message}`);
       console.log(gameboard.getBoard());
       showWarning(err.message);
     }

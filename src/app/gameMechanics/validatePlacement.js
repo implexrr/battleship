@@ -38,7 +38,7 @@ function isDuplicate(shipType, fleet) {
 // Checks if ship is placeable
 export default function isShipPlaceable(fleet, board, boardLength, row, col, orientation, shipType) {
   if (!(isInsideGameboard(boardLength, row, col, orientation, shipType))) {
-    return 'out of bounds';
+    return 'bounds';
   }
   if (!(isValidOrientation(orientation))) {
     return 'orientation';
