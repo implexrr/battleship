@@ -1,4 +1,4 @@
-import getPlacementState from '../controllers/optionsController';
+import { getPlacementState } from '../controllers/optionsController';
 import { colorShip } from './color';
 import checkPlacementCompleteness from './checkPlacementCompleteness';
 import showWarning from './showWarning';

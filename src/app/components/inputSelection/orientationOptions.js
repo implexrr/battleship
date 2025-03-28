@@ -1,4 +1,5 @@
 import synthesizeElement from '../../utils/synthesizeElement';
+import { setOrientationState } from '../../controllers/optionsController';
 
 // Creates a radio input element for the "Horizontal" orientation option
 const horizontalOptionEl = () => {
@@ -8,6 +9,7 @@ const horizontalOptionEl = () => {
     name: 'orientation',
     value: 'horizontal',
   });
+  el.addEventListener('change', () => { setOrientationState('horizontal'); });
   el.checked = true; // Sets "Horizontal" as the default selected option
   return el;
 };
@@ -20,6 +22,7 @@ const verticalOptionEl = () => {
     name: 'orientation',
     value: 'vertical',
   });
+  el.addEventListener('change', () => { setOrientationState('vertical'); });
   return el;
 };
 
@@ -37,6 +40,10 @@ const verticalOptionLabelEl = () => {
   return el;
 };
 
+function setDefaultOrientation() {
+  setOrientationState('horizontal');
+}
+
 // Combines all orientation-related elements into a single container <div>
 const orientationOptionsEl = () => {
   const el = synthesizeElement('div', { id: 'orientation-options' });
@@ -46,6 +53,7 @@ const orientationOptionsEl = () => {
     verticalOptionEl(),
     verticalOptionLabelEl(),
   );
+  setDefaultOrientation();
   return el;
 };
 
