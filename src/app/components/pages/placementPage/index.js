@@ -1,9 +1,9 @@
 import gameStateManager from '../../../controllers/gameStateManager';
-import { initialButtonEl } from '../../buttons';
 import pageTitleEl from './title';
 import boardsEl from './boards';
 import placementOptionsEl from './placementOptions';
 import { duplicatePlacementWarningEl, overlapWarningEl, outOfBoundsWarningEl } from '../../popUps';
+import startOverButtonEl from './button';
 
 // Returns an array of DOM elements to render for the "Placement" state
 const placementPageEls = () => {
@@ -14,7 +14,7 @@ const placementPageEls = () => {
     pageTitleEl(),
     boardsEl(),
     placementOptionsEl(),
-    initialButtonEl(),
+    startOverButtonEl(),
   ];
   return els;
 };

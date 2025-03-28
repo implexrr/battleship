@@ -4,10 +4,11 @@ TDL:
 - Basic CSS
 - Add cursor over board placement
 - Add hover tiles over board placement
-- rename page-title-container to placement-page-title-container
+✔ rename page-title-container to placement-page-title-container
 - give names to options divs
-- add container for button
+✔ add container for button
 
 - Set up shooting page CSS
 - Shooting page auto transition
 
+✔

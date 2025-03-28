@@ -2,7 +2,7 @@ import { pageTitleContainerEl } from '../../../containers';
 
 // Returns the page title element for the Placement phase
 const titleEl = () => {
-  const el = document.createElement('h2');
+  const el = document.createElement('h1');
   el.textContent = 'Placement Phase';
   return el;
 };
