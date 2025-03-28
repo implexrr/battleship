@@ -1,0 +1,34 @@
+button {
+  all: unset;
+  padding: 0.75rem 2rem;
+  background-color: #f0f0f0c9; /* Eraser color */
+  color: #22322c; /* Chalkboard green for contrast */
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 6px;
+
+  /* Soft edges like a rubber eraser */
+  box-shadow:
+    0 4px 0 #d67b7b,        /* Raised edge */
+    inset 0 0 5px rgba(0, 0, 0, 0.05); /* Light surface texture */
+
+  cursor: pointer;
+  transition: 
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+button:hover {
+  background-color: #f0f0f097; /* Slightly duller on hover */
+  box-shadow:
+    0 3px 0 #d67b7bc6, 
+    inset 0 0 8px rgba(0, 0, 0, 0.1); /* Slight dusty look */
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 1px 0 #aaa,
+    inset 0 0 10px rgba(0, 0, 0, 0.15); /* Pressed-in effect */
+}

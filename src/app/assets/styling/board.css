@@ -1,0 +1,15 @@
+.board {
+  border: 2px solid var(--chalk);
+  width: 20rem;
+  height: 20rem;
+  display: grid;
+  grid-template-columns: repeat(var(--board-height), 1fr);
+  grid-template-rows: repeat(var(--board-width), 1fr);
+}
+
+.board.player {
+  margin-right: 1rem;
+}
+.board.ai {
+  margin-left: 1rem;
+}

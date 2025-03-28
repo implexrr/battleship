@@ -1,0 +1,60 @@
+.cell {
+  border: 2px solid var(--chalk);
+  border-image: url(../images/cell.png) 50;
+}
+
+[cell-type='miss'] {
+  background-image: url(../images/miss.png);
+  background-size: cover; /* Scale to fill the div while maintaining aspect ratio */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent tiling */
+}
+
+[cell-type='shipwreck'] {
+  background-image: url(../images/shipwreck.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[cell-type='hit'] {
+  background-image: url(../images/hit.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[cell-type='carrier'] {
+  background-image: url(../images/shipFillWhite.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[cell-type='battleship'] {
+  background-image: url(../images/shipFillPurple.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[cell-type='cruiser'] {
+  background-image: url(../images/shipFillRed.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[cell-type='submarine'] {
+  background-image: url(../images/shipFillYellow.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[cell-type='destroyer'] {
+  background-image: url(../images/shipFillBlue.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
