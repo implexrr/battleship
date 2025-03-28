@@ -24,35 +24,35 @@
   background-repeat: no-repeat;
 }
 
-[cell-type='carrier'] {
+.player[cell-type='carrier'] {
   background-image: url(../images/shipFillWhite.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-[cell-type='battleship'] {
+.player[cell-type='battleship'] {
   background-image: url(../images/shipFillPurple.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-[cell-type='cruiser'] {
+.player[cell-type='cruiser'] {
   background-image: url(../images/shipFillRed.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-[cell-type='submarine'] {
+.player[cell-type='submarine'] {
   background-image: url(../images/shipFillYellow.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-[cell-type='destroyer'] {
+.player[cell-type='destroyer'] {
   background-image: url(../images/shipFillBlue.png);
   background-size: cover;
   background-position: center;
