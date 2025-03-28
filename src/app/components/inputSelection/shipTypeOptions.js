@@ -26,7 +26,7 @@ for (let i = 0; i < ships.length; i += 1) {
 
 // Creates and returns a container <div> holding all ship selection inputs and labels
 const shipTypeOptionsEl = () => {
-  const el = document.createElement('div');
+  const el = synthesizeElement('div', { id: 'ship-options' });
   for (let i = 0; i < ships.length; i += 1) {
     el.append(options[ships[i]], labels[ships[i]]);
   }
