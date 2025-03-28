@@ -1,3 +1,5 @@
+import { addKeyboardRotation, removeKeyboardRotation } from '../services/keyboardRotation';
+
 // Globally accessed IIFE that renders, registers and sets the state of the game
 const gameStateManager = (() => {
   const states = {}; // key=state, val=stateContentGenerator
@@ -23,6 +25,11 @@ const gameStateManager = (() => {
   function setState(newState) {
     curState = newState;
     renderStateContent();
+    if (newState === 'placement') {
+      addKeyboardRotation();
+    } else {
+      removeKeyboardRotation();
+    }
   }
 
   return { registerState, setState };
