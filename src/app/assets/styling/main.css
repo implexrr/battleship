@@ -31,6 +31,7 @@ body > * {
 
 #boards-container {
   width: 100%;
+  justify-content: center;
 }
 
 .board {
@@ -42,11 +43,15 @@ body > * {
   grid-template-rows: repeat(var(--board-width), 1fr);
 }
 
+#placement-options-container {
+  flex-direction: column;
+}
+
 .board.player {
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 .board.ai {
-  margin-left: 0.5rem;
+  margin-left: 1rem;
 }
 
 .cell {

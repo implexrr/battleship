@@ -3,7 +3,6 @@ TDL:
 - Basic CSS
 - Add cursor over board placement
 - Add hover tiles over board placement
-- give names to options divs
 
 - Set up shooting page CSS
 - Shooting page auto transition
