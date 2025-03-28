@@ -1,7 +1,8 @@
 TDL:
 
 - Add hover tiles over board placement
-- Add rotate fxn
+  - Needs to change hover tiles when rotating or switching ships
+- Add 1-5 keys for switching ships
 
 - Set up shooting page CSS
 - Shooting page auto transition

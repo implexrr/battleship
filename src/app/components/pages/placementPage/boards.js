@@ -46,6 +46,14 @@ const playerBoardEl = () => {
 
       // Attach click handler for placing ships interactively
       services.attachPlacementHandler(cell, gameboard, cellMap);
+
+      // Add hover handler for ship placement preview
+      cell.addEventListener('mouseenter', (e) => {
+        services.handleMouseEnter(e, cellMap);
+      });
+      cell.addEventListener('mouseleave', (e) => {
+        services.handleMouseLeave(e, cellMap);
+      });
       el.append(cell);
     }
   }

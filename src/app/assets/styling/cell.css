@@ -58,3 +58,7 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.hovered{
+  border: solid 1px red;
+}
