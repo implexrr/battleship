@@ -1,26 +1,57 @@
+@import url(meta.css);
 
-* {
-  box-sizing: border-box;
-  font-family: 'Fredericka the Great', cursive;
-  background-color: #22322c;
-  color: #e8efef;
+body {
+  border: solid 10px black;
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(min-content, 1fr) 10fr minmax(min-content, 4fr) minmax(min-content, 1fr);
+}
+
+#page-title-container {
+  grid-row: 1 / 2;
+}
+#boards-container {
+  grid-row: 2 / 3;
+}
+#placement-options-container {
+  grid-row: 3 / 4;
+}
+
+body > * {
+  border: solid 1px red;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-title-container {
+  font-size: 2rem;
+}
+
+#boards-container {
+  width: 100%;
 }
 
 .board {
-  border: 2px solid rgba(232, 239, 239, 0.8);
-  width: 300px;
-  height: 300px;
+  border: 2px solid var(--chalk);
+  width: 20rem;
+  height: 20rem;
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 10 equal columns */
-  grid-template-rows: repeat(10, 1fr);    /* 10 equal rows */
+  grid-template-columns: repeat(var(--board-height), 1fr);
+  grid-template-rows: repeat(var(--board-width), 1fr);
+}
+
+.board.player {
+  margin-right: 0.5rem;
+}
+.board.ai {
+  margin-left: 0.5rem;
 }
 
 .cell {
-  /* background-color: red; */
-  border: 2px solid rgba(232, 239, 239, 0.8);
-  width: 100%;  /* Makes sure it fills the grid cell */
-  height: 100%; /* Makes sure it fills the grid cell */
-  border-image: url("https://www.unicefusa.org/sites/default/files/answer-box.png") 50;
+  border: 2px solid var(--chalk);
+  border-image: url(../images/cell.png) 50;
 }
 
 [cell-type='miss'] {
@@ -151,4 +182,9 @@ input[type="radio"] + label:hover {
 .warning.visible {
   opacity: 1;
   pointer-events: none;
+}
+
+button {
+  color: var(--blue);
+  cursor: pointer;
 }

@@ -11,7 +11,7 @@ const playNowButtonEl = () => {
 // Create a "Go to initial" button that sets the game state to 'initial'
 const initialButtonEl = () => {
   const el = document.createElement('button');
-  el.textContent = 'Go to initial';
+  el.textContent = 'Start Over';
   el.addEventListener('click', () => { gameStateManager.setState('initial'); });
   return el;
 };
