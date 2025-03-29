@@ -2,19 +2,13 @@
 let currentOrientation = 'horizontal';
 let currentShipType = 'carrier';
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Listen for changes to orientation radio buttons
-  document.querySelectorAll('input[name="orientation"]').forEach((input) => input.addEventListener('change', (e) => {
-    currentOrientation = e.target.value;
-    console.log(currentOrientation);
-  }));
+function setShipType(shipType) {
+  currentShipType = shipType;
+}
 
-  // Listen for changes to ship type radio buttons
-  document.querySelectorAll('input[name="ship-type"]').forEach((input) => input.addEventListener('change', (e) => {
-    currentShipType = e.target.value;
-    console.log(currentShipType);
-  }));
-});
+function setOrientationState(orientation) {
+  currentOrientation = orientation;
+}
 
 // Provide the current selected orientation and ship type
 function getPlacementState() {
@@ -24,4 +18,4 @@ function getPlacementState() {
   };
 }
 
-export default getPlacementState;
+export { setShipType, setOrientationState, getPlacementState };

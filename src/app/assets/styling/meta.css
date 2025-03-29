@@ -1,0 +1,19 @@
+:root {
+  --chalkboard: #22322c;
+  --chalk: rgba(232, 239, 239, 0.8);
+  --board-width: 10;
+  --board-height: 10;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Fredericka the Great', cursive;
+  background-color: var(--chalkboard);
+  color: var(--chalk);
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100vh;
+}

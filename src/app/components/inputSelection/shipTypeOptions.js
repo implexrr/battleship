@@ -1,5 +1,6 @@
 import synthesizeElement from '../../utils/synthesizeElement';
 import { SHIP_LENGTHS } from '../../gameMechanics/ships';
+import { setShipType } from '../../controllers/optionsController';
 
 // Initializes objects to hold radio input elements and their corresponding labels
 const options = {};
@@ -12,24 +13,30 @@ for (let i = 0; i < ships.length; i += 1) {
     id: `${ships[i]}-option`,
     type: 'radio',
     name: 'ship-type',
-    value: `${ships[i]}`,
+    value: ships[i],
   });
   labels[ships[i]] = synthesizeElement('label', { for: `${ships[i]}-option` });
 
   // Capitalizes first letter of the ship name for label text
   labels[ships[i]].textContent = ships[i].charAt(0).toUpperCase() + ships[i].slice(1);
 
-  if (ships[i] === 'carrier') {
-    options[ships[i]].checked = true;
-  }
+  // Changes type of ship that will be placed
+  (options[ships[i]]).addEventListener('change', () => { setShipType(ships[i]); });
+}
+
+// Set the default ship that gets placed to "carrier"
+function setDefaultShip() {
+  options.carrier.checked = true;
+  setShipType('carrier');
 }
 
 // Creates and returns a container <div> holding all ship selection inputs and labels
 const shipTypeOptionsEl = () => {
-  const el = document.createElement('div');
+  const el = synthesizeElement('div', { id: 'ship-options' });
   for (let i = 0; i < ships.length; i += 1) {
     el.append(options[ships[i]], labels[ships[i]]);
   }
+  setDefaultShip();
   return el;
 };
 

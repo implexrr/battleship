@@ -1,5 +1,5 @@
 import { SHIP_LENGTHS } from './ships';
-import initializeFleet from './fleet';
+import { initializeFleet, MAX_FLEET_HEALTH } from './fleet';
 import createEmptyBoard from './emptyBoard';
 import isShipPlaceable from './validatePlacement';
 
@@ -20,7 +20,15 @@ function initializeGameboard(player) {
 
   // Places ship and adds it to player fleet
   function placeShip(row, col, orientation, shipType) {
-    const shipPlaceability = isShipPlaceable(fleet, gameboard, GAMEBOARD_LENGTH, row, col, orientation, shipType);
+    const shipPlaceability = isShipPlaceable(
+      fleet,
+      gameboard,
+      GAMEBOARD_LENGTH,
+      row,
+      col,
+      orientation,
+      shipType,
+    );
     if (shipPlaceability !== true) {
       throw new Error(`${shipPlaceability}`);
     }
@@ -40,7 +48,9 @@ function initializeGameboard(player) {
   function sinkAllShips() {
     for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
       for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-        if (gameboard[i][j] === 'hit') { gameboard[i][j] = 'wreckage'; }
+        if (gameboard[i][j] === 'hit') {
+          gameboard[i][j] = 'wreckage';
+        }
       }
     }
   }
@@ -60,16 +70,8 @@ function initializeGameboard(player) {
     }
   }
 
-  function getBoard() {
-    return gameboard;
-  }
-
-  function getPlayer() {
-    return player;
-  }
-
-  function isGameOver() {
-    return gameOver;
+  function placeWreckage(x, y) {
+    gameboard[x][y] = 'wreckage';
   }
 
   // Checks to see if a ship is properly placed in a given location
@@ -91,7 +93,7 @@ function initializeGameboard(player) {
       }
     } else {
       for (let i = row; i < row + SHIP_LENGTHS[shipType]; i += 1) {
-        if ((gameboard[i][col] !== shipType)) {
+        if (gameboard[i][col] !== shipType) {
           return false;
         }
       }
@@ -99,12 +101,10 @@ function initializeGameboard(player) {
 
     // Checks if ship has full HP
     const fleetStatus = fleet.getFleetStatus();
-    if (SHIP_LENGTHS[shipType] !== fleetStatus[shipType].healthLeft) { return false; }
+    if (SHIP_LENGTHS[shipType] !== fleetStatus[shipType].healthLeft) {
+      return false;
+    }
     return true;
-  }
-
-  function placeWreckage(x, y) {
-    gameboard[x][y] = 'wreckage';
   }
 
   function getFleetHealth() {
@@ -115,22 +115,40 @@ function initializeGameboard(player) {
     return fleet.getFleetStatus();
   }
 
+  function getBoard() {
+    return gameboard;
+  }
+
+  function getPlayer() {
+    return player;
+  }
+
+  function isPlacementFinished() {
+    return fleet.getFleetHealth() === MAX_FLEET_HEALTH;
+  }
+
   function isFleetSunk() {
     return fleet.isFleetSunk();
   }
 
+  function isGameOver() {
+    return gameOver;
+  }
+
   return {
-    getFleetHealth,
-    getFleetStatus,
-    isFleetSunk,
-    getPlayer,
-    getBoard,
     placeShip,
     registerHit,
-    isGameOver,
-    isShipFullyHere,
     resetGameboard,
     placeWreckage,
+    isShipFullyHere,
+    getFleetHealth,
+    getFleetStatus,
+    getBoard,
+    getPlayer,
+    isPlacementFinished,
+    isFleetSunk,
+    isGameOver,
+
   };
 }
 
