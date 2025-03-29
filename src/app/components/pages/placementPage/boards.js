@@ -4,6 +4,12 @@ import * as services from '../../../services';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
 
+const playerCellMap = {};
+
+function getPlayerCellMap() {
+  return playerCellMap;
+}
+
 // Generates the AI's game board and populates it with randomly placed ships
 const aiBoardEl = () => {
   const gameboard = initializeGameboard('ai');
@@ -33,7 +39,6 @@ const aiBoardEl = () => {
 const playerBoardEl = () => {
   const gameboard = initializeGameboard('player');
   const boardMatrix = gameboard.getBoard();
-  const cellMap = {};
   const el = synthesizeElement('div', { class: 'player' });
 
   el.setAttribute('class', 'board player');
@@ -42,17 +47,17 @@ const playerBoardEl = () => {
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
       const cell = cellEl(i, j, 'player', boardMatrix[i][j]);
-      services.updateCellMap(cellMap, i, j, cell);
+      services.updateCellMap(playerCellMap, i, j, cell);
 
       // Attach click handler for placing ships interactively
-      services.attachPlacementHandler(cell, gameboard, cellMap);
+      services.attachPlacementHandler(cell, gameboard, playerCellMap);
 
       // Add hover handler for ship placement preview
       cell.addEventListener('mouseenter', (e) => {
-        services.handleMouseEnter(e, cellMap);
+        services.handleMouseEnter(e, playerCellMap);
       });
       cell.addEventListener('mouseleave', (e) => {
-        services.handleMouseLeave(e, cellMap);
+        services.handleMouseLeave(e, playerCellMap);
       });
       el.append(cell);
     }
@@ -67,4 +72,4 @@ const boardsEl = () => {
   return el;
 };
 
-export default boardsEl;
+export { getPlayerCellMap, boardsEl };

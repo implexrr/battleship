@@ -1,4 +1,5 @@
-import { addKeyboardRotation, removeKeyboardRotation } from '../services/keyboardRotation';
+// import { addKeyboardRotation, removeKeyboardRotation } from '../services/keyboardRotation';
+import { addKeyboardRotation, removeKeyboardRotation } from './keyboardRotation';
 
 // Globally accessed IIFE that renders, registers and sets the state of the game
 const gameStateManager = (() => {
