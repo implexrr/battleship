@@ -1,4 +1,4 @@
-import extractCellMap from './extractCellMap';
+import { extractCellMap } from '../../services/cellMap';
 import { SHIP_LENGTHS } from '../../gameMechanics/ships';
 import { GAMEBOARD_LENGTH } from '../../gameMechanics/gameBoard';
 

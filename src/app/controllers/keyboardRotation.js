@@ -1,6 +1,7 @@
 import { getPlacementState } from './optionsController';
 import switchOrientationOption from './helpers/switchOrientationOption';
 import switchHoverOrientation from './helpers/switchHoverOrientation';
+import updateCellMap from '../services/cellMap';
 
 // Initializes mouseX and mouseY positions
 let mouseX = 0;
