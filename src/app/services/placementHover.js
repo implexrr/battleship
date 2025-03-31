@@ -1,9 +1,9 @@
-import { getPlacementState } from '../controllers/optionsController';
+import placementOptionsManager from '../controllers/placementOptionsManager';
 import { SHIP_LENGTHS } from '../gameMechanics/ships';
 import { GAMEBOARD_LENGTH } from '../gameMechanics/gameBoard';
 
 function handleMouseEnter(e, cellMap) {
-  const { orientation, shipType } = getPlacementState();
+  const { orientation, shipType } = placementOptionsManager.getPlacementState();
   const row = Number(e.target.dataset.row);
   const col = Number(e.target.dataset.col);
   if (orientation === 'horizontal') {
@@ -20,7 +20,7 @@ function handleMouseEnter(e, cellMap) {
 }
 
 function handleMouseLeave(e, cellMap) {
-  const { orientation, shipType } = getPlacementState();
+  const { orientation, shipType } = placementOptionsManager.getPlacementState();
   const row = Number(e.target.dataset.row);
   const col = Number(e.target.dataset.col);
   if (orientation === 'horizontal') {

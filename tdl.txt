@@ -1,10 +1,11 @@
 TDL:
 
-- Add hover tiles over board placement
-  - Needs to change hover tiles when rotating or switching ships
 - Add 1-5 keys for switching ships
 
 - Set up shooting page CSS
 - Shooting page auto transition
+- get/set for controllers
+- ship change via keyboard
+- reoragnize controller files
 
 ✔

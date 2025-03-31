@@ -1,4 +1,4 @@
-import { getPlacementState } from '../controllers/optionsController';
+import placementOptionsManager from '../controllers/placementOptionsManager';
 import { colorShip } from './color';
 import checkPlacementCompleteness from './checkPlacementCompleteness';
 import showWarning from './showWarning';
@@ -6,7 +6,7 @@ import showWarning from './showWarning';
 // Attaches a click handler to a board cell for placing a ship
 export default function attachPlacementHandler(cell, gameboard, cellMap) {
   cell.addEventListener('click', () => {
-    const { orientation, shipType } = getPlacementState();
+    const { orientation, shipType } = placementOptionsManager.getPlacementState();
     const row = Number(cell.dataset.row);
     const col = Number(cell.dataset.col);
 

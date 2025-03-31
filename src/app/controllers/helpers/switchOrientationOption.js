@@ -1,12 +1,12 @@
-import { setOrientationState } from '../optionsController';
+import placementOptionsManager from '../placementOptionsManager';
 
 // Switches placement orientation option
 export default function switchOrientation(oldOrientation) {
   if (oldOrientation === 'horizontal') {
-    setOrientationState('vertical');
+    placementOptionsManager.setOrientationState('vertical');
     document.querySelector('#vertical-option').checked = true;
   } else {
-    setOrientationState('horizontal');
+    placementOptionsManager.setOrientationState('horizontal');
     document.querySelector('#horizontal-option').checked = true;
   }
 }

@@ -1,7 +1,6 @@
-import { getPlacementState } from './optionsController';
+import placementOptionsManager from './placementOptionsManager';
 import switchOrientationOption from './helpers/switchOrientationOption';
 import switchHoverOrientation from './helpers/switchHoverOrientation';
-import updateCellMap from '../services/cellMap';
 
 // Initializes mouseX and mouseY positions
 let mouseX = 0;
@@ -16,8 +15,8 @@ function handleMouseMove(e) {
 // Changes placement orientation of ship
 function rotateShip(e) {
   if (e.key.toLowerCase() === 'r') {
-    const oldOrientation = getPlacementState().orientation;
-    const oldShipType = getPlacementState().shipType;
+    const oldOrientation = placementOptionsManager.getPlacementState().orientation;
+    const oldShipType = placementOptionsManager.getPlacementState().shipType;
     switchOrientationOption(oldOrientation);
     switchHoverOrientation(mouseX, mouseY, oldOrientation, oldShipType);
   }
