@@ -1,7 +1,7 @@
-import placementOptionsManager from './placementOptionsManager';
-import switchOrientationOption from './helpers/switchOrientationOption';
+import placementOptionsManager from '../../controllers/placementOptionsManager';
+import switchOrientationOption from './helpers/switchOrientationOptions';
 import switchHoverOrientation from './helpers/switchHoverOrientation';
-import mousePosition from './mouse/mousePosition';
+import mousePosition from '../../controllers/mouse/mousePosition';
 
 // Changes placement orientation of ship
 function rotateShip(e) {

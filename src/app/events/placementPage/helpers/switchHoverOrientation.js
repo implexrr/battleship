@@ -1,6 +1,6 @@
-import { extractCellMap } from '../../services/cellMap';
-import { SHIP_LENGTHS } from '../../gameMechanics/ships';
-import { GAMEBOARD_LENGTH } from '../../gameMechanics/gameBoard';
+import { extractCellMap } from '../../../services/cellMap';
+import { SHIP_LENGTHS } from '../../../gameMechanics/ships';
+import { GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 
 // Changes horizontal ship hover to vertical ship hover
 function horizontalToVertical(oldRow, oldCol, oldShipType, cellMap) {

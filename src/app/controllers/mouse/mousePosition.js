@@ -7,11 +7,10 @@ const mousePosition = (() => {
     console.log(`x: ${mouseX}, y: ${mouseY}`);
   }
 
-  // Changes mouseX and mouseY positions, can as long as add/remove keyboardRotation fxns are called
+  // Changes mouseX and mouseY positions
   function recordMousePosition(e) {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    consoleMousePosition();
   }
 
   function addMouseListener() {

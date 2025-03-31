@@ -1,5 +1,4 @@
-// import { addKeyboardRotation, removeKeyboardRotation } from '../services/keyboardRotation';
-import { addKeyboardRotation, removeKeyboardRotation } from './keyboardRotation';
+import { addKeyboardRotation, removeKeyboardRotation } from '../events/placementPage/keyboardEvents';
 import mousePosition from './mouse/mousePosition';
 
 // Globally accessed IIFE that renders, registers and sets the state of the game

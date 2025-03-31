@@ -1,4 +1,4 @@
-import placementOptionsManager from '../placementOptionsManager';
+import placementOptionsManager from '../../../controllers/placementOptionsManager';
 
 // Switches placement orientation option
 export default function switchOrientation(oldOrientation) {
