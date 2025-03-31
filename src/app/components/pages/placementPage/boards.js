@@ -3,6 +3,7 @@ import { boardsContainerEl } from '../../../containers';
 import * as services from '../../../services';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
+import { handleMouseEnter, handleMouseLeave } from '../../../events/placementPage/mouseEvents';
 
 const playerCellMap = {};
 
@@ -54,10 +55,10 @@ const playerBoardEl = () => {
 
       // Add hover handler for ship placement preview
       cell.addEventListener('mouseenter', (e) => {
-        services.handleMouseEnter(e, playerCellMap);
+        handleMouseEnter(e, playerCellMap);
       });
       cell.addEventListener('mouseleave', (e) => {
-        services.handleMouseLeave(e, playerCellMap);
+        handleMouseLeave(e, playerCellMap);
       });
       el.append(cell);
     }

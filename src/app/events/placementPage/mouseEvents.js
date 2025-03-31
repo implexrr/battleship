@@ -1,6 +1,6 @@
-import placementOptionsManager from '../controllers/placementOptionsManager';
-import { SHIP_LENGTHS } from '../gameMechanics/ships';
-import { GAMEBOARD_LENGTH } from '../gameMechanics/gameBoard';
+import placementOptionsManager from '../../controllers/placementOptionsManager';
+import { SHIP_LENGTHS } from '../../gameMechanics/ships';
+import { GAMEBOARD_LENGTH } from '../../gameMechanics/gameBoard';
 
 function handleMouseEnter(e, cellMap) {
   const { orientation, shipType } = placementOptionsManager.getPlacementState();
