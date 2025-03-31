@@ -1,4 +1,4 @@
-import { addKeyboardRotation, removeKeyboardRotation } from '../events/placementPage/keyboardEvents';
+import { addKeyboardRotation, addKeyboardShipChange, removeKeyboardRotation, removeKeyboardShipChange } from '../events/placementPage/keyboardEvents';
 import mousePosition from './mouse/mousePosition';
 
 // Globally accessed IIFE that renders, registers and sets the state of the game
@@ -29,9 +29,11 @@ const gameStateManager = (() => {
     if (newState === 'placement') {
       mousePosition.addMouseListener();
       addKeyboardRotation();
+      addKeyboardShipChange();
     } else {
       mousePosition.removeMouseListener();
       removeKeyboardRotation();
+      removeKeyboardShipChange();
     }
   }
 
