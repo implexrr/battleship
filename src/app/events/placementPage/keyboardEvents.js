@@ -2,6 +2,7 @@ import placementOptionsManager from '../../controllers/placementOptionsManager';
 import switchOrientationOption from './helpers/switchOrientationOptions';
 import switchHoverOrientation from './helpers/switchHoverOrientation';
 import mousePosition from '../../controllers/mouse/mousePosition';
+import mod from '../../utils/lazyMath';
 
 // Changes placement orientation of ship
 function rotateShip(e) {
@@ -21,5 +22,10 @@ function addKeyboardRotation() {
 function removeKeyboardRotation() {
   document.removeEventListener('keydown', rotateShip);
 }
+
+// ------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------- //
+// ------------------------------------------------------------------------------------- //
 
 export { addKeyboardRotation, removeKeyboardRotation };
