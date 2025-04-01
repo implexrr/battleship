@@ -3,7 +3,8 @@ import { boardsContainerEl } from '../../../containers';
 import * as services from '../../../services';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
-import { handleMouseEnter, handleMouseLeave } from '../../../events/placementPage/mouseEvents';
+import { handleMouseEnter, handleMouseLeave } from '../../../events/placementPage/mouse/mouseEvents';
+import attachPlacementHandler from '../../../events/placementPage/mouse/attachPlacementHandler';
 
 const playerCellMap = {};
 
@@ -51,7 +52,7 @@ const playerBoardEl = () => {
       services.updateCellMap(playerCellMap, i, j, cell);
 
       // Attach click handler for placing ships interactively
-      services.attachPlacementHandler(cell, gameboard, playerCellMap);
+      attachPlacementHandler(cell, gameboard, playerCellMap);
 
       // Add hover handler for ship placement preview
       cell.addEventListener('mouseenter', (e) => {

@@ -1,4 +1,4 @@
-import { addKeyboardListeners, removeKeyboardListeners } from '../events/placementPage/keyboardEvents';
+import { addKeyboardListeners, removeKeyboardListeners } from '../events/placementPage/keyboard/keyboardEvents';
 import mousePosition from './mouse/mousePosition';
 
 // Globally accessed IIFE that renders, registers and sets the state of the game
