@@ -1,6 +1,9 @@
 TDL:
 
-- Add 1-5 keys for switching ships
+- change placement option prompt
+- change board/cell generation for shooting page
+- make intro page
+- make game over page
 
 - Set up shooting page CSS
 - Shooting page auto transition
