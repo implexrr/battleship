@@ -20,8 +20,8 @@ function changeToPrevShip(curShip) {
   placementOptionsManager.setShipType(nextShip);
 }
 
-export default function cycleShips(e) {
+export default function cycleShip(direction) {
   const curShip = placementOptionsManager.getPlacementState().shipType;
-  if (e.key.toLowerCase() === 'q') { changeToPrevShip(curShip); }
-  if (e.key.toLowerCase() === 'e') { changeToNextShip(curShip); }
+  if (direction === 'backward') { changeToPrevShip(curShip); }
+  if (direction === 'forward') { changeToNextShip(curShip); }
 }

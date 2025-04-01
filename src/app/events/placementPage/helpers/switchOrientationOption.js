@@ -1,7 +1,7 @@
 import placementOptionsManager from '../../../controllers/placementOptionsManager';
 
 // Switches placement orientation option
-export default function switchOrientation(oldOrientation) {
+export default function switchOrientationOption(oldOrientation) {
   if (oldOrientation === 'horizontal') {
     placementOptionsManager.setOrientationState('vertical');
     document.querySelector('#vertical-option').checked = true;

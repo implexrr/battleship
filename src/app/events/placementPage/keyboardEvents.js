@@ -1,50 +1,20 @@
-import placementOptionsManager from '../../controllers/placementOptionsManager';
-import switchOrientationOption from './helpers/switchOrientationOptions';
-import switchHoverOrientation from './helpers/switchHoverOrientation';
-import mousePosition from '../../controllers/mouse/mousePosition';
-import cycleShips from './helpers/cycleShip';
+import rotateShip from './helpers/rotateShip';
+import cycleShip from './helpers/cycleShip';
 
-// Changes placement orientation of ship
-function rotateShip(e) {
-  if (e.key.toLowerCase() === 'r') {
-    const oldOrientation = placementOptionsManager.getPlacementState().orientation;
-    const oldShipType = placementOptionsManager.getPlacementState().shipType;
-    const { mouseX, mouseY } = mousePosition.getMousePosition();
-    switchOrientationOption(oldOrientation);
-    switchHoverOrientation(mouseX, mouseY, oldOrientation, oldShipType);
-  }
+function handleKeyDown(e) {
+  if (e.key.toLowerCase() === 'r') { rotateShip(); }
+  else if (e.key.toLowerCase() === 'q') { cycleShip('backward'); }
+  else if (e.key.toLowerCase() === 'e') { cycleShip('forward'); }
 }
 
-function addKeyboardRotation() {
-  document.addEventListener('keydown', rotateShip);
+function addKeyboardListeners() {
+  document.addEventListener('keydown', handleKeyDown);
 }
 
-function removeKeyboardRotation() {
-  document.removeEventListener('keydown', rotateShip);
-}
-
-// ------------------------------------------------------------------------------------- //
-// ------------------------------------------------------------------------------------- //
-// ------------------------------------------------------------------------------------- //
-// ------------------------------------------------------------------------------------- //
-
-function addKeyboardShipChange() {
-  document.addEventListener('keydown', cycleShips);
-}
-
-function removeKeyboardShipChange() {
-  document.removeEventListener('keydown', cycleShips);
-}
-
-// ------------------------------------------------------------------------------------- //
-// ------------------------------------------------------------------------------------- //
-// ------------------------------------------------------------------------------------- //
-// ------------------------------------------------------------------------------------- //
-
-function handleKeyDown() {
-
+function removeKeyboardListeners() {
+  document.removeEventListener('keydown', handleKeyDown);
 }
 
 export {
-  addKeyboardRotation, removeKeyboardRotation, addKeyboardShipChange, removeKeyboardShipChange,
+  addKeyboardListeners, removeKeyboardListeners,
 };
