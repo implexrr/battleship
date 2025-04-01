@@ -1,5 +1,6 @@
 import placementOptionsManager from '../../../controllers/placementOptionsManager';
 import mod from '../../../utils/lazyMath';
+import switchShipOption from './switchShipOption';
 
 const shipsCycle = ['carrier', 'battleship', 'cruiser', 'submarine', 'destroyer'];
 const numOfShips = shipsCycle.length;
@@ -11,13 +12,13 @@ for (let i = 0; i < numOfShips; i += 1) {
 function changeToNextShip(curShip) {
   const curInd = shipIndices[curShip];
   const nextShip = shipsCycle[mod(curInd + 1, numOfShips)];
-  placementOptionsManager.setShipType(nextShip);
+  switchShipOption(nextShip);
 }
 
 function changeToPrevShip(curShip) {
   const curInd = shipIndices[curShip];
   const nextShip = shipsCycle[mod(curInd - 1, numOfShips)];
-  placementOptionsManager.setShipType(nextShip);
+  switchShipOption(nextShip);
 }
 
 export default function cycleShip(direction) {
