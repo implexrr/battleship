@@ -22,18 +22,13 @@ body > * {
 
 /* ------------------------------------------------------------------------------------- */
 
-#initial-page > h1, #gameOver-page > h1 {
+h1 {
   font-size: 5rem;
   padding: 2rem;
 }
 
 /* ------------------------------------------------------------------------------------- */
 
-#placement-page-title-container {
-  font-size: 2rem;
-  margin-top: 0.5rem;
-  margin-bottom: 2rem;
-}
 
 #boards-container {
   width: 100%;

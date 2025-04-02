@@ -1,6 +1,7 @@
 import { addKeyboardListeners, removeKeyboardListeners } from '../events/placementPage/keyboard/keyboardEvents';
 import mousePosition from './mouse/mousePosition';
 import footerEl from '../components/footer/footer';
+import { headingText, pageTitleEl } from '../components/title';
 
 // Globally accessed IIFE that renders, registers and sets the state of the game
 const gameStateManager = (() => {
@@ -14,6 +15,7 @@ const gameStateManager = (() => {
     bodyEl.id = `${newState}-page`;
     bodyEl.textContent = '';
 
+    bodyEl.append(pageTitleEl(headingText(newState), newState));
     for (let i = 0; i < contentArr.length; i += 1) {
       bodyEl.append(contentArr[i]);
     }
