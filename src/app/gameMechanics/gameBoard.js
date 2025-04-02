@@ -135,6 +135,10 @@ function initializeGameboard(player) {
     return gameOver;
   }
 
+  function getFleetCoordinates() {
+    return fleet.getFleetCoordinates();
+  }
+
   return {
     placeShip,
     registerHit,
@@ -148,7 +152,7 @@ function initializeGameboard(player) {
     isPlacementFinished,
     isFleetSunk,
     isGameOver,
-
+    getFleetCoordinates,
   };
 }
 

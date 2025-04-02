@@ -3,4 +3,4 @@ import { initialPageEls, placementPageEls, shootingPageEls, gameOverPageEls } fr
 import gameStateManager from './app/controllers/gameStateManager';
 
 // Start by rendering the first page
-gameStateManager.setState('gameOver');
+gameStateManager.setState('shooting');
