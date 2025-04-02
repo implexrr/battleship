@@ -7,9 +7,10 @@ const gameStateManager = (() => {
   let curState = null;
 
   // Renders content related to state, according to whatever the current state is
-  function renderStateContent() {
+  function renderStateContent(newState) {
     const contentArr = (states[curState])();
-    const bodyEl = document.querySelector('body');
+    const bodyEl = document.body;
+    bodyEl.id = `${newState}-page`;
     bodyEl.textContent = '';
 
     for (let i = 0; i < contentArr.length; i += 1) {
@@ -25,7 +26,7 @@ const gameStateManager = (() => {
   // Sets the current state to newState, renders associated content via the states object
   function setState(newState) {
     curState = newState;
-    renderStateContent();
+    renderStateContent(newState);
     if (newState === 'placement') {
       mousePosition.addMouseListener();
       addKeyboardListeners();
