@@ -1,7 +1,7 @@
-import placementOptionsManager from '../controllers/placementOptionsManager';
-import { colorShip } from './color';
-import checkPlacementCompleteness from './checkPlacementCompleteness';
-import showWarning from './showWarning';
+import placementOptionsManager from '../../../controllers/placementOptionsManager';
+import { colorShip } from '../../../services/color';
+import checkPlacementCompleteness from '../../../services/checkPlacementCompleteness';
+import showWarning from '../../../services/showWarning';
 
 // Attaches a click handler to a board cell for placing a ship
 export default function attachPlacementHandler(cell, gameboard, cellMap) {

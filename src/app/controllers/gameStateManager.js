@@ -1,5 +1,7 @@
-import { addKeyboardRotation, addKeyboardShipChange, removeKeyboardRotation, removeKeyboardShipChange } from '../events/placementPage/keyboardEvents';
+import { addKeyboardListeners, removeKeyboardListeners } from '../events/placementPage/keyboard/keyboardEvents';
 import mousePosition from './mouse/mousePosition';
+import footerEl from '../components/footer/footer';
+import { headingText, pageTitleEl } from '../components/title';
 
 // Globally accessed IIFE that renders, registers and sets the state of the game
 const gameStateManager = (() => {
@@ -7,14 +9,17 @@ const gameStateManager = (() => {
   let curState = null;
 
   // Renders content related to state, according to whatever the current state is
-  function renderStateContent() {
+  function renderStateContent(newState) {
     const contentArr = (states[curState])();
-    const bodyEl = document.querySelector('body');
+    const bodyEl = document.body;
+    bodyEl.id = `${newState}-page`;
     bodyEl.textContent = '';
 
+    bodyEl.append(pageTitleEl(headingText(newState), newState));
     for (let i = 0; i < contentArr.length; i += 1) {
       bodyEl.append(contentArr[i]);
     }
+    bodyEl.append(footerEl());
   }
 
   // Registers a state and its associated content generation fxn as key-val pairs
@@ -25,15 +30,13 @@ const gameStateManager = (() => {
   // Sets the current state to newState, renders associated content via the states object
   function setState(newState) {
     curState = newState;
-    renderStateContent();
+    renderStateContent(newState);
     if (newState === 'placement') {
       mousePosition.addMouseListener();
-      addKeyboardRotation();
-      addKeyboardShipChange();
+      addKeyboardListeners();
     } else {
       mousePosition.removeMouseListener();
-      removeKeyboardRotation();
-      removeKeyboardShipChange();
+      removeKeyboardListeners();
     }
   }
 

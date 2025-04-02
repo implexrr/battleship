@@ -1,5 +1,4 @@
 import gameStateManager from '../../../controllers/gameStateManager';
-import pageTitleEl from './title';
 import { boardsEl } from './boards';
 import placementOptionsEl from './placementOptions';
 import { duplicatePlacementWarningEl, overlapWarningEl, outOfBoundsWarningEl } from '../../popUps';
@@ -11,7 +10,6 @@ const placementPageEls = () => {
     duplicatePlacementWarningEl(),
     overlapWarningEl(),
     outOfBoundsWarningEl(),
-    pageTitleEl(),
     boardsEl(),
     placementOptionsEl(),
     startOverButtonEl(),

@@ -1,8 +1,12 @@
 :root {
   --chalkboard: #22322c;
   --chalk: rgba(232, 239, 239, 0.8);
+  --warning-text:#721c24;
+  --footer-background: #090b0b44;
+  --footer-text: #ffffff;
   --board-width: 10;
   --board-height: 10;
+  --default-font-size: 2rem
 }
 
 * {

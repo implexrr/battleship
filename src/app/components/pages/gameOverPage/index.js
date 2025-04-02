@@ -1,16 +1,10 @@
 import gameStateManager from '../../../controllers/gameStateManager';
-import { initialButtonEl } from '../../buttons';
-
-// Generates the title element for the "Game Over" screen
-const titleEl = () => {
-  const el = document.createElement('h2');
-  el.textContent = 'Game over';
-  return el;
-};
+import resultsEl from './results';
+import startOverButtonEl from './button';
 
 // Returns an array of DOM elements to render for the "Game Over" state
 const gameOverPageEls = () => {
-  const els = [titleEl(), initialButtonEl()];
+  const els = [resultsEl('player1'), startOverButtonEl()];
   return els;
 };
 

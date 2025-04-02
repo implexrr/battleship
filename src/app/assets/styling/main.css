@@ -4,10 +4,9 @@
 @import url(placementOptions.css);
 @import url(buttons.css);
 @import url(warnings.css);
-
+@import url(footer.css);
 
 body {
-  border: solid 10px black;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -21,11 +20,15 @@ body > * {
   align-items: center;
 }
 
-#placement-page-title-container {
-  font-size: 2rem;
-  margin-top: 0.5rem;
-  margin-bottom: 2rem;
+/* ------------------------------------------------------------------------------------- */
+
+h1 {
+  font-size: 5rem;
+  padding: 2rem;
 }
+
+/* ------------------------------------------------------------------------------------- */
+
 
 #boards-container {
   width: 100%;
@@ -36,4 +39,14 @@ body > * {
 #placement-options-container {
   margin-bottom: 1rem;
   flex-direction: column;
+}
+
+#results-container {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+#results {
+  font-size: 4rem;
 }

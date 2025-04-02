@@ -11,7 +11,7 @@ input[type="radio"] + label {
   border: 2px solid transparent;
   border-radius: 50px;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: var(--default-font-size);
   margin: 10px;
   position: relative;
 }
@@ -32,6 +32,6 @@ input[type="radio"] + label:hover {
 }
 
 #rotation-instructions {
-  font-size: 2rem;
   margin-bottom: 1rem;
+  font-size: var(--default-font-size);
 }

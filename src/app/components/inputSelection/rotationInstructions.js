@@ -2,7 +2,7 @@ import synthesizeElement from '../../utils/synthesizeElement';
 
 const rotationInstructionsEl = () => {
   const el = synthesizeElement('div', { id: 'rotation-instructions' });
-  el.textContent = 'Press R to rotate ship';
+  el.textContent = 'R to change ship orientation, Q/E to change ship type';
   return el;
 };
 

@@ -1,8 +1,8 @@
 import synthesizeElement from '../utils/synthesizeElement';
 
 // Creates a container for the page title section
-const pageTitleContainerEl = () => {
-  const el = synthesizeElement('div', { id: 'placement-page-title-container', class: 'container' });
+const pageTitleContainerEl = (pageName) => {
+  const el = synthesizeElement('div', { id: `${pageName}-page-title-container`, class: 'container' });
   return el;
 };
 

@@ -27,7 +27,7 @@ function verticalToHorizontal(oldRow, oldCol, oldShipType, cellMap) {
 }
 
 // Switches which cells are hovered according to orientation if mouse is over board
-export default function switchHoverOrientation(mouseX, mouseY, oldOrientation, oldShipType) {
+export default function switchOrientationHover(mouseX, mouseY, oldOrientation, oldShipType) {
   const board = document.querySelector('.player.board');
   const isMouseOverBoard = board?.matches(':hover');
 

@@ -1,16 +1,9 @@
 import gameStateManager from '../../../controllers/gameStateManager';
-import { playNowButtonEl } from '../../buttons';
-
-// Generates the title element for the "Play Now" screen
-const titleEl = () => {
-  const el = document.createElement('h1');
-  el.textContent = 'Battleship';
-  return el;
-};
+import goToPlacementButtonEl from './button';
 
 // Returns an array of DOM elements to render for the "Play Now" state
 const initialPageEls = () => {
-  const els = [titleEl(), playNowButtonEl()];
+  const els = [goToPlacementButtonEl()];
   return els;
 };
 
