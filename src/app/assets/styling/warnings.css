@@ -11,7 +11,7 @@
   text-align: center;
 
   background-color: rgba(196, 196, 196, 0.7);
-  color: #721c24;
+  color: var(--warning-text);
   padding: 12px;
   border: 1px solid rgba(196, 196, 196, 1);
   opacity: 0;

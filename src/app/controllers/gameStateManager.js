@@ -1,5 +1,6 @@
 import { addKeyboardListeners, removeKeyboardListeners } from '../events/placementPage/keyboard/keyboardEvents';
 import mousePosition from './mouse/mousePosition';
+import footerEl from '../components/footer/footer';
 
 // Globally accessed IIFE that renders, registers and sets the state of the game
 const gameStateManager = (() => {
@@ -16,6 +17,7 @@ const gameStateManager = (() => {
     for (let i = 0; i < contentArr.length; i += 1) {
       bodyEl.append(contentArr[i]);
     }
+    bodyEl.append(footerEl());
   }
 
   // Registers a state and its associated content generation fxn as key-val pairs
