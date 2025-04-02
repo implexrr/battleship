@@ -3,7 +3,7 @@ import startOverButtonEl from './button';
 
 // Generates the title element for the "Game Over" screen
 const titleEl = () => {
-  const el = document.createElement('h2');
+  const el = document.createElement('h1');
   el.textContent = 'Game over';
   return el;
 };
