@@ -1,9 +1,10 @@
 import gameStateManager from '../../../controllers/gameStateManager';
+import resultsEl from './results';
 import startOverButtonEl from './button';
 
 // Returns an array of DOM elements to render for the "Game Over" state
 const gameOverPageEls = () => {
-  const els = [startOverButtonEl()];
+  const els = [resultsEl('player1'), startOverButtonEl()];
   return els;
 };
 

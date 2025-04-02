@@ -40,3 +40,13 @@ h1 {
   margin-bottom: 1rem;
   flex-direction: column;
 }
+
+#results-container {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+#results {
+  font-size: 4rem;
+}

@@ -6,6 +6,7 @@
   --footer-text: #ffffff;
   --board-width: 10;
   --board-height: 10;
+  --default-font-size: 2rem
 }
 
 * {
