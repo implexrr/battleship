@@ -12,12 +12,12 @@
 * {
   box-sizing: border-box;
   font-family: 'Fredericka the Great', cursive;
-  background-color: var(--chalkboard);
-  color: var(--chalk);
   margin: 0;
   padding: 0;
 }
 
 html {
+  background-color: var(--chalkboard);
+  color: var(--chalk);
   height: 100vh;
 }
