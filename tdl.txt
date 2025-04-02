@@ -1,7 +1,11 @@
 TDL:
 
-- change placement option prompt
 - change board/cell generation for shooting page
+  make gameboard track coord?
+    wait doesnt it already do this
+  make shooting page take gameboard?
+  remove placement event listeners/add shooting event listeners
+
 - make intro page
 - make game over page
 

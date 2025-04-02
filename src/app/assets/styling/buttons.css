@@ -1,5 +1,6 @@
 button {
   all: unset;
+  box-sizing: border-box;
   padding: 0.75rem 2rem;
   background-color: #f0f0f0c9; /* Eraser color */
   color: #22322c; /* Chalkboard green for contrast */

@@ -1,5 +1,5 @@
 import gameStateManager from '../../../controllers/gameStateManager';
-import { playNowButtonEl } from '../../buttons';
+import goToPlacementButtonEl from './button';
 
 // Generates the title element for the "Play Now" screen
 const titleEl = () => {
@@ -10,7 +10,7 @@ const titleEl = () => {
 
 // Returns an array of DOM elements to render for the "Play Now" state
 const initialPageEls = () => {
-  const els = [titleEl(), playNowButtonEl()];
+  const els = [titleEl(), goToPlacementButtonEl()];
   return els;
 };
 
