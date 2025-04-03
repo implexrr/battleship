@@ -1,4 +1,4 @@
-import gameStateManager from '../../../controllers/gameStateManager';
+import pageManager from '../../../controllers/pageManager';
 import { boardsEl } from './boards';
 import placementOptionsEl from './placementOptions';
 import { duplicatePlacementWarningEl, overlapWarningEl, outOfBoundsWarningEl } from '../../popUps';
@@ -22,10 +22,10 @@ const placementPageEls = () => {
 
   Note to self:
   We're importing the state manager here and registering the state externally.
-  This avoids needing to import this file inside `gameStateManager.js`,
+  This avoids needing to import this file inside `pageManager.js`,
   which would cause a circular dependency.
 
   This structure keeps state registration modular and decoupled.
 */
-gameStateManager.registerState('placement', placementPageEls);
+pageManager.registerPage('placement', placementPageEls);
 export default placementPageEls;

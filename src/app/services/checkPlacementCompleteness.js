@@ -1,7 +1,7 @@
-import gameStateManager from '../controllers/gameStateManager';
+import pageManager from '../controllers/pageManager';
 
 export default function checkPlacementCompleteness(gameboard) {
   if (gameboard.isPlacementFinished() === true) {
-    gameStateManager.setState('shooting');
+    pageManager.setPage('shooting');
   }
 }

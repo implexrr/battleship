@@ -1,11 +1,11 @@
-import gameStateManager from '../controllers/gameStateManager';
+import pageManager from '../controllers/pageManager';
 import synthesizeElement from '../utils/synthesizeElement';
 
 // Create a "Play Now" button that sets the game state to 'placement'
 const playNowButtonEl = () => {
   const el = synthesizeElement('button', { id: 'placement-button' });
   el.textContent = 'Play Now';
-  el.addEventListener('click', () => { gameStateManager.setState('placement'); });
+  el.addEventListener('click', () => { pageManager.setPage('placement'); });
   return el;
 };
 
@@ -13,7 +13,7 @@ const playNowButtonEl = () => {
 const initialButtonEl = () => {
   const el = synthesizeElement('button', { id: 'initial-button' });
   el.textContent = 'Start Over';
-  el.addEventListener('click', () => { gameStateManager.setState('initial'); });
+  el.addEventListener('click', () => { pageManager.setPage('initial'); });
   return el;
 };
 
@@ -21,7 +21,7 @@ const initialButtonEl = () => {
 const gameOverButtonEl = () => {
   const el = synthesizeElement('button', { id: 'game-over-button' });
   el.textContent = 'Go to gameOver';
-  el.addEventListener('click', () => { gameStateManager.setState('gameOver'); });
+  el.addEventListener('click', () => { pageManager.setPage('gameOver'); });
   return el;
 };
 
