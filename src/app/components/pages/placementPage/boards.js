@@ -25,7 +25,7 @@ const aiBoardEl = () => {
   // Generate and append each cell based on the board matrix
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-      const cell = cellEl(i, j, 'ai', 'water');
+      const cell = cellEl(i, j, 'ai', 'water', 'placement');
       services.updateCellMap(cellMap, i, j, cell);
       el.append(cell);
     }
@@ -45,7 +45,7 @@ const playerBoardEl = () => {
   // Generates and appends each cell based on the board matrix
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-      const cell = cellEl(i, j, 'player', boardMatrix[i][j]);
+      const cell = cellEl(i, j, 'player', boardMatrix[i][j], 'placement');
       services.updateCellMap(playerCellMap, i, j, cell);
 
       // Attach click handler for placing ships interactively
