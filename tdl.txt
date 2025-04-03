@@ -1,19 +1,7 @@
 TDL:
 
-- generate footer
+- shooting gameboard/visual update
+- check for autotransition to results
 
-- change board/cell generation for shooting page
-  make gameboard track coord?
-    wait doesnt it already do this
-  make shooting page take gameboard?
-  remove placement event listeners/add shooting event listeners
-
-- Set up shooting page CSS
-- Shooting page auto transition
-- get/set for controllers
-- ship change via keyboard
-- reoragnize controller files
-
-- colorBoard/colourBoard dead?
 
 ✔
