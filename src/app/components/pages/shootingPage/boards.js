@@ -11,10 +11,9 @@ function getPlayerCellMap() {
   return playerCellMap;
 }
 
-// Generates the AI's game board and populates it with randomly placed ships
+// Generates the AI's game board and repopulates it
 const aiBoardEl = () => {
   const gameboard = initializeGameboard('ai');
-  const boardMatrix = gameboard.getBoard();
   const cellMap = {};
   const el = synthesizeElement('div', { class: 'board ai' });
 
@@ -32,19 +31,15 @@ const aiBoardEl = () => {
   // Generate and append each cell based on the board matrix
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
-      const cell = cellEl(i, j, 'ai', boardMatrix[i][j]);
+      const cell = cellEl(i, j, 'ai', 'water');
       services.updateCellMap(cellMap, i, j, cell);
       el.append(cell);
     }
   }
-
-  // Sets the visual state of the board based on current matrix values
-  services.colorBoard(cellMap, boardMatrix);
-
   return el;
 };
 
-// Generates the AI's game board and populates it with randomly placed ships
+// Generates the player's game board and repopulates it
 const playerBoardEl = () => {
   const gameboard = initializeGameboard('player');
   const boardMatrix = gameboard.getBoard();
@@ -70,9 +65,6 @@ const playerBoardEl = () => {
       el.append(cell);
     }
   }
-
-  // Sets the visual state of the board based on current matrix values
-  services.colorBoard(cellMap, boardMatrix);
 
   return el;
 };

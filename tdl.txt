@@ -14,4 +14,6 @@ TDL:
 - ship change via keyboard
 - reoragnize controller files
 
+- colorBoard/colourBoard dead?
+
 ✔
