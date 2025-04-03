@@ -14,3 +14,14 @@
 .board.ai {
   margin-left: 1rem;
 }
+
+.board-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.board-label {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}

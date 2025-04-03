@@ -1,10 +1,11 @@
 import synthesizeElement from '../../../utils/synthesizeElement';
-import { boardsContainerEl } from '../../../containers';
+import { boardContainerEl, boardsContainerEl } from '../../../containers';
 import * as services from '../../../services';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
 import { handleMouseEnter, handleMouseLeave } from '../../../events/placementPage/mouse/mouseEvents';
 import attachPlacementHandler from '../../../events/placementPage/mouse/attachPlacementHandler';
+import boardLabelEl from '../../labels/boardLabel';
 
 const playerCellMap = {};
 
@@ -63,10 +64,22 @@ const playerBoardEl = () => {
   return el;
 };
 
+const aiBoardContainerEl = () => {
+  const el = boardContainerEl('ai');
+  el.append(boardLabelEl('ai'), aiBoardEl());
+  return el;
+};
+
+const playerBoardContainerEl = () => {
+  const el = boardContainerEl('player');
+  el.append(boardLabelEl('player'), playerBoardEl());
+  return el;
+};
+
 // Combines the AI and player boards into a single container element
 const boardsEl = () => {
   const el = boardsContainerEl();
-  el.append(playerBoardEl(), aiBoardEl());
+  el.append(playerBoardContainerEl(), aiBoardContainerEl());
   return el;
 };
 
