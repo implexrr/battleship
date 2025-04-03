@@ -3,4 +3,4 @@ import { initialPageEls, placementPageEls, shootingPageEls, gameOverPageEls } fr
 import pageManager from './app/controllers/pageManager';
 
 // Start by rendering the first page
-pageManager.setPage('shooting');
+pageManager.setPage('placement');

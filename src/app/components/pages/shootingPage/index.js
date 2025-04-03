@@ -1,9 +1,10 @@
 import pageManager from '../../../controllers/pageManager';
 import startOverButtonEl from './button';
+import { boardsEl } from './boards';
 
 // Returns an array of DOM elements to render for the "Shooting" state
 const shootingPageEls = () => {
-  const els = [startOverButtonEl()];
+  const els = [boardsEl(), startOverButtonEl()];
   return els;
 };
 

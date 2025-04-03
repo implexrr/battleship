@@ -1,4 +1,5 @@
 import pageManager from '../controllers/pageManager';
+import gameStateManager from '../controllers/gameStateManager.js';
 import synthesizeElement from '../utils/synthesizeElement';
 
 // Create a "Play Now" button that sets the game state to 'placement'
@@ -13,7 +14,7 @@ const playNowButtonEl = () => {
 const initialButtonEl = () => {
   const el = synthesizeElement('button', { id: 'initial-button' });
   el.textContent = 'Start Over';
-  el.addEventListener('click', () => { pageManager.setPage('initial'); });
+  el.addEventListener('click', () => { pageManager.setPage('initial'); gameStateManager.resetPlayerFleets(); });
   return el;
 };
 
