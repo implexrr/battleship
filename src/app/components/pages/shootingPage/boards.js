@@ -4,6 +4,9 @@ import * as services from '../../../services';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
 import boardLabelEl from '../../labels/boardLabel';
+import pageManager from '../../../controllers/pageManager';
+import gameStateManager from '../../../controllers/gameStateManager.js';
+import attachShootingHandler from '../../../events/shootingPage/mouse/attachShootingHandler';
 
 const playerCellMap = {};
 
@@ -14,6 +17,7 @@ function getPlayerCellMap() {
 // Generates the AI's game board and repopulates it
 const aiBoardEl = () => {
   const gameboard = initializeGameboard('ai');
+  const boardMatrix = gameboard.getBoard();
   const cellMap = {};
   const el = synthesizeElement('div', { class: 'board ai' });
 
@@ -25,8 +29,7 @@ const aiBoardEl = () => {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
       const cell = cellEl(i, j, 'ai', 'water', 'shooting');
       services.updateCellMap(cellMap, i, j, cell);
-      // TDL: add event listener for shooting (click), which will update both boards
-      // TDL p2 Create ai firing logic
+      attachShootingHandler(cell, gameboard, boardMatrix, i, j);
       el.append(cell);
     }
   }

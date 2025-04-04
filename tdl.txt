@@ -1,7 +1,8 @@
 TDL:
 
+- work on player shot recording logic?
 - shooting gameboard/visual update
 - check for autotransition to results
-
+- work on ai shooting logic
 
 ✔

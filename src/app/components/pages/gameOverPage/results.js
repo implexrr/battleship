@@ -1,15 +1,18 @@
 import { resultsContainerEl } from '../../../containers';
 import synthesizeElement from '../../../utils/synthesizeElement';
+import gameStateManager from '../../../controllers/gameStateManager.js';
 
-const resultsText = (winner) => {
+const resultsText = () => {
+  const winner = gameStateManager.getWinner();
+  console.log(winner);
   const el = synthesizeElement('div', { id: 'results' });
-  el.textContent = (winner === 'player1') ? 'Player wins!' : 'CPU Wins!';
+  el.textContent = (winner === 'player') ? 'Player wins!' : 'CPU Wins!';
   return el;
 };
 
-const resultsEl = (winner) => {
+const resultsEl = () => {
   const el = resultsContainerEl();
-  el.append(resultsText(winner));
+  el.append(resultsText());
   return el;
 };
 

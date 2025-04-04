@@ -1,5 +1,6 @@
 const gameStateManager = (() => {
   const playerFleets = {};
+  let gameWinner = null;
 
   function recordShipCoord(player, row, col, orientation, shipType) {
     if (!playerFleets[player]) { playerFleets[player] = {}; }
@@ -18,7 +19,26 @@ const gameStateManager = (() => {
     });
   }
 
-  return { recordShipCoord, getPlayerFleets, resetPlayerFleets };
+  function setWinner(winner) {
+    gameWinner = winner;
+  }
+
+  function getWinner() {
+    return gameWinner;
+  }
+
+  function resetWinner() {
+    gameWinner = null;
+  }
+
+  return {
+    recordShipCoord,
+    getPlayerFleets,
+    resetPlayerFleets,
+    resetWinner,
+    getWinner,
+    setWinner,
+  };
 })();
 
 export default gameStateManager;

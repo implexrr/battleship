@@ -14,7 +14,11 @@ const playNowButtonEl = () => {
 const initialButtonEl = () => {
   const el = synthesizeElement('button', { id: 'initial-button' });
   el.textContent = 'Start Over';
-  el.addEventListener('click', () => { pageManager.setPage('initial'); gameStateManager.resetPlayerFleets(); });
+  el.addEventListener('click', () => {
+    pageManager.setPage('initial');
+    gameStateManager.resetPlayerFleets();
+    gameStateManager.resetWinner();
+  });
   return el;
 };
 
