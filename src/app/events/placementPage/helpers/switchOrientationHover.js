@@ -1,6 +1,6 @@
-import { extractCellMap } from '../../../services/cellMap';
 import { SHIP_LENGTHS } from '../../../gameMechanics/ships';
 import { GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
+import gameManager from '../../../controllers/gameManager';
 
 // Changes horizontal ship hover to vertical ship hover
 function horizontalToVertical(oldRow, oldCol, oldShipType, cellMap) {
@@ -33,7 +33,7 @@ export default function switchOrientationHover(mouseX, mouseY, oldOrientation, o
 
   if (isMouseOverBoard) {
     const hoveredElement = document.elementFromPoint(mouseX, mouseY);
-    const cellMap = extractCellMap();
+    const cellMap = gameManager.getCellMap('player');
     const oldRow = Number(hoveredElement.dataset.row);
     const oldCol = Number(hoveredElement.dataset.col);
     if (oldOrientation === 'horizontal') {

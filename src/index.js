@@ -1,6 +1,6 @@
 import './app/assets/styling/main.css';
 import { initialPageEls, placementPageEls, shootingPageEls, gameOverPageEls } from './app/components/pages';
-import gameStateManager from './app/controllers/gameStateManager';
+import pageManager from './app/controllers/pageManager';
 
 // Start by rendering the first page
-gameStateManager.setState('gameOver');
+pageManager.setPage('initial');

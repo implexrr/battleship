@@ -1,12 +1,12 @@
-const headingText = (newState) => {
+const headingText = (newPage) => {
   let text;
-  if (newState === 'initial') {
+  if (newPage === 'initial') {
     text = 'Battleship';
-  } else if (newState === 'placement') {
+  } else if (newPage === 'placement') {
     text = 'Placement Phase';
-  } else if (newState === 'shooting') {
+  } else if (newPage === 'shooting') {
     text = 'Shooting Phase';
-  } else if (newState === 'gameOver') {
+  } else if (newPage === 'gameOver') {
     text = 'Game Over';
   }
   return text;

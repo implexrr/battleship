@@ -4,13 +4,15 @@ const MAX_FLEET_HEALTH = 15;
 
 // Initializes a fleet object with the ability to add/get status of ships
 export default function initializeFleet() {
-  // Sets up empty object to store ships and their associated values
+  // Sets up empty objects to store ships and their associated values
   const ships = {};
+  const coord = {};
 
   // Makes ship, then adds ship to ships object
   function addToFleet(x, y, orientation, shipType) {
     const newShip = makeShip(x, y, orientation, shipType);
     ships[shipType] = newShip;
+    coord[shipType] = { x, y };
   }
 
   // Checks if fleet is sunk
@@ -52,6 +54,11 @@ export default function initializeFleet() {
     return health;
   }
 
+  // Return ocject with ships and their starting coordinates as the keyval pairs
+  function getFleetCoordinates() {
+    return coord;
+  }
+
   function hitShip(a, b, ship) {
     ships[ship].hitShip(a, b);
   }
@@ -62,6 +69,7 @@ export default function initializeFleet() {
     isFleetSunk,
     getFleetStatus,
     getFleetHealth,
+    getFleetCoordinates,
   };
 }
 

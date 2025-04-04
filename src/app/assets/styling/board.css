@@ -8,9 +8,25 @@
 }
 
 .board.player {
-  cursor: pointer;
   margin-right: 1rem;
 }
 .board.ai {
   margin-left: 1rem;
+}
+.player.placement, .ai.shooting {
+  cursor: pointer;
+}
+.cell.ai.shooting:hover {
+  background-color: rgba(145, 73, 73, 0.583);
+}
+
+.board-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.board-label {
+  margin-bottom: 1rem;
+  font-size: 2rem;
 }

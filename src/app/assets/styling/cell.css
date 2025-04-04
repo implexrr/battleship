@@ -10,8 +10,8 @@
   background-repeat: no-repeat; /* Prevent tiling */
 }
 
-[cell-type='shipwreck'] {
-  background-image: url(../images/shipwreck.png);
+[cell-type='wreckage'] {
+  background-image: url(../images/wreckage.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

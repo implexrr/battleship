@@ -3,3 +3,4 @@ export { default as placementOptionsContainerEl } from './placementOptionsContai
 export { default as boardsContainerEl } from './boardsContainer';
 export { default as buttonContainerEl } from './buttonContainer';
 export { default as resultsContainerEl } from './resultsContainer';
+export { default as boardContainerEl } from './boardContainer';
