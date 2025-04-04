@@ -2,11 +2,9 @@ import gameManager from '../../../controllers/gameManager';
 import pageManager from '../../../controllers/pageManager';
 import aiShooter from '../../../controllers/aiShooter';
 
-function transitionToEndPage(gameboard) {
-  if (gameboard.isGameOver()) {
-    gameManager.setWinner('player');
-    pageManager.setPage('gameOver');
-  }
+function transitionToEndPage() {
+  if (gameManager.getBoard('player').isGameOver()) { gameManager.setWinner('ai'); pageManager.setPage('gameOver'); }
+  if (gameManager.getBoard('ai').isGameOver()) { gameManager.setWinner('player'); pageManager.setPage('gameOver'); }
 }
 
 function hitAiBoard(gameboard, cell, boardMatrix, i, j) {
