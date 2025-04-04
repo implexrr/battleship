@@ -1,46 +1,49 @@
-// import { GAMEBOARD_LENGTH } from '../gameMechanics/gameBoard';
-// import { SHIP_LENGTHS } from '../gameMechanics/ships';
+import { GAMEBOARD_LENGTH } from '../gameMechanics/gameBoard';
 
-// const aiShooter = (() => {
-//   const shots = {};
+const aiShooter = (() => {
+  let coordinates = [];
 
-//   function initializeShots() {
-//     for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
-//       shots[i] = {};
-//     }
-//   }
+  function shuffleCoordinates() {
+    const len = coordinates.length;
+    for (let i = 0; i < len; i += 1) {
+      // FY shuffle
+      const j = i + Math.floor(Math.random() * (len - i));
 
-//   function alreadyShotHere(i, j) {
-//     return (shots[i][j] === true);
-//   }
+      // Swap
+      const temp = coordinates[j];
+      coordinates[j] = coordinates[i];
+      coordinates[i] = temp;
+    }
+  }
 
-//   function getNextShot() {
-//     let row = Math.floor(Math.random() * 10);
-//     let col = Math.floor(Math.random() * 10);
-//     while (alreadyShotHere(row, col)) {
-//       row = Math.floor(Math.random() * 10);
-//       col = Math.floor(Math.random() * 10);
-//     }
-//     return { row, col };
-//   }
+  function initializeCoordinates() {
+    for (let row = 0; row < GAMEBOARD_LENGTH; row += 1) {
+      for (let col = 0; col < GAMEBOARD_LENGTH; col += 1) {
+        coordinates.push([row, col]);
+      }
+    }
+    shuffleCoordinates();
+  }
 
-//   function getShots() {
-//     return shots;
-//   }
+  function clearCoordinates() {
+    coordinates.splice(0, coordinates.length);
+  }
 
-//   function recordShot(i, j) {
-//     shots[i][j] = true;
-//     console.log(`shot recorded at ${i}, ${j}`);
-//     console.log(getShots());
-//   }
+  function resetCoordinates() {
+    clearCoordinates();
+    initializeCoordinates();
+    shuffleCoordinates();
+  }
 
-//   function resetShots() {
-//     Object.keys(shots).forEach((key) => {
-//       delete shots[key];
-//     });
-//   }
+  function getNextShot() {
+    const coord = coordinates.pop();
+    return coord;
+  }
 
-//   return { recordShot, resetShots, getShots };
-// })();
+  return {
+    resetCoordinates,
+    getNextShot,
+  };
+})();
 
-// export default aiShooter;
+export default aiShooter;

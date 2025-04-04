@@ -1,5 +1,6 @@
 import pageManager from '../controllers/pageManager';
 import gameStateManager from '../controllers/gameStateManager.js';
+import aiShooter from '../controllers/aiShooter';
 import synthesizeElement from '../utils/synthesizeElement';
 
 // Create a "Play Now" button that sets the game state to 'placement'
@@ -18,6 +19,7 @@ const initialButtonEl = () => {
     pageManager.setPage('initial');
     gameStateManager.resetPlayerFleets();
     gameStateManager.resetWinner();
+    aiShooter.resetCoordinates();
   });
   return el;
 };

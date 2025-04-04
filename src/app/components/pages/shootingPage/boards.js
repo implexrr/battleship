@@ -4,8 +4,6 @@ import * as services from '../../../services';
 import { initializeGameboard, GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
 import boardLabelEl from '../../labels/boardLabel';
-import pageManager from '../../../controllers/pageManager';
-import gameStateManager from '../../../controllers/gameStateManager.js';
 import attachShootingHandler from '../../../events/shootingPage/mouse/attachShootingHandler';
 
 const playerCellMap = {};
