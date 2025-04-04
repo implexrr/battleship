@@ -71,6 +71,10 @@ const gameManager = (() => {
     return gameData.cellMaps[player];
   }
 
+  function getCell(player, i, j) {
+    return gameData.cellMaps[player][i][j];
+  }
+
   return {
     populateGameboardMatrix,
     updateCellMap,
@@ -80,6 +84,7 @@ const gameManager = (() => {
     getBoardMatrix,
     getCellMap,
     resetGame,
+    getCell,
   };
 })();
 

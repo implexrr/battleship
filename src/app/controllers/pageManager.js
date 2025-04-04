@@ -2,6 +2,9 @@ import { addKeyboardListeners, removeKeyboardListeners } from '../events/placeme
 import mousePosition from './mouse/mousePosition';
 import footerEl from '../components/footer/footer';
 import { headingText, pageTitleEl } from '../components/title';
+import fleetCoordManager from './fleetCoordManager';
+import gameManager from './gameManager';
+import aiShooter from './aiShooter';
 
 // Globally accessed IIFE that renders, registers and sets the page of the game
 const pageManager = (() => {
@@ -37,6 +40,11 @@ const pageManager = (() => {
     } else {
       mousePosition.removeMouseListener();
       removeKeyboardListeners();
+    }
+    if (newPage === 'initial') {
+      fleetCoordManager.resetPlayerFleets();
+      gameManager.resetGame();
+      aiShooter.resetCoordinates();
     }
   }
 
