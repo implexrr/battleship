@@ -2,7 +2,7 @@ import { SHIP_LENGTHS } from './ships';
 import { initializeFleet, MAX_FLEET_HEALTH } from './fleet';
 import createEmptyBoard from './emptyBoard';
 import isShipPlaceable from './validatePlacement';
-import gameStateManager from '../controllers/gameStateManager.js';
+import fleetCoordManager from '../controllers/fleetCoordManager';
 
 const GAMEBOARD_LENGTH = 10;
 
@@ -43,7 +43,7 @@ function initializeGameboard(player) {
       }
     }
     fleet.addToFleet(row, col, orientation, shipType);
-    gameStateManager.recordShipCoord(player, row, col, orientation, shipType);
+    fleetCoordManager.recordShipCoord(player, row, col, orientation, shipType);
   }
 
   // Changes status of all "hit" ship tiles to 'wreckage'

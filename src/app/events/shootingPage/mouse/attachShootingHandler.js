@@ -1,15 +1,16 @@
-import gameStateManager from '../../../controllers/gameStateManager.js';
+import gameManager from '../../../controllers/gameManager';
 import pageManager from '../../../controllers/pageManager';
 import aiShooter from '../../../controllers/aiShooter';
 
 function transitionToEndPage(gameboard) {
   if (gameboard.isGameOver()) {
-    gameStateManager.setWinner('player');
+    gameManager.setWinner('player');
     pageManager.setPage('gameOver');
   }
 }
 
 function hitAiBoard(gameboard, cell, boardMatrix, i, j) {
+  console.log(boardMatrix);
   gameboard.registerHit(i, j);
   cell.setAttribute('cell-type', boardMatrix[i][j]);
 }

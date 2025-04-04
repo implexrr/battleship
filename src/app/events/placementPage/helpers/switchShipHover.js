@@ -1,7 +1,7 @@
 import mousePosition from '../../../controllers/mouse/mousePosition';
-import { extractCellMap } from '../../../services';
 import { SHIP_LENGTHS } from '../../../gameMechanics/ships';
 import { GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
+import gameManager from '../../../controllers/gameManager';
 
 function removeOldShipHover(orientation, hoverColStart, hoverRowStart, oldShip, cellMap) {
   if (orientation === 'horizontal') {
@@ -37,7 +37,7 @@ export default function changeHoveredShipLength(oldShip, newShip, orientation) {
   const isMouseOverBoard = board?.matches(':hover');
 
   if (isMouseOverBoard) {
-    const cellMap = extractCellMap();
+    const cellMap = gameManager.getCellMap('player');
     const hoveredElement = document.elementFromPoint(mouseX, mouseY);
     const hoverRowStart = Number(hoveredElement.dataset.row);
     const hoverColStart = Number(hoveredElement.dataset.col);

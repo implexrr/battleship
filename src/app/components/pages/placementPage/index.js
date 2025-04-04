@@ -1,5 +1,5 @@
 import pageManager from '../../../controllers/pageManager';
-import { boardsEl } from './boards';
+import boardsEl from './boards';
 import placementOptionsEl from './placementOptions';
 import { duplicatePlacementWarningEl, overlapWarningEl, outOfBoundsWarningEl } from '../../popUps';
 import startOverButtonEl from './button';

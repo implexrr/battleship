@@ -1,7 +1,8 @@
 import pageManager from '../controllers/pageManager';
-import gameStateManager from '../controllers/gameStateManager.js';
+import fleetCoordManager from '../controllers/fleetCoordManager';
 import aiShooter from '../controllers/aiShooter';
 import synthesizeElement from '../utils/synthesizeElement';
+import gameManager from '../controllers/gameManager';
 
 // Create a "Play Now" button that sets the game state to 'placement'
 const playNowButtonEl = () => {
@@ -17,8 +18,8 @@ const initialButtonEl = () => {
   el.textContent = 'Start Over';
   el.addEventListener('click', () => {
     pageManager.setPage('initial');
-    gameStateManager.resetPlayerFleets();
-    gameStateManager.resetWinner();
+    fleetCoordManager.resetPlayerFleets();
+    gameManager.resetGame();
     aiShooter.resetCoordinates();
   });
   return el;

@@ -1,32 +1,24 @@
 import synthesizeElement from '../../../utils/synthesizeElement';
 import { boardContainerEl, boardsContainerEl } from '../../../containers';
-import * as services from '../../../services';
-import { initializeGameboard, GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
+import { GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
 import { handleMouseEnter, handleMouseLeave } from '../../../events/placementPage/mouse/mouseEvents';
 import attachPlacementHandler from '../../../events/placementPage/mouse/attachPlacementHandler';
 import boardLabelEl from '../../labels/boardLabel';
-
-const playerCellMap = {};
-
-function getPlayerCellMap() {
-  return playerCellMap;
-}
+import gameManager from '../../../controllers/gameManager';
 
 // Generates the AI's game board and populates it with randomly placed ships
 const aiBoardEl = () => {
-  const gameboard = initializeGameboard('ai');
-  const cellMap = {};
   const el = synthesizeElement('div', { class: 'board ai' });
 
   // Populates AI board with ships at random positions
-  services.populateGameboardMatrix(gameboard);
+  gameManager.populateGameboardMatrix('ai');
 
   // Generate and append each cell based on the board matrix
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
       const cell = cellEl(i, j, 'ai', 'water', 'placement');
-      services.updateCellMap(cellMap, i, j, cell);
+      gameManager.updateCellMap('ai', i, j, cell);
       el.append(cell);
     }
   }
@@ -36,27 +28,27 @@ const aiBoardEl = () => {
 
 // Generates the player's game board and enables interactive ship placement
 const playerBoardEl = () => {
-  const gameboard = initializeGameboard('player');
-  const boardMatrix = gameboard.getBoard();
-  const el = synthesizeElement('div', { class: 'player' });
+  const boardMatrix = gameManager.getBoardMatrix('player');
+  const gameboard = gameManager.getBoard('player');
+  const cellMap = gameManager.getCellMap('player');
 
-  el.setAttribute('class', 'board player');
+  const el = synthesizeElement('div', { class: 'board player' });
 
   // Generates and appends each cell based on the board matrix
   for (let i = 0; i < GAMEBOARD_LENGTH; i += 1) {
     for (let j = 0; j < GAMEBOARD_LENGTH; j += 1) {
       const cell = cellEl(i, j, 'player', boardMatrix[i][j], 'placement');
-      services.updateCellMap(playerCellMap, i, j, cell);
+      gameManager.updateCellMap('player', i, j, cell);
 
       // Attach click handler for placing ships interactively
-      attachPlacementHandler(cell, gameboard, playerCellMap);
+      attachPlacementHandler(cell, gameboard, cellMap);
 
       // Add hover handler for ship placement preview
       cell.addEventListener('mouseenter', (e) => {
-        handleMouseEnter(e, playerCellMap);
+        handleMouseEnter(e, cellMap);
       });
       cell.addEventListener('mouseleave', (e) => {
-        handleMouseLeave(e, playerCellMap);
+        handleMouseLeave(e, cellMap);
       });
       el.append(cell);
     }
@@ -83,4 +75,4 @@ const boardsEl = () => {
   return el;
 };
 
-export { getPlayerCellMap, boardsEl };
+export default boardsEl;
