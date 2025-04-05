@@ -1,6 +1,6 @@
 import synthesizeElement from '../../utils/synthesizeElement';
 
-// Creates the main container element for holding both boards
+// Creates a label for a board, depending on the player
 const boardLabelEl = (player) => {
   const el = synthesizeElement('div', { id: `${player}-board-label`, class: 'board-label' });
   el.textContent = (player === 'ai') ? 'CPU' : 'Player';

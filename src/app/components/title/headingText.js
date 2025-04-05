@@ -1,3 +1,4 @@
+// Generates page title based on page type
 const headingText = (newPage) => {
   let text;
   if (newPage === 'initial') {

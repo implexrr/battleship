@@ -1,4 +1,4 @@
-import placementOptionsManager from '../../../controllers/placementOptionsManager';
+import { placementOptionsManager } from '../../../controllers';
 import { colorShip } from '../../../services/color';
 import checkPlacementCompleteness from '../../../services/checkPlacementCompleteness';
 import showWarning from '../../../services/showWarning';

@@ -1,3 +1,4 @@
+import { gameManager } from '../../../controllers';
 import synthesizeElement from '../../../utils/synthesizeElement';
 import { boardContainerEl, boardsContainerEl } from '../../../containers';
 import { GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
@@ -5,7 +6,6 @@ import cellEl from '../../cell';
 import { handleMouseEnter, handleMouseLeave } from '../../../events/placementPage/mouse/mouseEvents';
 import attachPlacementHandler from '../../../events/placementPage/mouse/attachPlacementHandler';
 import boardLabelEl from '../../labels/boardLabel';
-import gameManager from '../../../controllers/gameManager';
 
 // Generates the AI's game board and populates it with randomly placed ships
 const aiBoardEl = () => {

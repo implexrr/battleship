@@ -1,10 +1,10 @@
 import { placementOptionsContainerEl } from '../../../containers';
-import { rotationInstructionsEl, orientationOptionsEl, shipTypeOptionsEl } from '../../inputSelection';
+import { placementKeyboardInstructionsEl, orientationOptionsEl, shipTypeOptionsEl } from '../../inputSelection';
 
 // Returns the full placement options section (orientation + ship type selectors)
 const placementOptionsEl = () => {
   const el = placementOptionsContainerEl();
-  el.append(rotationInstructionsEl(), orientationOptionsEl(), shipTypeOptionsEl());
+  el.append(placementKeyboardInstructionsEl(), orientationOptionsEl(), shipTypeOptionsEl());
   return el;
 };
 

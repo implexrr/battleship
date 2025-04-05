@@ -1,6 +1,6 @@
 import synthesizeElement from '../utils/synthesizeElement';
 
-// Creates the main container element for holding both player boards
+// Creates a container to hold buttons
 const buttonContainerEl = () => {
   const el = synthesizeElement('div', { id: 'button-container', class: 'container' });
   return el;

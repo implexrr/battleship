@@ -1,6 +1,6 @@
+import { placementOptionsManager } from '../../controllers';
 import synthesizeElement from '../../utils/synthesizeElement';
 import { SHIP_LENGTHS } from '../../gameMechanics/ships';
-import placementOptionsManager from '../../controllers/placementOptionsManager';
 
 // Initializes objects to hold radio input elements and their corresponding labels
 const options = {};

@@ -1,5 +1,5 @@
+import { placementOptionsManager } from '../../controllers';
 import synthesizeElement from '../../utils/synthesizeElement';
-import placementOptionsManager from '../../controllers/placementOptionsManager';
 
 // Creates a radio input element for the "Horizontal" orientation option
 const horizontalOptionEl = () => {

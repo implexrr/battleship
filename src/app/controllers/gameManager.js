@@ -14,6 +14,7 @@ const gameManager = (() => {
     winner: null,
   };
 
+  // Update cellMap corresponding to gameboard state
   function updateCellMap(player, row, col, cell) {
     const cellMap = gameData.cellMaps[player];
     // eslint-disable-next-line no-param-reassign
@@ -22,6 +23,7 @@ const gameManager = (() => {
     cellMap[row][col] = cell;
   }
 
+  // Populate gameboard matrix
   function populateGameboardMatrix(player) {
     const gameboard = gameData.boards[player];
     // Create a mutable copy of ship types to track what's left to place

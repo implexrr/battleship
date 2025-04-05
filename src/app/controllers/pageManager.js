@@ -1,10 +1,10 @@
-import { addKeyboardListeners, removeKeyboardListeners } from '../events/placementPage/keyboard/keyboardEvents';
-import mousePosition from './mouse/mousePosition';
-import footerEl from '../components/footer/footer';
-import { headingText, pageTitleEl } from '../components/title';
-import fleetCoordManager from './fleetCoordManager';
+import mousePosition from './mousePosition';
 import gameManager from './gameManager';
 import aiShooter from './aiShooter';
+
+import { addKeyboardListeners, removeKeyboardListeners } from '../events/placementPage/keyboard/keyboardEvents';
+import footerEl from '../components/footer/footer';
+import { headingText, pageTitleEl } from '../components/title';
 
 // Globally accessed IIFE that renders, registers and sets the page of the game
 const pageManager = (() => {
@@ -42,7 +42,6 @@ const pageManager = (() => {
       removeKeyboardListeners();
     }
     if (newPage === 'initial') {
-      fleetCoordManager.resetPlayerFleets();
       gameManager.resetGame();
       aiShooter.resetCoordinates();
     }

@@ -1,12 +1,12 @@
+import { gameManager } from '../../../controllers';
 import synthesizeElement from '../../../utils/synthesizeElement';
 import { boardContainerEl, boardsContainerEl } from '../../../containers';
 import { GAMEBOARD_LENGTH } from '../../../gameMechanics/gameBoard';
 import cellEl from '../../cell';
 import boardLabelEl from '../../labels/boardLabel';
 import attachShootingHandler from '../../../events/shootingPage/mouse/attachShootingHandler';
-import gameManager from '../../../controllers/gameManager';
 
-// Generates the AI's game board and repopulates it
+// Generates the AI's game board and adds event listeners for shots fired
 const aiBoardEl = () => {
   console.log('generating ai board');
   const boardMatrix = gameManager.getBoardMatrix('ai');
@@ -25,7 +25,7 @@ const aiBoardEl = () => {
   return el;
 };
 
-// Generates the player's game board and repopulates it
+// Generates the player's game board
 const playerBoardEl = () => {
   console.log('generating player board');
   const boardMatrix = gameManager.getBoardMatrix('player');
